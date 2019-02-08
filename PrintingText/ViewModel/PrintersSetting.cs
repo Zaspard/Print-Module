@@ -46,7 +46,10 @@ namespace PrintingText.ViewModel
             set
             {
                 selectPrinter = value;
-                ReFillPage();
+                if (!selectPrinter.IsOffline)
+                {
+                    ReFillPage();
+                }
                 OnPropertyChanged("SelectPrinter");
                 selectPrinter.PropertyChanged += SelectPrinter_PropertyChanged;
             }

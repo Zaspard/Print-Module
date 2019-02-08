@@ -12,5 +12,6 @@ C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.c
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.exe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.pdb
-C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csprojAssemblyReference.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csproj.CopyComplete

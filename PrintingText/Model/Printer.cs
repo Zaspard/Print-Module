@@ -30,9 +30,9 @@ namespace PrintingText.Model
             set
             {
                 printQueue = value;
-                if (!value.IsOffline)
+                printerName = printQueue.Name;
+                if (!printQueue.IsOffline)
                 {
-                    printerName = printQueue.Name;
                     printTicket = printQueue.DefaultPrintTicket;
                     printCapabilities = printQueue.GetPrintCapabilities();
                     #region Filling BlockingCollection
@@ -138,7 +138,12 @@ namespace PrintingText.Model
 
         public PageMediaSize PageMediaSize
         {
-            get { return pageMediaSize; }
+            get {
+                if (!IsOffline)
+                { return pageMediaSize; }
+                else
+                { return null; }
+            }
             set
             {
                 if (!IsOffline)
