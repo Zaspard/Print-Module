@@ -1,0 +1,16 @@
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\Debug\PrintingText.exe.config
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\Debug\PrintingText.exe
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\MainWindow.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\App.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText_MarkupCompile.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText_MarkupCompile.lref
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\MainWindow.baml
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.g.resources
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.Properties.Resources.resources
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csproj.GenerateResource.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csproj.CoreCompileInputs.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.exe
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csprojAssemblyReference.cache
