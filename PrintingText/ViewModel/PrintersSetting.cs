@@ -99,7 +99,7 @@ namespace PrintingText.ViewModel
             {
                 return new DelegateCommand((obj) =>
                 {
-                    /*var fp = new FixedPage();
+                    var fp = new FixedPage();
                     //Window.Children.Remove(place);
                     if (Page.IsPortrait)
                     {
@@ -149,7 +149,7 @@ namespace PrintingText.ViewModel
                         {
                             fileStream.BaseStream.CopyTo(printStream);
                         }
-                    }*/
+                    }
                 });
             }
         }
