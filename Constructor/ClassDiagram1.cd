@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Constructor.ViewModel.BaseVM">
+    <Position X="5.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Constructor.ViewModel.ImageCellVM">
+    <Position X="8.25" Y="0.5" Width="2" />
+    <InheritanceLine Type="Constructor.ViewModel.BaseVM" ManuallyRouted="true">
+      <Path>
+        <Point X="7.75" Y="3.528" />
+        <Point X="7.915" Y="3.528" />
+        <Point X="7.915" Y="3.639" />
+        <Point X="8.085" Y="3.639" />
+        <Point X="8.085" Y="3.528" />
+        <Point X="8.25" Y="3.528" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQACEAAABgAAAAQIQBBACECSQAQIgwAACEEgAAFAIBA=</HashCode>
+      <FileName>ViewModel\ImageCellVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Constructor.ViewModel.TableVM">
+    <Position X="3.5" Y="3.25" Width="2" />
+    <InheritanceLine Type="Constructor.ViewModel.BaseVM" FixedFromPoint="true">
+      <Path>
+        <Point X="6.625" Y="4.305" />
+        <Point X="6.625" Y="6.062" />
+        <Point X="5.5" Y="6.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAGAAABBAAEEQAQBBAAEAAAAAAAAAgCAAAIAgAAAg=</HashCode>
+      <FileName>ViewModel\TableVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.ViewModel.TemplateVM">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAARAQAAAAEAAAAAAAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>ViewModel\TemplateVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.ViewModel.TextCellVM">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <InheritanceLine Type="Constructor.ViewModel.BaseVM" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="2.812" />
+        <Point X="7.75" Y="2.656" />
+        <Point X="8" Y="2.656" />
+        <Point X="8" Y="0.113" />
+        <Point X="11" Y="0.113" />
+        <Point X="11" Y="0.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQACAAAABgAAAAQIQBBACECSQAQAggAAAEAgAAFAIAA=</HashCode>
+      <FileName>ViewModel\TextCellVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Constructor.ViewModel.ICellVM" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <InheritanceLine Type="Constructor.ViewModel.IUserControl" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="1.531" />
+        <Point X="5.76" Y="1.531" />
+        <Point X="5.76" Y="0.26" />
+        <Point X="6" Y="0.26" />
+        <Point X="6" Y="0.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAABgAAAAAAAAAAAEAAAAQAgAAAAEAgAAAAAAA=</HashCode>
+      <FileName>ViewModel\ICellVM.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Constructor.ViewModel.IUserControl" Collapsed="true">
+    <Position X="6" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABBACAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\IUserControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

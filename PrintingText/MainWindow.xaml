@@ -1,0 +1,73 @@
+﻿<Window x:Class="PrintingText.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrintingText"
+        xmlns:viewmodel="clr-namespace:PrintingText.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="674.5" Width="1139.5">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Margin" Value="25 5 25 5" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFD6D4D4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="335*"/>
+            <ColumnDefinition Width="899*"/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="622*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <!--Вкладки-->
+                <TabControl>
+                    <TabItem Header="Вкладка 1">Шаблоны</TabItem>
+                    <TabItem Header="Вкладка 2">Настройка бумаги и печати</TabItem>
+                </TabControl>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="167*"/>
+                    <RowDefinition Height="180*"/>
+                    <RowDefinition Height="208*"/>
+                    <RowDefinition Height="67*"/>
+                </Grid.RowDefinitions>
+                <Grid  Margin="0,0,0,144" Grid.RowSpan="2">
+                    <Grid DataContext="{Binding Page}" HorizontalAlignment="Left" Height="135" Margin="53,28,0,0" VerticalAlignment="Top" Width="231">
+                        <TextBox Text="{Binding Left}" HorizontalAlignment="Left" Height="22" Margin="84,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Background="White"/>
+                        <Label Content="Left" HorizontalAlignment="Left" Margin="11,5,0,0" VerticalAlignment="Top"/>
+                        <TextBox Text="{Binding Top}" HorizontalAlignment="Left" Height="22" Margin="85,39,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
+                        <Label Content="Top" HorizontalAlignment="Left" Margin="11,37,0,0" VerticalAlignment="Top"/>
+                        <TextBox Text="{Binding Right}" HorizontalAlignment="Left" Height="22" Margin="84,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
+                        <Label Content="Right" HorizontalAlignment="Left" Margin="11,67,0,0" VerticalAlignment="Top"/>
+                        <TextBox Text="{Binding Bottom}" HorizontalAlignment="Left" Height="22" Margin="84,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
+                        <Label Content="Bottom" HorizontalAlignment="Left" Margin="11,101,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </Grid>
+                <ComboBox ItemsSource="{Binding NamePrinters}" SelectedItem="{Binding NameSelectPrinter}" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" Width="220" Grid.Row="2" Height="22"/>
+                <Grid DataContext="{Binding SelectPrinter}" HorizontalAlignment="Left" Height="174" Margin="21,14,0,0" VerticalAlignment="Top" Width="268" Grid.Row="2">
+                    <ComboBox ItemsSource="{Binding PageMediaSizes}" SelectedItem="{Binding PageMediaSize}" HorizontalAlignment="Left" Margin="21,29,0,0" VerticalAlignment="Top" Width="220" />
+                    <ComboBox ItemsSource="{Binding PageOrientations}" SelectedItem="{Binding PageOrientation}" HorizontalAlignment="Left" Margin="21,56,0,0" VerticalAlignment="Top" Width="220"/>
+                    <ComboBox ItemsSource="{Binding OutputColors}" SelectedItem="{Binding OutputColor}" HorizontalAlignment="Left" Margin="21,84,0,0" VerticalAlignment="Top" Width="220"/>
+                    <ComboBox ItemsSource="{Binding InputBins}" SelectedItem="{Binding InputBin}" HorizontalAlignment="Left" Margin="21,111,0,0" VerticalAlignment="Top" Width="220"/>
+                    <TextBox Text="{Binding CopyCount, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="93,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Background="White"/>
+                    <Label Content="Count copy" HorizontalAlignment="Left" Margin="19,139,0,0" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="167*"/>
+                        <ColumnDefinition Width="168*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding Print}" Content="Print" HorizontalAlignment="Stretch" Grid.Column="0"/>
+                    <Button Command="{Binding PrintDialog}" Content="Button" HorizontalAlignment="Stretch" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
