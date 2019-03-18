@@ -11,21 +11,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Constructor.UC
+namespace Constructor
 {
-    public partial class UCTextBox : UserControl
+    public partial class TableWindow : Window
     {
-        public UCTextBox()
+        public TableWindow()
         {
             InitializeComponent();
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void ClickButton_Cancel(object sender, ExecutedRoutedEventArgs e)
         {
-            ((TableVM)DataContext).SelectingCell(sender);
+            Close();
+        }
+
+        private void ClickButton_Send(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), int.Parse(CountColumn.Text), int.Parse(CountRow.Text));
+            Close();
         }
     }
 }

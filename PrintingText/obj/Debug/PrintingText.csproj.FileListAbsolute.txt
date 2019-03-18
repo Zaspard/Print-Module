@@ -14,3 +14,4 @@ C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.c
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csproj.CopyComplete
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.exe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\Debug\PrintingText.csprojAssemblyReference.cache

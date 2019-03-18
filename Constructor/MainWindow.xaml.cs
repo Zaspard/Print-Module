@@ -36,12 +36,31 @@ namespace Constructor
             ViewModel.Template.State = State.createText;
         }
 
-        private void CreateText_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void ClickButton_CreateTable(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.Template.State = State.createTable;
+            TableWindow tableWindow = new TableWindow();
+            tableWindow.Focusable = true;
+            tableWindow.Owner = this;
+            tableWindow.Show();            
+        }
+
+        private void ClickButton_CreateImage(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.Template.State = State.createImage;
+        }
+
+        private void CreateElement_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (ViewModel.Template.State == State.createText)
             {
                 Point newLocation = Mouse.GetPosition(constructor);
                 ViewModel.CreateTextBox(newLocation);
+            }
+            else if (ViewModel.Template.State == State.createImage)
+            {
+                Point newLocation = Mouse.GetPosition(constructor);
+                ViewModel.CreateImage(newLocation);
             }
         }
 

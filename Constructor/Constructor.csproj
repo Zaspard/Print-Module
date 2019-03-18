@@ -63,6 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="Adorner\CircleAdorner.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
+    <Compile Include="TableWindow.xaml.cs">
+      <DependentUpon>TableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UCTextBox.xaml.cs">
       <DependentUpon>UCTextBox.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
     <Compile Include="ViewModel\TableVM.cs" />
     <Compile Include="ViewModel\TemplateVM.cs" />
     <Compile Include="ViewModel\TextCellVM.cs" />
+    <Page Include="TableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +136,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

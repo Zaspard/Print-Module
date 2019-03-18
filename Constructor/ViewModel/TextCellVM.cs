@@ -11,14 +11,14 @@ namespace Constructor.ViewModel
     public class TextCellVM : BaseVM, ICellVM
     {
         private string content;
-        private int cellRow;
-        private int cellColumn;
+        private int cellRow,  cellColumn;
         private Brush borderBrush;
         private Thickness borderThickness;
         private HorizontalAlignment horizontalAlignment;
         private VerticalAlignment verticalAlignment;
-        private double width;
-        private double height;
+        private double width, height;
+        public double OldWidth { get; set; }
+        public double OldHeight { get; set; }
         private SolidColorBrush background;
         private int angle;
         private Point renderTransformOrigin;
@@ -38,6 +38,7 @@ namespace Constructor.ViewModel
         public ObservableCollection<FontStyle> FontStyles { get; } = new ObservableCollection<FontStyle>();
         public ObservableCollection<FontWeight> FontWeights { get; } = new ObservableCollection<FontWeight>();
         public ObservableCollection<FontStretch> FontStretches { get; } = new ObservableCollection<FontStretch>();
+        public bool SelectInvokeOnProperyChanged { get; set; } = false;
 
         public TextCellVM()
         {
@@ -99,17 +100,34 @@ namespace Constructor.ViewModel
             get { return width; }
             set
             {
+                OldWidth = width;
                 width = value;
-                OnPropertyChanged("Width");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("WidthCell");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }
             }
         }
+
         public double Height
         {
             get { return height; }
             set
             {
+                OldHeight = height;
                 height = value;
-                OnPropertyChanged("Height");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("HeightCell");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }
             }
         }
 
@@ -300,6 +318,8 @@ namespace Constructor.ViewModel
                 OnPropertyChanged("FontStretch");
             }
         }
+
+
         //
     }
 }

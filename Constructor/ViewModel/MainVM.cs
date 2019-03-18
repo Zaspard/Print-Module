@@ -53,10 +53,6 @@ namespace Constructor.ViewModel
                     && location.Y <= (table.YPoint + table.Height))
                 {
                     Template.SelectTable = table;
-                    //foreach (var cell in table.Cells)
-                    //{
-
-                    //}
                     break;
                 }
             }           
@@ -81,6 +77,48 @@ namespace Constructor.ViewModel
             Template.State = State.normally;
             Template.SelectTable = table;
             return table;
+        }
+
+        public TableVM CreateImage(Point newLocation)
+        {
+            var table = new TableVM()
+            {
+                Columns = 1,
+                Rows = 1,
+                NameColor = Colors.White.ToString(),
+                XPoint = newLocation.X,
+                YPoint = newLocation.Y,
+                Height = 50,
+                Width = 80,
+                IsBorder = true,
+                ZPoint = 1
+            };
+            table.CreateImage();
+            Template.Table.Add(table);
+            Template.State = State.normally;
+            Template.SelectTable = table;
+            return table;
+        }
+
+        public TableVM CreateTable(Point newLocation, int countColumn, int countRow)
+        {
+            /*var table = new TableVM()
+            {
+                Columns = countColumn,
+                Rows = countRow,
+                NameColor = Colors.White.ToString(),
+                XPoint = newLocation.X,
+                YPoint = newLocation.Y,
+                Height = 50,
+                Width = 80,
+                IsBorder = true,
+                ZPoint = 1
+            };
+            table.CreateTextBox();
+            Template.Table.Add(table);
+            Template.State = State.normally;
+            Template.SelectTable = table;
+            return table;*/
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿<Window x:Class="Constructor.TableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Constructor"
+        mc:Ignorable="d"
+        Title="TableWindow" Height="200" Width="400">
+    <Window.Resources>
+        <RoutedUICommand x:Key="Commands.Cancel" />
+        <RoutedUICommand x:Key="Commands.Send" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{StaticResource Commands.Cancel}" 
+            Executed="ClickButton_Cancel"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Send}" 
+            Executed="ClickButton_Send"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text=" Использовать API" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <Button Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" Margin="10,3,10,3" Content="Задать API"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text=" Количество строк" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <TextBox x:Name="CountColumn" Grid.Column="1" Grid.Row="2" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text=" Количество столбцов" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,4" />
+        <TextBox x:Name="CountRow" Grid.Column="1" Grid.Row="3" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Button Grid.Column="0" Grid.Row="6" Content="Отмена" Margin="3,3,3,0" Command="{StaticResource Commands.Cancel}"/>
+        <Button Grid.Column="1" Grid.Row="6" Content="Далее" Margin="3,3,3,0" Command="{StaticResource Commands.Send}"/>
+    </Grid>
+</Window>

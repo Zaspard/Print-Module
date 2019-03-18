@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Constructor.ViewModel
@@ -27,7 +29,6 @@ namespace Constructor.ViewModel
         public ObservableCollection<ICellVM> Cells { get; } = new ObservableCollection<ICellVM>();
         public List<ICellVM> DeletedCellsCollection = new List<ICellVM>();
 
-        //SENDER SELECTCELL ON PROPERTY CHANGED CELL
         public TableVM()
         {
             //Background
@@ -47,6 +48,54 @@ namespace Constructor.ViewModel
             {
                 selectCell = value;
                 OnPropertyChanged("SelectCell");
+                SelectCell.PropertyChanged += SelectCell_PropertyChanged;
+            }
+        }
+
+        public void SelectingCell(object sender)
+        {
+            var cell = ((TextBox)sender).DataContext;
+            var index = Cells.IndexOf((ICellVM)cell);
+            SelectCell = Cells[index];
+        }
+
+        private void SelectCell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "WidthCell")
+            {
+                var changeWidth = false;
+                foreach (var cell in Cells)
+                {
+                    if (((ICellVM)sender).CellColumn == cell.CellColumn)
+                    {
+                        cell.SelectInvokeOnProperyChanged = true;
+                        if (!changeWidth)
+                        {
+                            Width += ((ICellVM)sender).Width - ((ICellVM)sender).OldWidth;
+                            changeWidth = true;
+                        }
+                        cell.Width = ((ICellVM)sender).Width;
+                        cell.SelectInvokeOnProperyChanged = false;
+                    }
+                }                
+            }
+            if (e.PropertyName == "HeightCell")
+            {
+                var changeHeight = false;
+                foreach (var cell in Cells)
+                {
+                    if (((ICellVM)sender).CellRow == cell.CellRow)
+                    {
+                        cell.SelectInvokeOnProperyChanged = true;
+                        if (!changeHeight)
+                        {
+                            Height += ((ICellVM)sender).Height - ((ICellVM)sender).OldHeight;
+                            changeHeight = true;
+                        }
+                        cell.Height = ((ICellVM)sender).Height;
+                        cell.SelectInvokeOnProperyChanged = false;
+                    }
+                }
             }
         }
 
@@ -231,91 +280,97 @@ namespace Constructor.ViewModel
 
         public void CreateTextOnRow()
         {
+            var cell = Cells[Cells.Count - 1];
             if (Columns==1)
             {
                 while (oldRows < Rows)
                 {
                     var textCell = new TextCellVM()
                     {
-                        Content = "123",
-                        Height = Cells[0].Height,
-                        Width = Cells[0].Width,
+                        Content = "T",
+                        Height = cell.Height,
+                        Width = cell.Width,
                         CellRow = oldRows,
                         CellColumn = Columns - 1,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString()
+                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        IsBorder = true
                     };
-                    Height += Cells[0].Height;
+                    Height += cell.Height;
                     Cells.Add(textCell);
-                    selectCell = textCell;
+                    SelectCell = textCell;
                     oldRows++;
                 }
                 return;
             }
             for (; oldRows < Rows; oldRows++)
             {
-                Height += Cells[0].Height;
+                Height += cell.Height;
                 for (var i = 0; i <= Columns-1; i++)
                 {
                     var textCell = new TextCellVM()
                     {
-                        Content = "123",
-                        Height = Cells[0].Height,
-                        Width = Cells[0].Width,
+                        Content = "T",
+                        Height = cell.Height,
+                        Width = cell.Width,
                         CellRow = oldRows,
                         CellColumn = i,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString()
+                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        IsBorder = true
                     };
                     Cells.Add(textCell);
-                    selectCell = textCell;
+                    SelectCell = textCell;
                 }
             }
         }
 
         public void CreateTextOnColumn()
         {
+            var cell = Cells[Cells.Count-1];
             if (Rows == 1)
             {
                 while (oldColumns < Columns)
                 {
                     var textCell = new TextCellVM()
                     {
-                        Content = "123",
-                        Height = Cells[0].Height,
-                        Width = Cells[0].Width,
+                        Content = "T",
+                        Height = cell.Height,
+                        Width = cell.Width,
                         CellRow = Rows - 1,
                         CellColumn = oldColumns,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString()
+                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        IsBorder = true
                     };
-                    Width += Cells[0].Width;
+                    Width += cell.Width;
                     Cells.Add(textCell);
-                    selectCell = textCell;
+                    SelectCell = textCell;
                     oldColumns++;
                 }
             }
             for (; oldColumns < Columns; oldColumns++)
             {
-                Width += Cells[0].Width;
+                Width += cell.Width;
                 for (var i = 0; i <= Rows - 1; i++)
                 {
                     var textCell = new TextCellVM()
                     {
-                        Content = "123",
-                        Height = Cells[0].Height,
-                        Width = Cells[0].Width,
+                        Content = "T",
+                        Height = cell.Height,
+                        Width = cell.Width,
                         CellRow = i,
                         CellColumn = oldColumns,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString()
+                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        IsBorder = true
                     };
                     Cells.Add(textCell);
-                    selectCell = textCell;
+                    SelectCell = textCell;
                 }
             }
         }
@@ -329,11 +384,21 @@ namespace Constructor.ViewModel
                     DeletedCellsCollection.Add(cell);
                 }
             }
+            for (var i = Rows; i < oldRows; i++)
+            {
+                foreach (var deletedCell in DeletedCellsCollection)
+                {
+                    if (deletedCell.CellRow==i)
+                    {
+                        Height -= deletedCell.Height;
+                        break;
+                    }
+                }
+            }
             foreach (var deletedCell in DeletedCellsCollection)
             {
                 Cells.Remove(deletedCell);                
             }
-            Height -= DeletedCellsCollection[0].Height * (oldRows-Rows);
             DeletedCellsCollection.Clear();
         }
 
@@ -346,24 +411,59 @@ namespace Constructor.ViewModel
                     DeletedCellsCollection.Add(cell);
                 }
             }
+            for (var i = Columns; i < oldColumns; i++)
+            {
+                foreach (var deletedCell in DeletedCellsCollection)
+                {
+                    if (deletedCell.CellColumn == i)
+                    {
+                        Width -= deletedCell.Width;
+                        break;
+                    }
+                }
+            }
             foreach (var deletedCell in DeletedCellsCollection)
             {
                 Cells.Remove(deletedCell);
             }
-            Width -= DeletedCellsCollection[0].Width * (oldColumns - Columns);
             DeletedCellsCollection.Clear();
         }
 
         public TextCellVM CreateTextBox()
         {
-            var textCell = new TextCellVM() { Content = "123", Height=50, Width = 80, CellRow = 0, CellColumn = 0,
-                                              HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Center,
-                                              NameColor = System.Windows.Media.Colors.White.ToString()
+            var textCell = new TextCellVM()
+            {
+                Content = "T",
+                Height = 50,
+                Width = 80,
+                CellRow = 0,
+                CellColumn = 0,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Center,
+                NameColor = System.Windows.Media.Colors.White.ToString(),
+                IsBorder = true
             };
             Cells.Add(textCell);
-            selectCell = textCell;
+            SelectCell = textCell;
             return textCell;
         }
 
+        public ImageCellVM CreateImage()
+        {
+            var image = new ImageCellVM()
+            {
+                Content = "image.png",
+                Height = 50,
+                Width = 80,
+                CellRow = 0,
+                CellColumn = 0,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Center,
+                NameColor = System.Windows.Media.Colors.White.ToString(),
+            };
+            Cells.Add(image);
+            SelectCell = image;
+            return image;
+        }
     }
 }

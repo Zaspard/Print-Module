@@ -9,42 +9,65 @@
              xmlns:view="clr-namespace:Constructor.View"
              mc:Ignorable="d" Height="{Binding Height}" Width="{Binding Width}">
 
+    <UserControl.Resources>
+        <!--TEXTBOX-->
+        <DataTemplate DataType="{x:Type viewmodel:TextCellVM}">
+            <Border Height="{Binding Height}" Width="{Binding Width}"
+                            BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
+                            Background="{Binding Background}">
+                <TextBox
+                             Grid.Column="{Binding Column}" Grid.Row="{Binding Row}" Background="{Binding Background}" 
+                             BorderThickness="0,0,0,0"
+                             VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
+                             Text="{Binding Content}"
+                             FontFamily="{Binding FontFamily}" FontSize="{Binding FontSize}" FontStyle="{Binding FontStyle}"
+                             FontWeight="{Binding FontWeight}" FontStretch="{Binding FontStretch}"
+                             GotFocus="TextBox_GotFocus">
+                    <TextBox.RenderTransformOrigin>
+                        <Point X="0.5" Y="0.5"/>
+                    </TextBox.RenderTransformOrigin>
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding Angle}"/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+            </Border>
+        </DataTemplate>
+        <!--IMAGE-->
+        <DataTemplate DataType="{x:Type viewmodel:ImageCellVM}">
+            <Border Height="{Binding Height}" Width="{Binding Width}"
+                            BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
+                            Background="{Binding Background}">
+                <Image
+                             Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"
+                             VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
+                             Source="{Binding Content}" Stretch="Fill"
+                    
+                             GotFocus="TextBox_GotFocus">
+                    <Image.RenderTransformOrigin>
+                        <Point X="0.5" Y="0.5"/>
+                    </Image.RenderTransformOrigin>
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding Angle}"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Border Grid.Row="1" BorderBrush="Black" BorderThickness="{Binding BorderThickness}" Background="{Binding Background}">
         <ItemsControl x:Name="myItems" ItemsSource="{Binding Cells}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid 
                         view:GridHelpers.RowCount="{Binding Rows}"              
-                        view:GridHelpers.ColumnCount="{Binding Columns}"
-                        view:GridHelpers.StarColumns="0,1,2,3,4,5,6,7,8,9,10"
-                        view:GridHelpers.StarRows="0,1,2,3,4,5,6,7,8,9,10">
+                        view:GridHelpers.ColumnCount="{Binding Columns}">
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewmodel:TextCellVM}">
-                    <Border Height="{Binding Height}" Width="{Binding Width}"
-                            BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
-                            Background="{Binding Background}">
-                        <TextBox
-                             Grid.Column="{Binding Column}" Grid.Row="{Binding Row}" Background="{Binding Background}" 
-                             BorderThickness="0,0,0,0"
-                             VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
-                             Text="{Binding Content}"
-                             FontFamily="{Binding FontFamily}" FontSize="{Binding FontSize}" FontStyle="{Binding FontStyle}"
-                             FontWeight="{Binding FontWeight}" FontStretch="{Binding FontStretch}">
-                            <TextBox.RenderTransformOrigin>
-                                <Point X="0.5" Y="0.5"/>
-                            </TextBox.RenderTransformOrigin>
-                            <TextBox.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="{Binding Angle}"/>
-                                </TransformGroup>
-                            </TextBox.RenderTransform>
-                        </TextBox>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Style.Setters>

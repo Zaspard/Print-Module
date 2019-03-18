@@ -23,3 +23,5 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csp
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csproj.CopyComplete
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csprojAssemblyReference.cache
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\TableWindow.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\TableWindow.baml

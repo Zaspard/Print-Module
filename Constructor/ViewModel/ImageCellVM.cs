@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,8 +15,9 @@ namespace Constructor.ViewModel
         private Thickness borderThickness;
         private HorizontalAlignment horizontalAlignment;
         private VerticalAlignment verticalAlignment;
-        private double width;
-        private double height;
+        private double width, height;
+        public double OldWidth { get; set; }
+        public double OldHeight { get; set; }
         private SolidColorBrush background = new SolidColorBrush();
         private int angle;
         private Point renderTransformOrigin;
@@ -26,13 +28,14 @@ namespace Constructor.ViewModel
         public List<string> Colors { get; } = new List<string>();
         public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
         public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
+        public bool SelectInvokeOnProperyChanged { get; set; } = false;
 
         //ctor
         public object Content
         {
             get { return content; }
             set
-            {
+            {               
                 content = (value != null && value is Image)?(Image)value:null;
                 OnPropertyChanged("Content");
             }
@@ -65,6 +68,15 @@ namespace Constructor.ViewModel
             {
                 width = value;
                 OnPropertyChanged("Width");
+            }
+        }
+
+        public double ChangeWidthInColumn
+        {
+            get { return width; }
+            set
+            {
+                width = value;
             }
         }
 

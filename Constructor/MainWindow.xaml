@@ -10,9 +10,12 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="810" Width="1200">
+    
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.ClickOnButtonCreateTextBox" />
-        <RoutedUICommand x:Key="Commands.CreateText" />
+        <RoutedUICommand x:Key="Commands.ClickOnButtonCreateTable"/>
+        <RoutedUICommand x:Key="Commands.ClickOnButtonCreateImage" />
+        <RoutedUICommand x:Key="Commands.CreateElement"/>
         <RoutedUICommand x:Key="Commands.Select"/>
         <RoutedUICommand x:Key="Commands.DeleteSelectedTable" />
 
@@ -52,8 +55,14 @@
             Command="{StaticResource Commands.ClickOnButtonCreateTextBox}" 
             Executed="ClickButton_CreateTextBox"/>
         <CommandBinding 
-            Command="{StaticResource Commands.CreateText}" 
-            Executed="CreateText_Executed"/>
+            Command="{StaticResource Commands.ClickOnButtonCreateTable}" 
+            Executed="ClickButton_CreateTable"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.ClickOnButtonCreateImage}" 
+            Executed="ClickButton_CreateImage"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.CreateElement}" 
+            Executed="CreateElement_Executed"/>
         <CommandBinding 
             Command="{StaticResource Commands.Select}" 
             Executed="Select"/>
@@ -108,8 +117,8 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" Margin="3,3,3,3" Content="Текст" Command="{StaticResource Commands.ClickOnButtonCreateTextBox}"/>
-                            <Button Grid.Column="1" Margin="3,3,3,3" Content="Таблица"/>
-                            <Button Grid.Column="2" Margin="3,3,3,3" Content="Изображение"/>
+                            <Button Grid.Column="1" Margin="3,3,3,3" Content="Таблица" Command="{StaticResource Commands.ClickOnButtonCreateTable}"/>
+                            <Button Grid.Column="2" Margin="3,3,3,3" Content="Изображение" Command="{StaticResource Commands.ClickOnButtonCreateImage}"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -120,7 +129,7 @@
                         Height="{Binding Template.Height}"  Background="White">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
-                            <i:InvokeCommandAction Command="{StaticResource Commands.CreateText}"/>
+                            <i:InvokeCommandAction Command="{StaticResource Commands.CreateElement}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </view:TableView>
