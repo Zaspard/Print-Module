@@ -22,6 +22,8 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.Pro
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csproj.GenerateResource.cache
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csproj.CopyComplete
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Windows\SimpleApi.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Windows\TableWindow.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Windows\SimpleApi.baml
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Windows\TableWindow.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\Constructor.csprojAssemblyReference.cache
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\TableWindow.g.cs
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\Debug\TableWindow.baml

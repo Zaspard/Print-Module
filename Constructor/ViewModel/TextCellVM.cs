@@ -10,6 +10,7 @@ namespace Constructor.ViewModel
 {
     public class TextCellVM : BaseVM, ICellVM
     {
+        private string nameColor;
         private string content;
         private int cellRow,  cellColumn;
         private Brush borderBrush;
@@ -23,27 +24,25 @@ namespace Constructor.ViewModel
         private int angle;
         private Point renderTransformOrigin;
         private bool isBorder;
-        //Font
+        public List<string> Colors { get; } = new List<string>();
+        public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
+        public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
+        public bool SelectInvokeOnProperyChanged { get; set; } = false;
+        //Private TextCell
         private FontFamily fontFamily;
         private float fontSize;
         private FontStyle fontStyle;
         private FontWeight fontWeight;
         private FontStretch fontStretch;
-        private string nameColor;
-        public List<string> Colors { get; } = new List<string>();
-        public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
-        public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
         public List<FontFamily> FontFamils { get; } = new List<FontFamily>();
-        public List<FamilyTypeface> AllFontStyles { get; } = new List<FamilyTypeface>();
         public ObservableCollection<FontStyle> FontStyles { get; } = new ObservableCollection<FontStyle>();
         public ObservableCollection<FontWeight> FontWeights { get; } = new ObservableCollection<FontWeight>();
         public ObservableCollection<FontStretch> FontStretches { get; } = new ObservableCollection<FontStretch>();
-        public bool SelectInvokeOnProperyChanged { get; set; } = false;
 
         public TextCellVM()
         {
             //Background
-            Type typeBackground = typeof(System.Drawing.Color);
+            /*Type typeBackground = typeof(System.Drawing.Color);
             PropertyInfo[] colorInfo = typeBackground.GetProperties(BindingFlags.Public |
                 BindingFlags.Static);
             foreach (PropertyInfo info in colorInfo)
@@ -66,7 +65,7 @@ namespace Constructor.ViewModel
                 FontFamils.Add(fontFamily);
             }
             FontFamily = new FontFamily("Times New Roman");
-            FontSize = 12;
+            FontSize = 12;*/
         }
 
         public object Content
@@ -318,8 +317,5 @@ namespace Constructor.ViewModel
                 OnPropertyChanged("FontStretch");
             }
         }
-
-
-        //
     }
 }

@@ -61,16 +61,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Adorner\CircleAdorner.cs" />
+    <Compile Include="api\Borehole.cs" />
+    <Compile Include="api\Dataset.cs" />
+    <Compile Include="api\Field.cs" />
+    <Compile Include="api\Well.cs" />
+    <Compile Include="api\Bush.cs" />
+    <Compile Include="SimpleAdorner\AdornerResize.cs" />
+    <Compile Include="Model\API.cs" />
+    <Compile Include="Model\RequestAPI.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
-    <Compile Include="TableWindow.xaml.cs">
+    <Compile Include="Windows\SimpleApi.xaml.cs">
+      <DependentUpon>SimpleApi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UC\UCTextBox.xaml.cs">
       <DependentUpon>UCTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseVM.cs" />
-    <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="View\ElementControl.cs" />
     <Compile Include="ViewModel\ICellVM.cs" />
     <Compile Include="ViewModel\ImageCellVM.cs" />
@@ -83,7 +92,11 @@
     <Compile Include="ViewModel\TableVM.cs" />
     <Compile Include="ViewModel\TemplateVM.cs" />
     <Compile Include="ViewModel\TextCellVM.cs" />
-    <Page Include="TableWindow.xaml">
+    <Page Include="Windows\SimpleApi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

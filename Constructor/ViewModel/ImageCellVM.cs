@@ -8,6 +8,7 @@ namespace Constructor.ViewModel
 {
     public class ImageCellVM : BaseVM, ICellVM
     {
+        private string nameColor;
         private Image content;
         private int cellRow;
         private int cellColumn;
@@ -21,14 +22,14 @@ namespace Constructor.ViewModel
         private SolidColorBrush background = new SolidColorBrush();
         private int angle;
         private Point renderTransformOrigin;
-        private string url;
-        private double opacity;
-        private bool isStretched;
-        private string nameColor;
         public List<string> Colors { get; } = new List<string>();
         public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
         public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
+        //Private ImageCell
+        private string url;
+        private double opacity;
+        private bool isStretched;
 
         //ctor
         public object Content

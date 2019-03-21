@@ -23,6 +23,5 @@ namespace Constructor.ViewModel
         List<VerticalAlignment> VerticalAlignments { get; }
         bool SelectInvokeOnProperyChanged { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
-        //margin?
     }
 }

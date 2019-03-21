@@ -34,7 +34,7 @@
                 </TextBox>
             </Border>
         </DataTemplate>
-        <!--IMAGE-->
+        <!--IMAGE--><!--
         <DataTemplate DataType="{x:Type viewmodel:ImageCellVM}">
             <Border Height="{Binding Height}" Width="{Binding Width}"
                             BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
@@ -55,10 +55,10 @@
                     </Image.RenderTransform>
                 </Image>
             </Border>
-        </DataTemplate>
+        </DataTemplate>-->
     </UserControl.Resources>
 
-    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="{Binding BorderThickness}" Background="{Binding Background}">
+    <Border BorderBrush="Black" BorderThickness="{Binding BorderThickness}" Background="{Binding Background}">
         <ItemsControl x:Name="myItems" ItemsSource="{Binding Cells}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

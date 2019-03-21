@@ -1,5 +1,4 @@
-﻿using Constructor.Adorner;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +43,7 @@ namespace Constructor.ViewModel
             }
         }
 
-        public void Select(Point location)
+        public TableVM Select(Point location)
         {
             foreach (var table in Template.Table)
             {
@@ -53,9 +52,10 @@ namespace Constructor.ViewModel
                     && location.Y <= (table.YPoint + table.Height))
                 {
                     Template.SelectTable = table;
-                    break;
+                    return table;
                 }
-            }           
+            }
+            return null;
         }
 
         public TableVM CreateTextBox(Point newLocation)
@@ -64,7 +64,6 @@ namespace Constructor.ViewModel
             {
                 Columns = 1,
                 Rows = 1,
-                NameColor = Colors.White.ToString(),
                 XPoint = newLocation.X,
                 YPoint = newLocation.Y,
                 Height = 50,
@@ -85,7 +84,6 @@ namespace Constructor.ViewModel
             {
                 Columns = 1,
                 Rows = 1,
-                NameColor = Colors.White.ToString(),
                 XPoint = newLocation.X,
                 YPoint = newLocation.Y,
                 Height = 50,
@@ -102,11 +100,10 @@ namespace Constructor.ViewModel
 
         public TableVM CreateTable(Point newLocation, int countColumn, int countRow)
         {
-            /*var table = new TableVM()
+            var table = new TableVM()
             {
-                Columns = countColumn,
-                Rows = countRow,
-                NameColor = Colors.White.ToString(),
+                Columns = 1,
+                Rows = 1,
                 XPoint = newLocation.X,
                 YPoint = newLocation.Y,
                 Height = 50,
@@ -115,10 +112,12 @@ namespace Constructor.ViewModel
                 ZPoint = 1
             };
             table.CreateTextBox();
+            table.Rows = countRow;
+            table.Columns = countColumn;
             Template.Table.Add(table);
             Template.State = State.normally;
             Template.SelectTable = table;
-            return table;*/
+            return table;
         }
     }
 }

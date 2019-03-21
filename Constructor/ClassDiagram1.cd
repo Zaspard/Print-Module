@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Constructor.ViewModel.BaseVM">
-    <Position X="5.75" Y="2.75" Width="2" />
+    <Position X="7.25" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\BaseVM.cs</FileName>
@@ -9,84 +9,225 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Constructor.ViewModel.ImageCellVM">
-    <Position X="8.25" Y="0.5" Width="2" />
-    <InheritanceLine Type="Constructor.ViewModel.BaseVM" ManuallyRouted="true">
-      <Path>
-        <Point X="7.75" Y="3.528" />
-        <Point X="7.915" Y="3.528" />
-        <Point X="7.915" Y="3.639" />
-        <Point X="8.085" Y="3.639" />
-        <Point X="8.085" Y="3.528" />
-        <Point X="8.25" Y="3.528" />
-      </Path>
-    </InheritanceLine>
+    <Position X="11" Y="3" Width="2" />
     <TypeIdentifier>
-      <HashCode>AQACEAAABgAAAAQIQBBACECSQAQIgwAACEEgAAFAIBA=</HashCode>
+      <HashCode>QKSCEEAkBgIAAAQIwBBACkCQQAAIgQAACEEggQBAoBA=</HashCode>
       <FileName>ViewModel\ImageCellVM.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Constructor.ViewModel.TableVM">
-    <Position X="3.5" Y="3.25" Width="2" />
-    <InheritanceLine Type="Constructor.ViewModel.BaseVM" FixedFromPoint="true">
-      <Path>
-        <Point X="6.625" Y="4.305" />
-        <Point X="6.625" Y="6.062" />
-        <Point X="5.5" Y="6.062" />
-      </Path>
-    </InheritanceLine>
+    <Position X="5.5" Y="3" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAGAAABBAAEEQAQBBAAEAAAAAAAAAgCAAAIAgAAAg=</HashCode>
+      <HashCode>AQYAHAAUBBAAuEQESBJAAEARAQAEIQEkCAAgoQgCIAg=</HashCode>
       <FileName>ViewModel\TableVM.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Constructor.ViewModel.TemplateVM">
-    <Position X="3.5" Y="0.5" Width="2" />
+    <Position X="8.25" Y="3" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAARAQAAAAEAAAAAAAAAAAAAgAAAAIAA=</HashCode>
+      <HashCode>AEAAAAAQBAAAEARAQAAAQEAAAAAAQAAEAAAABAAAAAA=</HashCode>
       <FileName>ViewModel\TemplateVM.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Constructor.ViewModel.TextCellVM">
-    <Position X="10.5" Y="0.5" Width="2" />
-    <InheritanceLine Type="Constructor.ViewModel.BaseVM" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.75" Y="2.812" />
-        <Point X="7.75" Y="2.656" />
-        <Point X="8" Y="2.656" />
-        <Point X="8" Y="0.113" />
-        <Point X="11" Y="0.113" />
-        <Point X="11" Y="0.5" />
-      </Path>
-    </InheritanceLine>
+    <Position X="13.75" Y="3" Width="2" />
     <TypeIdentifier>
-      <HashCode>AQACAAAABgAAAAQIQBBACECSQAQAggAAAEAgAAFAIAA=</HashCode>
+      <HashCode>UKaCQFAkRgIAEkQKwBJACkCQQAJAgAAAAEAwgABAsAA=</HashCode>
       <FileName>ViewModel\TextCellVM.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Constructor.ViewModel.ICellVM" Collapsed="true">
-    <Position X="6" Y="0.5" Width="1.5" />
-    <InheritanceLine Type="Constructor.ViewModel.IUserControl" FixedToPoint="true">
-      <Path>
-        <Point X="6" Y="1.531" />
-        <Point X="5.76" Y="1.531" />
-        <Point X="5.76" Y="0.26" />
-        <Point X="6" Y="0.26" />
-        <Point X="6" Y="0.5" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="Constructor.Adorner.CircleAdorner" Collapsed="true">
+    <Position X="21.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAABgAAAAAAAAAAAEAAAAQAgAAAAEAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Adorner\CircleAdorner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.App" Collapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgACAAAAAAAAAAAAAAIAEAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Constructor.TableWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAIAAAAAAAgAAAAAQAAAA=</HashCode>
+      <FileName>TableWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Constructor.Model.API" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Model\API.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.Model.CollectionItemsChangedEventArgs" Collapsed="true">
+    <Position X="21" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CollectionItemsChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.Model.RequestAPI" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\RequestAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.Properties.Resources" Collapsed="true">
+    <Position X="19.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.Properties.Settings" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.UC.UCTextBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UC\UCTextBox.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Constructor.View.ElementControl" Collapsed="true">
+    <Position X="21.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAIAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>View\ElementControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.View.GridHelpers" Collapsed="true">
+    <Position X="21.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAACCEAIACEAAQAAAAAAAIAAAAAAAATAAAAEIAA=</HashCode>
+      <FileName>View\GridHelpers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.View.ItemTable" Collapsed="true">
+    <Position X="18.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABQQAAwAAAAACAAAAEAAIBAgBhAAAABIAAQhAAGYAA=</HashCode>
+      <FileName>View\ItemTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.View.TableView" Collapsed="true">
+    <Position X="13.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MRUYYAC4gCxEIgRAAGSgVMBAoJkBYBUCIAgMZTBOAYU=</HashCode>
+      <FileName>View\TableView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="View.TableDragEventArgs" Collapsed="true">
+    <Position X="3" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="View.TableDragStartedEventArgs" Collapsed="true">
+    <Position X="5.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="View.TableDraggingEventArgs" Collapsed="true">
+    <Position X="2.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAEAAAABAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="View.TableDragCompletedEventArgs" Collapsed="true">
+    <Position X="2.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constructor.ViewModel.MainVM" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAACAEAAAABABAAAAAAAAAAAIAAAAAAAQAAAAAA=</HashCode>
+      <FileName>ViewModel\MainVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrintingText.ViewModel.DelegateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\DelegateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Constructor.ViewModel.ICellVM" Collapsed="true">
+    <Position X="17.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAEAkBgIAAAAAgAAAAEAAgAAAgAAAAEAggAAAAAA=</HashCode>
       <FileName>ViewModel\ICellVM.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Constructor.ViewModel.IUserControl" Collapsed="true">
-    <Position X="6" Y="1.25" Width="1.5" />
+    <Position X="17.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABBACAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAAAAAAAABBACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\IUserControl.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="State" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAQAAAAAAAAAAABAAAABAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\TemplateVM.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="View.TableDragEventHandler" Collapsed="true">
+    <Position X="19.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="View.TableDragStartedEventHandler" Collapsed="true">
+    <Position X="19.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="View.TableDraggingEventHandler" Collapsed="true">
+    <Position X="19.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="View.TableDragCompletedEventHandler" Collapsed="true">
+    <Position X="19.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TableDragEvents.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

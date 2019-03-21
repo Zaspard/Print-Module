@@ -17,7 +17,6 @@ namespace Constructor.ViewModel
         private double height;
         private State state = State.normally;
         private TableVM selectTable;
-        private bool isSelected = false;
         private ObservableCollection<TableVM> table;
 
         public TemplateVM()
@@ -35,16 +34,6 @@ namespace Constructor.ViewModel
                     table = new ObservableCollection<TableVM>();
                 }
                 return table;
-            }
-        }
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged("IsSelected");
             }
         }
 
