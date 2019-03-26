@@ -27,5 +27,27 @@ namespace Constructor.UC
         {
             ((TableVM)DataContext).SelectingCell(sender);
         }
+
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            DataTemplate dt = null;
+            if (e.PropertyType == typeof(TextCellVM))
+                dt = (DataTemplate)Resources["TextTemplate"];
+            else if (e.PropertyType == typeof(ImageCellVM))
+                dt = (DataTemplate)Resources["ImageTemplate"];
+
+            if (dt != null)
+            {
+                DataGridTemplateColumn c = new DataGridTemplateColumn()
+                {
+                    CellTemplate = dt,
+                    Header = e.Column.Header,
+                    HeaderTemplate = e.Column.HeaderTemplate,
+                    HeaderStringFormat = e.Column.HeaderStringFormat,
+                    SortMemberPath = e.PropertyName
+                };
+                e.Column = c;
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -134,11 +136,6 @@ namespace Constructor.ViewModel
                 {
                     return;
                 }
-                //if (value > 30)
-                //{
-                //    MessageBox.Show("Количество столбцов не может быть больше 30");
-                //    return;
-                //}
                 oldColumns = columns;
                 columns = value;
                 if (columns != 1)
@@ -165,11 +162,6 @@ namespace Constructor.ViewModel
                 {
                     return;
                 }
-                //if (value > 30)
-                //{
-                //    MessageBox.Show("Количество строк не может быть больше 30");
-                //    return;
-                //}
                 oldRows = rows;
                 rows = value;
                 if (rows != 1)
@@ -247,40 +239,46 @@ namespace Constructor.ViewModel
             }
         }
 
-        public async void CreateTextOnRow()
+        public void CreateTextOnRow()
         {
-            var cell = Cells[Cells.Count - 1];
-            if (Columns==1)
+            //await Task.Run(() =>
             {
-                while (oldRows < Rows)
+                var cell = Cells[Cells.Count - 1];
+                double addHeight = 0;
+                if (Columns == 1)
                 {
-                    var textCell = new TextCellVM()
+                    while (oldRows < Rows)
                     {
-                        Content = "",
-                        Height = cell.Height,
-                        Width = cell.Width,
-                        CellRow = oldRows,
-                        CellColumn = Columns - 1,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString(),
-                        IsBorder = true
-                    };
-                    Height += cell.Height;
-                    Cells.Add(textCell);
-                    oldRows++;
+                        //Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            var textCell = new TextCellVM()
+                            {
+                                Content = "",
+                                Height = cell.Height,
+                                Width = cell.Width,
+                                CellRow = oldRows,
+                                CellColumn = Columns - 1,
+                                HorizontalAlignment = HorizontalAlignment.Stretch,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                NameColor = System.Windows.Media.Colors.White.ToString(),
+                                IsBorder = true
+                            };
+                            addHeight += cell.Height;
+                            Cells.Add(textCell);
+                            oldRows++;
+                        }//);
+                    }
+                    Height += addHeight;
+                    EditTable();
+                    return;
                 }
-                return;
-            }
-            await Task.Run(() =>
-            {
                 for (; oldRows < Rows; oldRows++)
                 {
-                    Height += cell.Height;
+                    addHeight += cell.Height;
                     for (var i = 0; i <= Columns - 1; i++)
                     {
-                        
-                        Application.Current.Dispatcher.Invoke(() =>
+
+                        //Application.Current.Dispatcher.Invoke(() =>
                         {
                             var textCell = new TextCellVM()
                             {
@@ -294,61 +292,75 @@ namespace Constructor.ViewModel
                                 NameColor = System.Windows.Media.Colors.White.ToString(),
                                 IsBorder = true
                             };
-
                             Cells.Add(textCell);
-                        });
+                        }//);
                     }
                 }
-            });
+                Height += addHeight;
+                EditTable();
+            }//);
         }
 
-        public async void CreateTextOnColumn()
+        public  void CreateTextOnColumn()
         {
-            var cell = Cells[Cells.Count-1];
-            if (Rows == 1)
+            //await Task.Run(() =>
             {
-                while (oldColumns < Columns)
+                var cell = Cells[Cells.Count - 1];
+                double addWidth = 0;
+                if (Rows == 1)
                 {
-                    var textCell = new TextCellVM()
+                    while (oldColumns < Columns)
                     {
-                        Content = "",
-                        Height = cell.Height,
-                        Width = cell.Width,
-                        CellRow = Rows - 1,
-                        CellColumn = oldColumns,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString(),
-                        IsBorder = true
-                    };
-                    Width += cell.Width;
-                    Cells.Add(textCell);
-                    oldColumns++;
+                       // Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            var textCell = new TextCellVM()
+                            {
+                                Content = "",
+                                Height = cell.Height,
+                                Width = cell.Width,
+                                CellRow = Rows - 1,
+                                CellColumn = oldColumns,
+                                HorizontalAlignment = HorizontalAlignment.Stretch,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                NameColor = System.Windows.Media.Colors.White.ToString(),
+                                IsBorder = true
+                            };
+
+                            addWidth += cell.Width;
+                            Cells.Add(textCell);
+                            oldColumns++;
+                       }//);
+                    }
+                    Width = addWidth;
+                    EditTable();
+                    return;
                 }
-            }
-            await Task.Run(() =>
-            {
                 for (; oldColumns < Columns; oldColumns++)
                 {
-                    Width += cell.Width;
+                    addWidth += cell.Width;
                     for (var i = 0; i <= Rows - 1; i++)
                     {
-                        var textCell = new TextCellVM()
+                       // Application.Current.Dispatcher.Invoke(() =>
                         {
-                            Content = "",
-                            Height = cell.Height,
-                            Width = cell.Width,
-                            CellRow = i,
-                            CellColumn = oldColumns,
-                            HorizontalAlignment = HorizontalAlignment.Stretch,
-                            VerticalAlignment = VerticalAlignment.Center,
-                            NameColor = System.Windows.Media.Colors.White.ToString(),
-                            IsBorder = true
-                        };
-                        Cells.Add(textCell);
+                            var textCell = new TextCellVM()
+                            {
+                                Content = "",
+                                Height = cell.Height,
+                                Width = cell.Width,
+                                CellRow = i,
+                                CellColumn = oldColumns,
+                                HorizontalAlignment = HorizontalAlignment.Stretch,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                NameColor = System.Windows.Media.Colors.White.ToString(),
+                                IsBorder = true
+                            };
+                            Cells.Add(textCell);
+                        }//);
                     }
                 }
-            });
+                Width += addWidth;
+                EditTable();
+           }//);
         }
 
         public void DeleteTextOnRow()
@@ -376,6 +388,7 @@ namespace Constructor.ViewModel
                 Cells.Remove(deletedCell);                
             }
             DeletedCellsCollection.Clear();
+            EditTable();
         }
 
         public void DeleteTextOnColumn()
@@ -403,6 +416,7 @@ namespace Constructor.ViewModel
                 Cells.Remove(deletedCell);
             }
             DeletedCellsCollection.Clear();
+            EditTable();
         }
 
         public TextCellVM CreateTextBox()
@@ -421,6 +435,7 @@ namespace Constructor.ViewModel
             };
             Cells.Add(textCell);
             SelectCell = textCell;
+            EditTable();
             return textCell;
         }
 
@@ -439,7 +454,103 @@ namespace Constructor.ViewModel
             };
             Cells.Add(image);
             SelectCell = image;
+            EditTable();
             return image;
+        }
+
+
+
+        /////
+        private DataTable dataGridTable;
+        private DataView defaultTableView;
+
+        public DataTable DataGridTable
+        {
+            get { return dataGridTable; }
+
+            set
+            {
+                dataGridTable = value;
+                OnPropertyChanged("DataGridTable");
+            }
+        }
+        public DataView DefaultTableView
+        {
+            get { return defaultTableView; }
+
+            set
+            {
+                defaultTableView = value;
+                OnPropertyChanged("DefaultTableView");
+            }
+        }
+
+        //private void EditTable()
+        //{
+        //    DataTable dt = new DataTable();
+        //    if (dt != null)
+        //    {
+        //        dt.Clear();
+        //    }
+        //    dt = new DataTable();
+
+        //    for (int i = 1; i <= columns; ++i)
+        //    {
+        //        dt.Columns.Add("", typeof(TextCellVM));
+        //    }
+        //    var content = new object[columns];
+        //    for (int i = 0; i < rows; ++i)
+        //    {
+        //        for (int j = 0; j < columns; ++j)
+        //        {
+        //            foreach (var cell in Cells)
+        //            {
+        //                if ((cell.CellColumn == j) && (cell.CellRow == i))
+        //                {
+        //                    content[j] = cell;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //        dt.Rows.Add(content);
+        //    }
+        //    DataGridTable = dt;
+        //}
+
+        private void EditTable()
+        {
+            if (DataGridTable != null)
+            {
+                DataGridTable.Clear();
+            }
+            DataGridTable = new DataTable();
+            DefaultTableView = new DataView();
+
+            DataGridTable.BeginLoadData();
+            for (int i = 1; i <= columns; ++i)
+            {
+                DataGridTable.Columns.Add();
+            }        
+            var content = new object[columns];
+            for (int i = 0; i < rows; ++i)
+            {
+                for (int j = 0; j < columns; ++j)
+                {
+                    foreach (var cell in Cells)
+                    {
+                        if ((cell.CellColumn == j) && (cell.CellRow == i))
+                        {
+                            content[j] = cell.Content;
+                            break;
+                        }
+                    }
+                }
+                DataGridTable.Rows.Add(content);
+            }
+            DataGridTable.EndLoadData();
+
+            DefaultTableView = DataGridTable.DefaultView;
+            Debug.WriteLine("Changed");
         }
     }
 }

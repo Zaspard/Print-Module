@@ -42,7 +42,7 @@ namespace Constructor.ViewModel
         public TextCellVM()
         {
             //Background
-            /*Type typeBackground = typeof(System.Drawing.Color);
+            Type typeBackground = typeof(System.Drawing.Color);
             PropertyInfo[] colorInfo = typeBackground.GetProperties(BindingFlags.Public |
                 BindingFlags.Static);
             foreach (PropertyInfo info in colorInfo)
@@ -65,7 +65,7 @@ namespace Constructor.ViewModel
                 FontFamils.Add(fontFamily);
             }
             FontFamily = new FontFamily("Times New Roman");
-            FontSize = 12;*/
+            FontSize = 12;
         }
 
         public object Content

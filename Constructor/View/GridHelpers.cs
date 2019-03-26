@@ -43,7 +43,7 @@ namespace Constructor.View
                 grid.RowDefinitions.Add(
                     new RowDefinition() { Height = GridLength.Auto });
 
-            SetStarRows(grid);
+            //SetStarRows(grid);
         }
 
         #endregion
@@ -85,105 +85,105 @@ namespace Constructor.View
                 grid.ColumnDefinitions.Add(
                     new ColumnDefinition() { Width = GridLength.Auto });
 
-            SetStarColumns(grid);
+            //SetStarColumns(grid);
         }
 
         #endregion
 
-        #region StarRows Property
+        //#region StarRows Property
 
-        /// <summary>
-        /// Makes the specified Row's Height equal to Star. 
-        /// Can set on multiple Rows
-        /// </summary>
-        public static readonly DependencyProperty StarRowsProperty =
-            DependencyProperty.RegisterAttached(
-                "StarRows", typeof(string), typeof(GridHelpers),
-                new PropertyMetadata(string.Empty, StarRowsChanged));
+        ///// <summary>
+        ///// Makes the specified Row's Height equal to Star. 
+        ///// Can set on multiple Rows
+        ///// </summary>
+        //public static readonly DependencyProperty StarRowsProperty =
+        //    DependencyProperty.RegisterAttached(
+        //        "StarRows", typeof(string), typeof(GridHelpers),
+        //        new PropertyMetadata(string.Empty, StarRowsChanged));
 
-        // Get
-        public static string GetStarRows(DependencyObject obj)
-        {
-            return (string)obj.GetValue(StarRowsProperty);
-        }
+        //// Get
+        //public static string GetStarRows(DependencyObject obj)
+        //{
+        //    return (string)obj.GetValue(StarRowsProperty);
+        //}
 
-        // Set
-        public static void SetStarRows(DependencyObject obj, string value)
-        {
-            obj.SetValue(StarRowsProperty, value);
-        }
+        //// Set
+        //public static void SetStarRows(DependencyObject obj, string value)
+        //{
+        //    obj.SetValue(StarRowsProperty, value);
+        //}
 
-        // Change Event - Makes specified Row's Height equal to Star
-        public static void StarRowsChanged(
-            DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
-                return;
+        //// Change Event - Makes specified Row's Height equal to Star
+        //public static void StarRowsChanged(
+        //    DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+        //        return;
 
-            SetStarRows((Grid)obj);
-        }
+        //    SetStarRows((Grid)obj);
+        //}
 
-        #endregion
+        //#endregion
 
-        #region StarColumns Property
+        //#region StarColumns Property
 
-        /// <summary>
-        /// Makes the specified Column's Width equal to Star. 
-        /// Can set on multiple Columns
-        /// </summary>
-        public static readonly DependencyProperty StarColumnsProperty =
-            DependencyProperty.RegisterAttached(
-                "StarColumns", typeof(string), typeof(GridHelpers),
-                new PropertyMetadata(string.Empty, StarColumnsChanged));
+        ///// <summary>
+        ///// Makes the specified Column's Width equal to Star. 
+        ///// Can set on multiple Columns
+        ///// </summary>
+        //public static readonly DependencyProperty StarColumnsProperty =
+        //    DependencyProperty.RegisterAttached(
+        //        "StarColumns", typeof(string), typeof(GridHelpers),
+        //        new PropertyMetadata(string.Empty, StarColumnsChanged));
 
-        // Get
-        public static string GetStarColumns(DependencyObject obj)
-        {
-            return (string)obj.GetValue(StarColumnsProperty);
-        }
+        //// Get
+        //public static string GetStarColumns(DependencyObject obj)
+        //{
+        //    return (string)obj.GetValue(StarColumnsProperty);
+        //}
 
-        // Set
-        public static void SetStarColumns(DependencyObject obj, string value)
-        {
-            obj.SetValue(StarColumnsProperty, value);
-        }
+        //// Set
+        //public static void SetStarColumns(DependencyObject obj, string value)
+        //{
+        //    obj.SetValue(StarColumnsProperty, value);
+        //}
 
-        // Change Event - Makes specified Column's Width equal to Star
-        public static void StarColumnsChanged(
-            DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
-                return;
+        //// Change Event - Makes specified Column's Width equal to Star
+        //public static void StarColumnsChanged(
+        //    DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (!(obj is Grid) || string.IsNullOrEmpty(e.NewValue.ToString()))
+        //        return;
 
-            SetStarColumns((Grid)obj);
-        }
+        //    SetStarColumns((Grid)obj);
+        //}
 
-        #endregion
+        //#endregion
 
-        private static void SetStarColumns(Grid grid)
-        {
-            string[] starColumns =
-                GetStarColumns(grid).Split(',');
+        //private static void SetStarColumns(Grid grid)
+        //{
+        //    string[] starColumns =
+        //        GetStarColumns(grid).Split(',');
 
-            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
-            {
-                if (starColumns.Contains(i.ToString()))
-                    grid.ColumnDefinitions[i].Width =
-                        new GridLength(1, GridUnitType.Star);
-            }
-        }
+        //    for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+        //    {
+        //        if (starColumns.Contains(i.ToString()))
+        //            grid.ColumnDefinitions[i].Width =
+        //                new GridLength(1, GridUnitType.Star);
+        //    }
+        //}
 
-        private static void SetStarRows(Grid grid)
-        {
-            string[] starRows =
-                GetStarRows(grid).Split(',');
+        //private static void SetStarRows(Grid grid)
+        //{
+        //    string[] starRows =
+        //        GetStarRows(grid).Split(',');
 
-            for (int i = 0; i < grid.RowDefinitions.Count; i++)
-            {
-                if (starRows.Contains(i.ToString()))
-                    grid.RowDefinitions[i].Height =
-                        new GridLength(1, GridUnitType.Star);
-            }
-        }
+        //    for (int i = 0; i < grid.RowDefinitions.Count; i++)
+        //    {
+        //        if (starRows.Contains(i.ToString()))
+        //            grid.RowDefinitions[i].Height =
+        //                new GridLength(1, GridUnitType.Star);
+        //    }
+        //}
     }
 }

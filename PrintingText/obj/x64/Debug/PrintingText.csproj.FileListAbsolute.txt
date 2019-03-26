@@ -1,0 +1,17 @@
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingText.exe.config
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingText.exe
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\System.Windows.Interactivity.dll
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csprojAssemblyReference.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\MainWindow.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\App.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText_MarkupCompile.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText_MarkupCompile.lref
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\MainWindow.baml
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.g.resources
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.Properties.Resources.resources
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csproj.GenerateResource.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csproj.CoreCompileInputs.cache
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csproj.CopyComplete
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.exe
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.pdb

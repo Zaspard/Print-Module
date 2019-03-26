@@ -110,16 +110,16 @@ namespace PrintingText.ViewModel
                         fixedPage.Height = Page.Width;
                     }
 
-                    //fixedPage.Children.Add(template.Place(Page));
-                    //var pageContent = new PageContent();
-                    //((IAddChild)pageContent).AddChild(fixedPage);
+                    fixedPage.Children.Add(template.Place(Page));
+                    var pageContent = new PageContent();
+                    ((IAddChild)pageContent).AddChild(fixedPage);
 
                     var package = Package.Open(path, FileMode.Create);
                     var doc = new XpsDocument(package);
                     var writers = XpsDocument.CreateXpsDocumentWriter(doc);
-                    /*var fixedDocument = new FixedDocument();
-                    fixedDocument.Pages.Add(pageContent);*/
-                    writers.Write(((IDocumentPaginatorSource)template).DocumentPaginator, selectPrinter.PrintTicket);
+                    var fixedDocument = new FixedDocument();
+                    fixedDocument.Pages.Add(pageContent);
+                    writers.Write(fixedDocument, selectPrinter.PrintTicket);
                     doc.Close();
                     package.Close();
 

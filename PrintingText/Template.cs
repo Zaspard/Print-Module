@@ -12,11 +12,13 @@ namespace PrintingText
             //FlowDocument flowDocument = new FlowDocument();          
             Grid place = new Grid
             {
-                Background = Brushes.AntiqueWhite,
+                //Background = Brushes.AntiqueWhite,
                 Margin = new Thickness(page.Left, page.Top, page.Right, page.Bottom),
                 Width = 780,
                 Height = 1050
             };
+            TextBlock s = new TextBlock() { Text = "Это строка не должна быть напечатана" };
+            place.Children.Add(s);
             //Table table = new Table();
             //table.Columns.Add()
             //flowDocument.Blocks.Add();
