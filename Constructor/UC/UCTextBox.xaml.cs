@@ -1,4 +1,5 @@
 ﻿using Constructor.ViewModel;
+using Constructor.ViewModel.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,29 +26,7 @@ namespace Constructor.UC
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ((TableVM)DataContext).SelectingCell(sender);
-        }
-
-        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            DataTemplate dt = null;
-            if (e.PropertyType == typeof(TextCellVM))
-                dt = (DataTemplate)Resources["TextTemplate"];
-            else if (e.PropertyType == typeof(ImageCellVM))
-                dt = (DataTemplate)Resources["ImageTemplate"];
-
-            if (dt != null)
-            {
-                DataGridTemplateColumn c = new DataGridTemplateColumn()
-                {
-                    CellTemplate = dt,
-                    Header = e.Column.Header,
-                    HeaderTemplate = e.Column.HeaderTemplate,
-                    HeaderStringFormat = e.Column.HeaderStringFormat,
-                    SortMemberPath = e.PropertyName
-                };
-                e.Column = c;
-            }
+            ((TableWithTextOrImageVM)DataContext).SelectingCell(sender);
         }
     }
 }

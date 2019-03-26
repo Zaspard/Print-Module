@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Constructor.ViewModel.Table;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,11 +40,13 @@ namespace Constructor.ViewModel
                 if (table == Template.SelectTable)
                 {
                     Template.Table.Remove(table);
+                    Template.SelectTable = null;
+                    return;
                 }
             }
         }
 
-        public TableVM Select(Point location)
+        public ITable Select(Point location)
         {
             foreach (var table in Template.Table)
             {
@@ -58,9 +61,9 @@ namespace Constructor.ViewModel
             return null;
         }
 
-        public TableVM CreateTextBox(Point newLocation)
+        public ITable CreateTextBox(Point newLocation)
         {
-            var table = new TableVM()
+            var table = new TableWithTextOrImageVM()
             {
                 Columns = 1,
                 Rows = 1,
@@ -78,9 +81,9 @@ namespace Constructor.ViewModel
             return table;
         }
 
-        public TableVM CreateImage(Point newLocation)
+        public ITable CreateImage(Point newLocation)
         {
-            var table = new TableVM()
+            var table = new TableWithTextOrImageVM()
             {
                 Columns = 1,
                 Rows = 1,
@@ -98,20 +101,20 @@ namespace Constructor.ViewModel
             return table;
         }
 
-        public TableVM CreateTable(Point newLocation, int countColumn, int countRow)
+        public ITable CreateTable(Point newLocation, int countColumn, int countRow)
         {
-            var table = new TableVM()
+            var table = new TableWithArrayVM()
             {
                 Columns = 1,
                 Rows = 1,
                 XPoint = newLocation.X,
                 YPoint = newLocation.Y,
-                Height = 50,
-                Width = 80,
+                Height = 20,
+                Width = 50,
                 IsBorder = true,
                 ZPoint = 1
             };
-            table.CreateTextBox();
+            table.CreateUserTable();
             table.Rows = countRow;
             table.Columns = countColumn;
             Template.Table.Add(table);

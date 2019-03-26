@@ -1,6 +1,5 @@
 ﻿using Constructor.ViewModel;
 using Constructor.Windows;
-using Constructor.SimpleAdorner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +40,7 @@ namespace Constructor
             simpleApi.Show();
         }
 
-                private void ClickButton_CreateTable(object sender, ExecutedRoutedEventArgs e)
+        private void ClickButton_CreateTable(object sender, ExecutedRoutedEventArgs e)
         {
             ViewModel.Template.State = State.createTable;
             TableWindow tableWindow = new TableWindow();
@@ -84,95 +83,5 @@ namespace Constructor
         {
             ViewModel.DeleteSelectedTable();
         }
-
-
-        //////////////////////////////////////Adorner
-
-        //AdornerLayer aLayer;
-        //bool _isDown;
-        //bool selected = false;
-        //UIElement selectedElement = null;
-
-        //Point _startPoint;
-        //private double _originalLeft;
-        //private double _originalTop;
-
-        //private void Window_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    MouseLeftButtonDown += new MouseButtonEventHandler(Window1_MouseLeftButtonDown);
-        //    MouseLeftButtonUp += new MouseButtonEventHandler(DragFinishedMouseHandler);
-
-        //    //constructor.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(myCanvas_PreviewMouseLeftButtonDown);
-        //    constructor.PreviewMouseLeftButtonUp += new MouseButtonEventHandler(DragFinishedMouseHandler);
-        //}
-
-        //// Handler for drag stopping on leaving the window
-        //void Window1_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    StopDragging();
-        //    e.Handled = true;
-        //}
-
-        //// Handler for drag stopping on user choise
-        //void DragFinishedMouseHandler(object sender, MouseButtonEventArgs e)
-        //{
-        //    StopDragging();
-        //    e.Handled = true;
-        //}
-
-        //// Method for stopping dragging
-        //private void StopDragging()
-        //{
-        //    if (_isDown)
-        //    {
-        //        _isDown = false;
-        //    }
-        //}
-
-
-        //// Handler for clearing element selection, adorner removal
-        //void Window1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (selected)
-        //    {
-        //        selected = false;
-        //        if (selectedElement != null)
-        //        {
-        //            aLayer.Remove(aLayer.GetAdorners(selectedElement)[0]);
-        //            selectedElement = null;
-        //        }
-        //    }
-        //}
-
-        // Handler for element selection on the canvas providing resizing adorner
-        //void myCanvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (selected)
-        //    {
-        //        selected = false;
-        //        if (selectedElement != null)
-        //        {
-        //            aLayer.Remove(aLayer.GetAdorners(selectedElement)[0]);
-        //            selectedElement = null;
-        //        }
-        //    }
-        //    Point location = Mouse.GetPosition(constructor);
-        //    ViewModel.Select(location);
-        //    if (e.Source != constructor)
-        //    {
-        //        _isDown = true;
-        //        _startPoint = e.GetPosition(constructor);
-
-        //        selectedElement = e.Source as UIElement;
-
-        //        _originalLeft = Canvas.GetLeft(selectedElement);
-        //        _originalTop = Canvas.GetTop(selectedElement);
-
-        //        aLayer = AdornerLayer.GetAdornerLayer(selectedElement);
-        //        aLayer.Add(new AdornerResize(selectedElement));
-        //        selected = true;
-        //        e.Handled = true;
-        //    }
-        //}
     }
 }

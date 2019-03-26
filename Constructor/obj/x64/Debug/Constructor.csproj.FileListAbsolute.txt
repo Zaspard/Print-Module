@@ -23,3 +23,5 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.exe
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.pdb
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csprojAssemblyReference.cache
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCDataGrid.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCDataGrid.baml

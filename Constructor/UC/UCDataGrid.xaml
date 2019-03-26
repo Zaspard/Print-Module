@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Constructor.UC.UCDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:Constructor.UC"
+             xmlns:viewmodel="clr-namespace:Constructor.ViewModel"
+             xmlns:textorimage="clr-namespace:Constructor.ViewModel.Table.TextOrImage"
+             xmlns:view="clr-namespace:Constructor.View"
+             mc:Ignorable="d" Height="{Binding Height}" Width="{Binding Width}">
+
+    <DataGrid x:Name="dataGrid" ItemsSource="{Binding DefaultTableView, UpdateSourceTrigger=PropertyChanged}"
+              VirtualizingPanel.VirtualizationMode="Recycling" ColumnWidth="*"
+              CanUserAddRows="False" HeadersVisibility="None"
+              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="{Binding Background}"
+              VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="false"
+              HorizontalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="Cell"
+              SelectedCellsChanged="DataGrid_SelectedCellsChanged" CellEditEnding="DataGrid_CellEditEnding">
+    </DataGrid>
+    
+</UserControl>
+
+<!--//////////////////////////////////////-->
+<!--<DataGrid AutoGenerateColumns="True" ItemsSource="{Binding DataGridTable}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
+              CanUserAddRows="False" HeadersVisibility="None" ColumnWidth="*"
+              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="{Binding Background}"
+              VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="false"
+              VerticalGridLinesBrush="White" HorizontalGridLinesBrush="white" GridLinesVisibility="None"
+              HorizontalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <DataGrid.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+    </DataGrid>-->

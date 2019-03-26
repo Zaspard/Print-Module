@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 using Constructor.Model;
+using Constructor.ViewModel.Table;
 
 namespace Constructor.ViewModel
 {
@@ -16,8 +17,8 @@ namespace Constructor.ViewModel
         private double width;
         private double height;
         private State state = State.normally;
-        private TableVM selectTable;
-        private ObservableCollection<TableVM> table;
+        private ITable selectTable;
+        private ObservableCollection<ITable> table;
 
         public TemplateVM()
         {
@@ -25,19 +26,19 @@ namespace Constructor.ViewModel
             Height = 1200;
         }
 
-        public ObservableCollection<TableVM> Table
+        public ObservableCollection<ITable> Table
         {
             get
             {
                 if (table == null)
                 {
-                    table = new ObservableCollection<TableVM>();
+                    table = new ObservableCollection<ITable>();
                 }
                 return table;
             }
         }
 
-        public TableVM SelectTable
+        public ITable SelectTable
         {
             get { return selectTable; }
             set

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Constructor"
         xmlns:control="clr-namespace:Constructor.UC"
         xmlns:viewmodel="clr-namespace:Constructor.ViewModel"
+        xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table" 
         xmlns:view="clr-namespace:Constructor.View"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
@@ -32,7 +33,7 @@
         </Style>
 
         <DataTemplate
-            DataType="{x:Type viewmodel:TableVM}">
+            DataType="{x:Type tablevm:TableWithTextOrImageVM}">
             <control:UCTextBox>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
@@ -40,6 +41,18 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </control:UCTextBox>
+        </DataTemplate>
+
+        <DataTemplate
+            DataType="{x:Type tablevm:TableWithArrayVM}">
+            <control:UCDataGrid>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction Command="{StaticResource Commands.Select}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </control:UCDataGrid>
+            
         </DataTemplate>
 
     </Window.Resources>
@@ -130,8 +143,10 @@
             </Border>
             <!--Место под коструктор-->
             <Grid Grid.Column="1" Grid.Row="2" Background="LightGray">
-                <view:TableView x:Name="constructor" TablesSource="{Binding Template.Table}" Margin="0,70,0,0"  Width="{Binding Template.Width}"
-                        Height="{Binding Template.Height}"  Background="White">
+                <view:TableView x:Name="constructor" TablesSource="{Binding Template.Table}"
+                                Margin="0,70,0,0"  Width="{Binding Template.Width}"
+                                Height="{Binding Template.Height}"  Background="White"
+                                VirtualizingPanel.VirtualizationMode="Recycling">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
                             <i:InvokeCommandAction Command="{StaticResource Commands.CreateElement}"/>

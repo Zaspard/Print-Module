@@ -2,7 +2,6 @@ C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingTe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingText.exe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\PrintingText.pdb
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\System.Windows.Interactivity.dll
-C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csprojAssemblyReference.cache
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\MainWindow.g.cs
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\App.g.cs
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText_MarkupCompile.cache
@@ -15,3 +14,4 @@ C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingTe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csproj.CopyComplete
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.exe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csprojAssemblyReference.cache

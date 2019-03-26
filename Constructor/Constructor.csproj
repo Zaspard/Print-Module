@@ -86,10 +86,15 @@
     <Compile Include="api\Field.cs" />
     <Compile Include="api\Well.cs" />
     <Compile Include="api\Bush.cs" />
-    <Compile Include="SimpleAdorner\AdornerResize.cs" />
     <Compile Include="Model\API.cs" />
     <Compile Include="Model\RequestAPI.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
+    <Compile Include="UC\UCDataGrid.xaml.cs">
+      <DependentUpon>UCDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Table\ITable.cs" />
+    <Compile Include="ViewModel\Table\TableWithArrayVM.cs" />
+    <Compile Include="ViewModel\Table\Array\TableControlVM.cs" />
     <Compile Include="View\DataRowViewConverter.cs" />
     <Compile Include="Windows\SimpleApi.xaml.cs">
       <DependentUpon>SimpleApi.xaml</DependentUpon>
@@ -102,17 +107,21 @@
     </Compile>
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="View\ElementControl.cs" />
-    <Compile Include="ViewModel\ICellVM.cs" />
-    <Compile Include="ViewModel\ImageCellVM.cs" />
-    <Compile Include="ViewModel\IUserControl.cs" />
+    <Compile Include="ViewModel\Table\TextOrImage\ICellVM.cs" />
+    <Compile Include="ViewModel\Table\TextOrImage\ImageCellVM.cs" />
+    <Compile Include="ViewModel\Table\IUserControl.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="View\GridHelpers.cs" />
     <Compile Include="View\ItemTable.cs" />
     <Compile Include="View\TableDragEvents.cs" />
     <Compile Include="View\TableView.cs" />
-    <Compile Include="ViewModel\TableVM.cs" />
+    <Compile Include="ViewModel\Table\TableWithTextOrImageVM.cs" />
     <Compile Include="ViewModel\TemplateVM.cs" />
-    <Compile Include="ViewModel\TextCellVM.cs" />
+    <Compile Include="ViewModel\Table\TextOrImage\TextCellVM.cs" />
+    <Page Include="UC\UCDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\SimpleApi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SimpleAdorner\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
