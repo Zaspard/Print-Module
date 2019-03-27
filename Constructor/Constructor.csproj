@@ -81,13 +81,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="api\Borehole.cs" />
-    <Compile Include="api\Dataset.cs" />
-    <Compile Include="api\Field.cs" />
-    <Compile Include="api\Well.cs" />
-    <Compile Include="api\Bush.cs" />
-    <Compile Include="Model\API.cs" />
-    <Compile Include="Model\RequestAPI.cs" />
+    <Compile Include="Model\api\Borehole.cs" />
+    <Compile Include="Model\api\Dataset.cs" />
+    <Compile Include="Model\api\Field.cs" />
+    <Compile Include="Model\api\Well.cs" />
+    <Compile Include="Model\api\Bush.cs" />
+    <Compile Include="Model\api\API.cs" />
+    <Compile Include="Model\api\RequestAPI.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
     <Compile Include="UC\UCDataGrid.xaml.cs">
       <DependentUpon>UCDataGrid.xaml</DependentUpon>

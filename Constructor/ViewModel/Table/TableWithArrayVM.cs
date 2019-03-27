@@ -340,7 +340,7 @@ namespace Constructor.ViewModel.Table
                 {
                     if (deletedCell.CellRow == i)
                     {
-                        Height -= ((ICellVM)deletedCell).Height;
+                        Height -= deletedCell.Height;
                         break;
                     }
                 }
@@ -368,7 +368,7 @@ namespace Constructor.ViewModel.Table
                 {
                     if (deletedCell.CellColumn == i)
                     {
-                        Width -= ((ICellVM)deletedCell).Width;
+                        Width -= deletedCell.Width;
                         break;
                     }
                 }
@@ -446,6 +446,7 @@ namespace Constructor.ViewModel.Table
                     content[j - 1] = Cells[(j * i) - 1].Content;
                 }
                 DataGridTable.Rows.Add(content);
+                
             }
             DataGridTable.EndLoadData();
             DefaultTableView = DataGridTable.DefaultView;

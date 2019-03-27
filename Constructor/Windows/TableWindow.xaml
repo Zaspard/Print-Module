@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Constructor"
         mc:Ignorable="d"
         Title="TableWindow" Height="200" Width="400">
+    
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.Cancel" />
         <RoutedUICommand x:Key="Commands.Send" />

@@ -1,4 +1,5 @@
 ﻿using Constructor.Model;
+using Constructor.Model.api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Constructor.Windows
         public SimpleApi()
         {
             InitializeComponent();
-            DataContext = new RequestAPI();
+            DataContext = new API();
         }
 
         private void ClickButton_Cancel(object sender, ExecutedRoutedEventArgs e)
