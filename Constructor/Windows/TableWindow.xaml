@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Constructor"
         mc:Ignorable="d"
-        Title="TableWindow" Height="200" Width="400">
+        Title="TableWindow" Height="400" Width="600">
     
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.Cancel" />
@@ -19,24 +19,23 @@
         <CommandBinding 
             Command="{StaticResource Commands.Send}" 
             Executed="ClickButton_Send"/>
-        <CommandBinding 
-            Command="{StaticResource Commands.SelectApi}" 
-            Executed="ClickButton_SelectApi"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="10,3,10,3" Content="Задать API" Command="{StaticResource Commands.SelectApi}"/>
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsEnabled="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -47,8 +46,33 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text=" Количество столбцов" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
             <TextBox x:Name="CountColumn" Grid.Column="1" Grid.Row="0" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountColumn_TextChanged"/>
-            <TextBlock Grid.Column="0" Grid.Row="1" Text=" Количество строк" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,4" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text=" Количество строк" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,4" />
             <TextBox x:Name="CountRow" Grid.Column="1" Grid.Row="1" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountRow_TextChanged"/>
+        </Grid>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Использовать API" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <CheckBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="4" IsEnabled="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ListBox Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem>
+                    <ComboBox />
+                </ListBoxItem>
+            </ListBox>
+            <DataGrid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0"/>
         </Grid>
         <Button Grid.Column="0" Grid.Row="7" Content="Отмена" Margin="3,3,3,0" Command="{StaticResource Commands.Cancel}"/>
         <Button Grid.Column="1" Grid.Row="7" Content="Создать" Margin="3,3,3,0" Command="{StaticResource Commands.Send}"/>

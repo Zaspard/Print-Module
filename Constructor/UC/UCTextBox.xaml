@@ -26,14 +26,6 @@
                              FontFamily="{Binding FontFamily}" FontSize="{Binding FontSize}" FontStyle="{Binding FontStyle}"
                              FontWeight="{Binding FontWeight}" FontStretch="{Binding FontStretch}"
                              GotFocus="TextBox_GotFocus">
-                    <TextBox.RenderTransformOrigin>
-                        <Point X="0.5" Y="0.5"/>
-                    </TextBox.RenderTransformOrigin>
-                    <TextBox.RenderTransform>
-                        <TransformGroup>
-                            <RotateTransform Angle="{Binding Angle}"/>
-                        </TransformGroup>
-                    </TextBox.RenderTransform>
                 </TextBox>
             </Border>
         </DataTemplate>
@@ -42,14 +34,11 @@
 
         <DataTemplate DataType="{x:Type textorimage:ImageCellVM}">
             <Border Height="{Binding Height}" Width="{Binding Width}"
-                            BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
-                            Background="{Binding Background}">
-                <Image
-                             VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
-                             Source="{Binding Content}" Stretch="Fill"
-                    
-                             GotFocus="TextBox_GotFocus">
-                    <!--Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"-->
+                    BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
+                    Background="{Binding Background}">
+                <Image VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
+                       Source="{Binding Content}" Stretch="Fill"                   
+                       GotFocus="TextBox_GotFocus">
                     <Image.RenderTransformOrigin>
                         <Point X="0.5" Y="0.5"/>
                     </Image.RenderTransformOrigin>
@@ -64,7 +53,7 @@
 
     </UserControl.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="{Binding BorderThickness}">
+    <Border BorderBrush="Black" BorderThickness="0,0,0,0">
         <ItemsControl x:Name="myItems" ItemsSource="{Binding Cells}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -83,56 +72,14 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
+        <Border.RenderTransformOrigin>
+            <Point X="0.5" Y="0.5"/>
+        </Border.RenderTransformOrigin>
+        <Border.RenderTransform>
+            <TransformGroup>
+                <RotateTransform Angle="{Binding Angle}"/>
+            </TransformGroup>
+        </Border.RenderTransform>
     </Border>
-    
+
 </UserControl>
-
-
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <!--<DataGrid x:Name="dataGrid" ItemsSource="{Binding DefaultTableView, UpdateSourceTrigger=PropertyChanged}"
-              VirtualizingPanel.VirtualizationMode="Recycling" ColumnWidth="*"
-              CanUserAddRows="False" HeadersVisibility="None"
-              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="{Binding Background}"
-              VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="false"
-              HorizontalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-    </DataGrid>
-</UserControl>-->
-
-
-
-
-
-
-<!--//////////////////////////////////////-->
-<!--<DataGrid AutoGenerateColumns="True" ItemsSource="{Binding DataGridTable}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
-              CanUserAddRows="False" HeadersVisibility="None" ColumnWidth="*"
-              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="{Binding Background}"
-              VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="false"
-              VerticalGridLinesBrush="White" HorizontalGridLinesBrush="white" GridLinesVisibility="None"
-              HorizontalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-    <DataGrid.Resources>
-                <ResourceDictionary>
-                    <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
-                        <Setter Property="Background" Value="{x:Null}" />
-                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{x:Null}" />
-                                <Setter Property="BorderBrush" Value="{x:Null}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background" Value="{x:Null}" />
-                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{x:Null}" />
-                                <Setter Property="BorderBrush" Value="{x:Null}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ResourceDictionary>
-            </DataGrid.Resources>
-    </DataGrid>-->

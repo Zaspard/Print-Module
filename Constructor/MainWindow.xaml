@@ -8,6 +8,8 @@
         xmlns:viewmodel="clr-namespace:Constructor.ViewModel"
         xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table" 
         xmlns:view="clr-namespace:Constructor.View"
+        xmlns:cellTextOrImage="clr-namespace:Constructor.ViewModel.Table.TextOrImage"
+        xmlns:cellArray="clr-namespace:Constructor.ViewModel.Table.Array"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="810" Width="1200">
@@ -42,7 +44,7 @@
                 </i:Interaction.Triggers>
             </control:UCTextBox>
         </DataTemplate>
-
+        
         <DataTemplate
             DataType="{x:Type tablevm:TableWithArrayVM}">
             <control:UCDataGrid>
@@ -52,7 +54,235 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </control:UCDataGrid>
-            
+        </DataTemplate>
+
+        <!--Свойства ячейки для текствого поля-->
+        <DataTemplate DataType="{x:Type cellTextOrImage:TextCellVM}">  
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Колонка"/>
+                    <TextBox Grid.Column="1" Text="{Binding CellColumn}" IsReadOnly="True"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Строка"/>
+                    <TextBox Grid.Column="1" Text="{Binding CellRow}" IsReadOnly="True"/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Содержание"/>
+                    <TextBox Grid.Column="1" Text="{Binding Content}"/>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <Button Margin="10,3,10,3" Content="Добавить API" Command="{StaticResource Commands.SimpleRequestByAPI}"/>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Высота"/>
+                    <TextBox Grid.Column="1" Text="{Binding Height}"/>
+                </Grid>
+                <Grid Grid.Row="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Ширина"/>
+                    <TextBox Grid.Column="1" Text="{Binding Width}"/>
+                </Grid>
+                <Grid Grid.Row="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Цвет фона ячейки"/>
+                    <ComboBox Grid.Column="1" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Colors}"
+                                          SelectedItem="{Binding NameColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Grid.Row="14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Выравнивание по V"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding VerticalAlignments}" SelectedItem="{Binding VerticalAlignment}"/>
+                </Grid>
+                <Grid Grid.Row="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Выравнивание по H"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding HorizontalAlignments}" SelectedItem="{Binding HorizontalAlignment}"/>
+                </Grid>
+                <Grid Grid.Row="18">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Шрифт"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding FontFamils}" SelectedItem="{Binding FontFamily}"/>
+                </Grid>
+                <Grid Grid.Row="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Размер шрифта"/>
+                    <TextBox Grid.Column="1" Text="{Binding FontSize}"/>
+                </Grid>
+                <Grid Grid.Row="22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Стиль шрифта"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding FontStyles}" SelectedItem="{Binding FontStyle,Mode=TwoWay}"/>
+                </Grid>
+                <Grid Grid.Row="24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Жирность шрифта"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding FontWeights}" SelectedItem="{Binding FontWeight}"/>
+                </Grid>
+                <Grid Grid.Row="26">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Растяжение шрифта"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding FontStretches}" SelectedItem="{Binding FontStretch}"/>
+                </Grid>
+                <Grid Grid.Row="28">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Границы"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding IsBorderLeft}" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsBorderTop}" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding IsBorderRight}" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="3" IsChecked="{Binding IsBorderBottom}" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <!--Свойства ячейки для таблицы-->
+        <DataTemplate DataType="{x:Type cellArray:UserTableVM}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Колонка"/>
+                    <TextBox Grid.Column="1" Text="{Binding CellColumn}" IsReadOnly="True"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Строка"/>
+                    <TextBox Grid.Column="1" Text="{Binding CellRow}" IsReadOnly="True"/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Содержание"/>
+                    <TextBox Grid.Column="1" Text="{Binding Content}"/>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <Button Margin="10,3,10,3" Content="Добавить API" Command="{StaticResource Commands.SimpleRequestByAPI}"/>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Высота"/>
+                    <TextBox Grid.Column="1" Text="{Binding Height}"/>
+                </Grid>
+                <Grid Grid.Row="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Ширина"/>
+                    <TextBox Grid.Column="1" Text="{Binding Width}"/>
+                </Grid>
+            </Grid>
         </DataTemplate>
 
     </Window.Resources>
@@ -222,6 +452,8 @@
                                 <RowDefinition Height="25"/>
                                 <RowDefinition Height="5"/>
                                 <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
@@ -284,172 +516,14 @@
                                     <ColumnDefinition Width="130"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Границы"/>
-                                <CheckBox Grid.Column="1" IsChecked="{Binding IsBorder}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="0" Content="Угол вращения"/>
+                                <TextBox Grid.Column="1" Text="{Binding Angle}"/>
                             </Grid>
                         </Grid>
                         <Border Grid.Row="7" BorderBrush="Black" BorderThickness="0,0,0,1"/>
                         <Label Grid.Row="8" Content="Свойства ячейки" BorderBrush="Black" BorderThickness="0,0,0,1"/>
-                        <Grid Grid.Row="10" DataContext="{Binding SelectTable.SelectCell}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="5"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Колонка"/>
-                                <TextBox Grid.Column="1" Text="{Binding CellColumn}" IsReadOnly="True"/>
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Строка"/>
-                                <TextBox Grid.Column="1" Text="{Binding CellRow}" IsReadOnly="True"/>
-                            </Grid>
-                            <Grid Grid.Row="4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Содержание"/>
-                                <TextBox Grid.Column="1" Text="{Binding Content}"/>
-                            </Grid>
-                            <Grid Grid.Row="6">
-                                <Button Margin="10,3,10,3" Content="Добавить API" Command="{StaticResource Commands.SimpleRequestByAPI}"/>
-                            </Grid>
-                            <Grid Grid.Row="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Высота"/>
-                                <TextBox Grid.Column="1" Text="{Binding Height}"/>
-                            </Grid>
-                            <Grid Grid.Row="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Ширина"/>
-                                <TextBox Grid.Column="1" Text="{Binding Width}"/>
-                            </Grid>
-                            <Grid Grid.Row="12">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Цвет фона ячейки"/>
-                                <ComboBox Grid.Column="1" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Colors}"
-                                          SelectedItem="{Binding NameColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-                            <Grid Grid.Row="14">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Выравнивание по V"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding VerticalAlignments}" SelectedItem="{Binding VerticalAlignment}"/>
-                            </Grid>
-                            <Grid Grid.Row="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Выравнивание по H"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding HorizontalAlignments}" SelectedItem="{Binding HorizontalAlignment}"/>
-                            </Grid>
-                            <Grid Grid.Row="18">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Угол вращения"/>
-                                <TextBox Grid.Column="1" Text="{Binding Angle}"/>
-                            </Grid>
-                            <Grid Grid.Row="20">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Шрифт"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding FontFamils}" SelectedItem="{Binding FontFamily}"/>
-                            </Grid>
-                            <Grid Grid.Row="22">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Размер шрифта"/>
-                                <TextBox Grid.Column="1" Text="{Binding FontSize}"/>
-                            </Grid>
-                            <Grid Grid.Row="24">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Стиль шрифта"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding FontStyles}" SelectedItem="{Binding FontStyle,Mode=TwoWay}"/>
-                            </Grid>
-                            <Grid Grid.Row="26">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Жирность шрифта"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding FontWeights}" SelectedItem="{Binding FontWeight}"/>
-                            </Grid>
-                            <Grid Grid.Row="28">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Растяжение шрифта"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding FontStretches}" SelectedItem="{Binding FontStretch}"/>
-                            </Grid>
-                            <Grid Grid.Row="30">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Границы"/>
-                                <CheckBox Grid.Column="1" IsChecked="{Binding IsBorder}" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Grid>
+                        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                        <ContentPresenter Grid.Row="10" Content="{Binding SelectTable.SelectCell}"/>
                     </Grid>
                 </ScrollViewer>
                 <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="Black">

@@ -46,7 +46,7 @@ namespace Constructor.ViewModel
             }
         }
 
-        public ITable Select(Point location)
+        public void Select(Point location)
         {
             foreach (var table in Template.Table)
             {
@@ -55,13 +55,12 @@ namespace Constructor.ViewModel
                     && location.Y <= (table.YPoint + table.Height))
                 {
                     Template.SelectTable = table;
-                    return table;
+                    return;
                 }
             }
-            return null;
         }
 
-        public ITable CreateTextBox(Point newLocation)
+        public void CreateTextBox(Point newLocation)
         {
             var table = new TableWithTextOrImageVM()
             {
@@ -78,10 +77,9 @@ namespace Constructor.ViewModel
             Template.Table.Add(table);
             Template.State = State.normally;
             Template.SelectTable = table;
-            return table;
         }
 
-        public ITable CreateImage(Point newLocation)
+        public void CreateImage(Point newLocation)
         {
             var table = new TableWithTextOrImageVM()
             {
@@ -98,10 +96,9 @@ namespace Constructor.ViewModel
             Template.Table.Add(table);
             Template.State = State.normally;
             Template.SelectTable = table;
-            return table;
         }
 
-        public ITable CreateTable(Point newLocation, int countColumn, int countRow)
+        public void CreateTable(Point newLocation, int countColumn, int countRow)
         {
             var table = new TableWithArrayVM()
             {
@@ -120,7 +117,6 @@ namespace Constructor.ViewModel
             Template.Table.Add(table);
             Template.State = State.normally;
             Template.SelectTable = table;
-            return table;
         }
 
         public void AddSimpleAPI(string nameAttribute)

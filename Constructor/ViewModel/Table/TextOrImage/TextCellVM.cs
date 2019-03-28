@@ -21,7 +21,10 @@ namespace Constructor.ViewModel.Table.TextOrImage
         private SolidColorBrush background;
         private int angle;
         private Point renderTransformOrigin;
-        private bool isBorder;
+        private bool isBorderLeft = true;
+        private bool isBorderTop = true;
+        private bool isBorderRight = true;
+        private bool isBorderBottom = true;
         private bool cellHaveApi = false;
         
         public double OldWidth { get; set; }
@@ -30,6 +33,8 @@ namespace Constructor.ViewModel.Table.TextOrImage
         public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
         public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
+
+        private int left = 1, top = 1, right = 1, bottom = 1;
 
         //Private TextCell
         private FontFamily fontFamily;
@@ -69,6 +74,8 @@ namespace Constructor.ViewModel.Table.TextOrImage
             }
             FontFamily = new FontFamily("Times New Roman");
             FontSize = 12;
+            BorderThickness = new Thickness(1, 1, 1, 1);
+            Background = new SolidColorBrush(System.Windows.Media.Colors.White);
         }
 
         public object Content
@@ -199,22 +206,55 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("BorderBrush");
             }
         }
-        public bool IsBorder
+
+        public bool IsBorderLeft
         {
-            get { return isBorder; }
+            get { return isBorderLeft; }
             set
             {
-                isBorder = value;
-                if (!isBorder)
-                {
-                    BorderThickness = new Thickness(0, 0, 0, 0);
-                }
-                else
-                {
-                    BorderThickness = new Thickness(1, 1, 1, 1);
-                }
-                OnPropertyChanged("IsBorder");
+                isBorderLeft = value;
+                left = isBorderLeft ? 1:0;
+                ChangeBorger();
+                OnPropertyChanged("IsBorderLeft");
             }
+        }
+        public bool IsBorderTop
+        {
+            get { return isBorderTop; }
+            set
+            {
+                isBorderTop = value;
+                top = isBorderTop ? 1 : 0;
+                ChangeBorger();
+                OnPropertyChanged("IsBorderTop");
+            }
+        }
+        public bool IsBorderRight
+        {
+            get { return isBorderRight; }
+            set
+            {
+                isBorderRight = value;
+                right = isBorderRight ? 1 : 0;
+                ChangeBorger();
+                OnPropertyChanged("IsBorderRight");
+            }
+        }
+        public bool IsBorderBottom
+        {
+            get { return isBorderBottom; }
+            set
+            {
+                isBorderBottom = value;
+                bottom = isBorderBottom ? 1 : 0;
+                ChangeBorger();
+                OnPropertyChanged("IsBorderBottom");
+            }
+        }
+
+        private void ChangeBorger()
+        {
+            BorderThickness = new Thickness(left,top,right,bottom);
         }
 
         public Thickness BorderThickness

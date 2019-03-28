@@ -10,7 +10,7 @@
     <SolidColorBrush
         x:Key="selectionBorderBackgroundColor"
         Color="Blue"
-        Opacity="0.5"
+        Opacity="0.01"
         />
 
 

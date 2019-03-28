@@ -9,8 +9,6 @@ namespace Constructor.ViewModel.Table.TextOrImage
         HorizontalAlignment HorizontalAlignment { get; set; }
         VerticalAlignment VerticalAlignment { get; set; }
         SolidColorBrush Background { get; set; }
-        int Angle { get; set; }
-        Point RenderTransformOrigin { get; set; }
         string NameColor { get; set; }
         List<string> Colors { get; }
         List<HorizontalAlignment> HorizontalAlignments { get; }

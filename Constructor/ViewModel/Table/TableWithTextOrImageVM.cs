@@ -27,6 +27,8 @@ namespace Constructor.ViewModel.Table
         private IUserControl selectCell;
         private string nameTable;
         private bool isUsedAPi = false;
+        private int angle;
+        private Point renderTransformOrigin;
 
         public ObservableCollection<IUserControl> Cells { get; } = new ObservableCollection<IUserControl>();
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
@@ -253,6 +255,26 @@ namespace Constructor.ViewModel.Table
             }
         }
 
+        public int Angle
+        {
+            get { return angle; }
+            set
+            {
+                angle = value;
+                OnPropertyChanged("Angle");
+            }
+        }
+
+        public Point RenderTransformOrigin
+        {
+            get { return renderTransformOrigin; }
+            set
+            {
+                renderTransformOrigin = value;
+                OnPropertyChanged("RenderTransformOrigin");
+            }
+        }
+
         #region Добавление новых строк и столбцов
         public void CreateTextOnRow()
         {
@@ -272,7 +294,6 @@ namespace Constructor.ViewModel.Table
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
                         NameColor = System.Windows.Media.Colors.White.ToString(),
-                        IsBorder = true
                     };
                     addHeight += cell.Height;
                     Cells.Add(textCell);
@@ -297,7 +318,6 @@ namespace Constructor.ViewModel.Table
                             HorizontalAlignment = HorizontalAlignment.Stretch,
                             VerticalAlignment = VerticalAlignment.Center,
                             NameColor = System.Windows.Media.Colors.White.ToString(),
-                            IsBorder = true
                         };
                         Cells.Add(textCell);
                     }
@@ -325,7 +345,6 @@ namespace Constructor.ViewModel.Table
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
                         NameColor = System.Windows.Media.Colors.White.ToString(),
-                        IsBorder = true
                     };
                     Cells.Insert(((oldColumns + 1) * i) - 1, textCell);
                 }
@@ -339,7 +358,6 @@ namespace Constructor.ViewModel.Table
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     VerticalAlignment = VerticalAlignment.Center,
                     NameColor = System.Windows.Media.Colors.White.ToString(),
-                    IsBorder = true
                 };
                 Cells.Add(textCellEnd);
                 oldColumns++;
@@ -420,7 +438,6 @@ namespace Constructor.ViewModel.Table
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Center,
                 NameColor = System.Windows.Media.Colors.White.ToString(),
-                IsBorder = true
             };
             Cells.Add(textCell);
             SelectCell = textCell;

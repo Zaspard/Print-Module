@@ -13,7 +13,7 @@
     <DataGrid x:Name="dataGrid" ItemsSource="{Binding DefaultTableView, UpdateSourceTrigger=PropertyChanged}"
               VirtualizingPanel.VirtualizationMode="Recycling" ColumnWidth="*"
               CanUserAddRows="False" HeadersVisibility="None"
-              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="{Binding Background}"
+              BorderThickness="{Binding BorderThickness}" BorderBrush="Black" Background="White"
               VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="false"
               HorizontalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
               CanUserDeleteRows="False" SelectionMode="Single" SelectionUnit="Cell"

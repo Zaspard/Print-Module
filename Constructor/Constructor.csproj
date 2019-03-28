@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\api\Borehole.cs" />
+    <Compile Include="Model\api\Curse.cs" />
     <Compile Include="Model\api\Dataset.cs" />
     <Compile Include="Model\api\Field.cs" />
     <Compile Include="Model\api\Well.cs" />
@@ -98,6 +99,9 @@
     <Compile Include="View\DataRowViewConverter.cs" />
     <Compile Include="Windows\SimpleApi.xaml.cs">
       <DependentUpon>SimpleApi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TableApi.xaml.cs">
+      <DependentUpon>TableApi.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
@@ -123,6 +127,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\SimpleApi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TableApi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

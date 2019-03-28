@@ -1,4 +1,5 @@
-﻿using Constructor.ViewModel;
+﻿using Constructor.Model.api;
+using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Constructor.Windows
         public TableWindow()
         {
             InitializeComponent();
+            DataContext = new API();
         }
 
         private void ClickButton_Cancel(object sender, ExecutedRoutedEventArgs e)
@@ -61,11 +63,6 @@ namespace Constructor.Windows
             //{
             //    MessageBox.Show("Ввод только для чисел");
             //}
-        }
-
-        private void ClickButton_SelectApi(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -26,6 +26,8 @@ namespace Constructor.ViewModel.Table
         private IUserControl selectCell;
         private string nameTable;
         private bool isUsedAPi = false;
+        private int angle;
+        private Point renderTransformOrigin;
 
         public ObservableCollection<IUserControl> Cells { get; } = new ObservableCollection<IUserControl>();
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
@@ -247,6 +249,26 @@ namespace Constructor.ViewModel.Table
             {
                 isUsedAPi = value;
                 OnPropertyChanged("IsUsedApi");
+            }
+        }
+
+        public int Angle
+        {
+            get { return angle; }
+            set
+            {
+                angle = value;
+                OnPropertyChanged("Angle");
+            }
+        }
+
+        public Point RenderTransformOrigin
+        {
+            get { return renderTransformOrigin; }
+            set
+            {
+                renderTransformOrigin = value;
+                OnPropertyChanged("RenderTransformOrigin");
             }
         }
 

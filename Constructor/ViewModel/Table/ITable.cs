@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,8 @@ namespace Constructor.ViewModel.Table
         string NameTable { get; set; }
         ObservableCollection<IUserControl> Cells { get; }
         bool IsUsedApi { get; set; }
+        event PropertyChangedEventHandler PropertyChanged;
+        int Angle { get; set; }
+        Point RenderTransformOrigin { get; set; }
     }
 }

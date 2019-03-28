@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using Constructor.Model;
 using Constructor.ViewModel.Table;
+using System.ComponentModel;
 
 namespace Constructor.ViewModel
 {
@@ -45,6 +46,18 @@ namespace Constructor.ViewModel
             {
                 selectTable = value;
                 OnPropertyChanged("SelectTable");
+                if (SelectTable != null)
+                {
+                    SelectTable.PropertyChanged += SelectTable_PropertyChanged;
+                }
+            }
+        }
+
+        private void SelectTable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectCell")
+            {
+                SelectTable = (ITable)sender;
             }
         }
 
