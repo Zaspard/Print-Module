@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,21 +18,45 @@ namespace Constructor.ViewModel.Table.TextOrImage
         private HorizontalAlignment horizontalAlignment;
         private VerticalAlignment verticalAlignment;
         private double width, height;
-        public double OldWidth { get; set; }
-        public double OldHeight { get; set; }
+        private bool cellHaveApi = false;
         private SolidColorBrush background = new SolidColorBrush();
         private int angle;
         private Point renderTransformOrigin;
+
+        public double OldWidth { get; set; }
+        public double OldHeight { get; set; }
         public List<string> Colors { get; } = new List<string>();
         public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
         public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
+
         //Private ImageCell
         private string url;
         private double opacity;
         private bool isStretched;
 
-        //ctor
+        public ImageCellVM()
+        {
+            //Background
+            Type typeBackground = typeof(System.Drawing.Color);
+            PropertyInfo[] colorInfo = typeBackground.GetProperties(BindingFlags.Public |
+                BindingFlags.Static);
+            foreach (PropertyInfo info in colorInfo)
+            {
+                Colors.Add(info.Name);
+            }
+            //HorizontalAlignment
+            foreach (var item in Enum.GetValues(typeof(HorizontalAlignment)))
+            {
+                HorizontalAlignments.Add((HorizontalAlignment)item);
+            }
+            //VerticalAlignment
+            foreach (var item in Enum.GetValues(typeof(VerticalAlignment)))
+            {
+                VerticalAlignments.Add((VerticalAlignment)item);
+            }
+        }
+
         public object Content
         {
             get { return content; }
@@ -198,6 +223,16 @@ namespace Constructor.ViewModel.Table.TextOrImage
             {
                 isStretched = value;
                 OnPropertyChanged("IsStretched");
+            }
+        }
+
+        public bool CellHaveApi
+        {
+            get { return cellHaveApi; }
+            set
+            {
+                cellHaveApi = value;
+                OnPropertyChanged("CellHaveApi");
             }
         }
     }

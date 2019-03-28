@@ -1,5 +1,6 @@
 ﻿using Constructor.Model;
 using Constructor.Model.api;
+using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Constructor.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для SimpleApi.xaml
-    /// </summary>
     public partial class SimpleApi : Window
     {
         public SimpleApi()
@@ -34,7 +32,12 @@ namespace Constructor.Windows
 
         private void ClickButton_Send(object sender, ExecutedRoutedEventArgs e)
         {
-            Close();
+            if (((API)DataContext).SelectNameAttribute != null)
+            {
+                ((MainVM)Owner.DataContext).AddSimpleAPI(((API)DataContext).SelectNameAttribute);
+                Close();
+            }
+            else MessageBox.Show("Выберите имя атрибута");
         }
 
     }

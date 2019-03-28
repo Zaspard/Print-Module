@@ -11,11 +11,6 @@
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.Cancel" />
         <RoutedUICommand x:Key="Commands.Send" />
-
-        <!--<DataTemplate DataType="{x:Type model:API}">
-            <TextBlock Text="{Binding}"/>
-        </DataTemplate>-->
-        
     </Window.Resources>
     
     <Window.CommandBindings>

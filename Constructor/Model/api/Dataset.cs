@@ -11,6 +11,7 @@ namespace Constructor.Model.api
         string Name { get; set; }
         string Attribute { get; set; }
         Dictionary<string, string> CollectionAttribures { get; set; } = new Dictionary<string, string>();
+        List<Curse> Curses = new List<Curse>();
 
         public Dataset()
         {

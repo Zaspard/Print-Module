@@ -18,16 +18,19 @@ namespace Constructor.ViewModel.Table.TextOrImage
         private HorizontalAlignment horizontalAlignment;
         private VerticalAlignment verticalAlignment;
         private double width, height;
-        public double OldWidth { get; set; }
-        public double OldHeight { get; set; }
         private SolidColorBrush background;
         private int angle;
         private Point renderTransformOrigin;
         private bool isBorder;
+        private bool cellHaveApi = false;
+        
+        public double OldWidth { get; set; }
+        public double OldHeight { get; set; }
         public List<string> Colors { get; } = new List<string>();
         public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
         public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
+
         //Private TextCell
         private FontFamily fontFamily;
         private float fontSize;
@@ -315,6 +318,16 @@ namespace Constructor.ViewModel.Table.TextOrImage
             {
                 fontStretch = value;
                 OnPropertyChanged("FontStretch");
+            }
+        }
+
+        public bool CellHaveApi
+        {
+            get { return cellHaveApi; }
+            set
+            {
+                cellHaveApi = value;
+                OnPropertyChanged("CellHaveApi");
             }
         }
     }

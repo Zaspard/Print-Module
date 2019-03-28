@@ -26,6 +26,7 @@ namespace Constructor.ViewModel.Table
         private Thickness borderThickness;
         private IUserControl selectCell;
         private string nameTable;
+        private bool isUsedAPi = false;
 
         public ObservableCollection<IUserControl> Cells { get; } = new ObservableCollection<IUserControl>();
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
@@ -239,6 +240,16 @@ namespace Constructor.ViewModel.Table
             {
                 borderThickness = value;
                 OnPropertyChanged("BorderThickness");
+            }
+        }
+
+        public bool IsUsedApi
+        {
+            get { return isUsedAPi; }
+            set
+            {
+                isUsedAPi = value;
+                OnPropertyChanged("IsUsedApi");
             }
         }
 

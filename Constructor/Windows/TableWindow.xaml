@@ -10,6 +10,7 @@
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.Cancel" />
         <RoutedUICommand x:Key="Commands.Send" />
+        <RoutedUICommand x:Key="Commands.SelectApi" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding 
@@ -18,12 +19,12 @@
         <CommandBinding 
             Command="{StaticResource Commands.Send}" 
             Executed="ClickButton_Send"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.SelectApi}" 
+            Executed="ClickButton_SelectApi"/>
     </Window.CommandBindings>
-    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -34,14 +35,22 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text=" Использовать API" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <Button Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" Margin="10,3,10,3" Content="Задать API"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text=" Количество столбцов" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <TextBox x:Name="CountColumn" Grid.Column="1" Grid.Row="2" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountColumn_TextChanged"/>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text=" Количество строк" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,4" />
-        <TextBox x:Name="CountRow" Grid.Column="1" Grid.Row="3" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountRow_TextChanged"/>
-        <Button Grid.Column="0" Grid.Row="6" Content="Отмена" Margin="3,3,3,0" Command="{StaticResource Commands.Cancel}"/>
-        <Button Grid.Column="1" Grid.Row="6" Content="Создать" Margin="3,3,3,0" Command="{StaticResource Commands.Send}"/>
+        <Button Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="10,3,10,3" Content="Задать API" Command="{StaticResource Commands.SelectApi}"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text=" Количество столбцов" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <TextBox x:Name="CountColumn" Grid.Column="1" Grid.Row="0" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountColumn_TextChanged"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text=" Количество строк" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,4" />
+            <TextBox x:Name="CountRow" Grid.Column="1" Grid.Row="1" Text="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextChanged="CountRow_TextChanged"/>
+        </Grid>
+        <Button Grid.Column="0" Grid.Row="7" Content="Отмена" Margin="3,3,3,0" Command="{StaticResource Commands.Cancel}"/>
+        <Button Grid.Column="1" Grid.Row="7" Content="Создать" Margin="3,3,3,0" Command="{StaticResource Commands.Send}"/>
     </Grid>
 </Window>

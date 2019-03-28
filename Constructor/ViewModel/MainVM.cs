@@ -122,5 +122,12 @@ namespace Constructor.ViewModel
             Template.SelectTable = table;
             return table;
         }
+
+        public void AddSimpleAPI(string nameAttribute)
+        {
+            Template.SelectTable.SelectCell.Content += "%"+nameAttribute+"%";
+            Template.SelectTable.IsUsedApi = true;
+            Template.SelectTable.SelectCell.CellHaveApi = true;
+        }
     }
 }

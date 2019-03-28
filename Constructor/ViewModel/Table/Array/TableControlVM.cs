@@ -9,6 +9,7 @@
         public double OldWidth { get; set; }
         public double OldHeight { get; set; }
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
+        private bool cellHaveApi = false;
 
         public object Content
         {
@@ -73,6 +74,16 @@
                 {
                     OnPropertyChanged("");
                 }
+            }
+        }
+
+        public bool CellHaveApi
+        {
+            get { return cellHaveApi; }
+            set
+            {
+                cellHaveApi = value;
+                OnPropertyChanged("CellHaveApi");
             }
         }
     }

@@ -19,7 +19,7 @@
                             BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
                             Background="{Binding Background}">
                 <TextBox
-                             Background="{Binding Background}" 
+                             Background="{Binding Background}" TextWrapping="Wrap"
                              BorderThickness="0,0,0,0"
                              VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
                              Text="{Binding Content}"

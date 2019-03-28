@@ -62,5 +62,10 @@ namespace Constructor.Windows
             //    MessageBox.Show("Ввод только для чисел");
             //}
         }
+
+        private void ClickButton_SelectApi(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

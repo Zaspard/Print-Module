@@ -23,5 +23,6 @@ namespace Constructor.ViewModel.Table
         IUserControl SelectCell { get; set; }
         string NameTable { get; set; }
         ObservableCollection<IUserControl> Cells { get; }
+        bool IsUsedApi { get; set; }
     }
 }

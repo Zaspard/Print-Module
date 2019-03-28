@@ -13,5 +13,6 @@ namespace Constructor.ViewModel.Table
         double OldHeight { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
         bool SelectInvokeOnProperyChanged { get; set; }
+        bool CellHaveApi { get; set; }
     }
 }
