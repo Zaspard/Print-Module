@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace Constructor.Model.api
 {
-    class Curse
+    class Curve
     {
-        int[][] vs = new int[10][]; 
+        public double[] array = new double[10];
+        public string name;
+        public string family;
+        public string type;
+
+        public Curve(double[] array, string name, string family, string type)
+        {
+            this.array = array;
+            this.name = name;
+            this.family = family;
+            this.type = type;
+        }
     }
 }

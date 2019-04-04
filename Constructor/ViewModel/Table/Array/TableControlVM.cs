@@ -26,6 +26,8 @@
             get { return cellRow; }
             set
             {
+                if (value < 0)
+                { return; }
                 cellRow = value;
                 OnPropertyChanged("CellRow");
             }
@@ -36,6 +38,8 @@
             get { return cellColumn; }
             set
             {
+                if (value < 0)
+                { return; }
                 cellColumn = value;
                 OnPropertyChanged("CellColumn");
             }
@@ -46,6 +50,8 @@
             get { return width; }
             set
             {
+                if (value < 0)
+                { return; }
                 OldWidth = width;
                 width = value;
                 if (!SelectInvokeOnProperyChanged)
@@ -64,6 +70,8 @@
             get { return height; }
             set
             {
+                if (value < 0)
+                { return; }
                 OldHeight = height;
                 height = value;
                 if (!SelectInvokeOnProperyChanged)
@@ -86,5 +94,7 @@
                 OnPropertyChanged("CellHaveApi");
             }
         }
+
+        public string Url { get; set; } //not using
     }
 }

@@ -119,11 +119,38 @@ namespace Constructor.ViewModel
             Template.SelectTable = table;
         }
 
+        public void CreateTable(Point newLocation, int countColumn, int countRow, IEnumerable<double> list)
+        {
+            var table = new TableWithArrayVM()
+            {
+                Columns = 1,
+                Rows = 1,
+                XPoint = newLocation.X,
+                YPoint = newLocation.Y,
+                Height = 20,
+                Width = 50,
+                IsBorder = true,
+                ZPoint = 1
+            };
+            table.CreateUserTable();
+            table.Rows = countRow;
+            table.Columns = countColumn;
+            table.UsingTableApi(list);
+            Template.Table.Add(table);
+            Template.State = State.normally;
+            Template.SelectTable = table;
+        }
+
         public void AddSimpleAPI(string nameAttribute)
         {
-            Template.SelectTable.SelectCell.Content += "%"+nameAttribute+"%";
+            Template.SelectTable.SelectCell.Content += "%|"+nameAttribute+"|%";
             Template.SelectTable.IsUsedApi = true;
             Template.SelectTable.SelectCell.CellHaveApi = true;
+        }
+
+        public void AddImageInSelectCell(string url)
+        {
+            Template.SelectTable.SelectCell.Url = url;
         }
     }
 }

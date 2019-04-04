@@ -86,6 +86,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("Content");
             }
         }
+
         public HorizontalAlignment HorizontalAlignment
         {
             get { return horizontalAlignment; }
@@ -95,6 +96,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("HorizontalAlignment");
             }
         }
+
         public VerticalAlignment VerticalAlignment
         {
             get { return verticalAlignment; }
@@ -104,11 +106,14 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("VerticalAlignment");
             }
         }
+
         public double Width
         {
             get { return width; }
             set
             {
+                if (value < 0)
+                { return; }
                 OldWidth = width;
                 width = value;
                 if (!SelectInvokeOnProperyChanged)
@@ -127,6 +132,8 @@ namespace Constructor.ViewModel.Table.TextOrImage
             get { return height; }
             set
             {
+                if (value < 0)
+                { return; }
                 OldHeight = height;
                 height = value;
                 if (!SelectInvokeOnProperyChanged)
@@ -170,6 +177,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("Angle");
             }
         }
+
         public Point RenderTransformOrigin
         {
             get { return renderTransformOrigin; }
@@ -179,24 +187,31 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("RenderTransformOrigin");
             }
         }
+
         public int CellRow
         {
             get { return cellRow; }
             set
             {
+                if (value < 0)
+                { return; }
                 cellRow = value;
                 OnPropertyChanged("CellRow");
             }
         }
+
         public int CellColumn
         {
             get { return cellColumn; }
             set
             {
+                if (value < 0)
+                { return; }
                 cellColumn = value;
                 OnPropertyChanged("CellColumn");
             }
         }
+
         public Brush BorderBrush
         {
             get { return borderBrush; }
@@ -218,6 +233,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("IsBorderLeft");
             }
         }
+
         public bool IsBorderTop
         {
             get { return isBorderTop; }
@@ -229,6 +245,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("IsBorderTop");
             }
         }
+
         public bool IsBorderRight
         {
             get { return isBorderRight; }
@@ -240,6 +257,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("IsBorderRight");
             }
         }
+
         public bool IsBorderBottom
         {
             get { return isBorderBottom; }
@@ -324,15 +342,19 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("FontFamily");
             }
         }
+
         public float FontSize
         {
             get { return fontSize; }
             set
             {
+                if (value < 0)
+                { return; }
                 fontSize = value;
                 OnPropertyChanged("FontSize");
             }
         }
+
         public FontStyle FontStyle
         {
             get { return fontStyle; }
@@ -342,6 +364,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("FontStyle");
             }
         }
+
         public FontWeight FontWeight
         {
             get { return fontWeight; }
@@ -351,6 +374,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("FontWeight");
             }
         }
+
         public FontStretch FontStretch
         {
             get { return fontStretch; }
@@ -370,5 +394,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 OnPropertyChanged("CellHaveApi");
             }
         }
+
+        public string Url { get; set; } //not using
     }
 }

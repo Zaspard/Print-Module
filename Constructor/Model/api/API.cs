@@ -10,6 +10,7 @@ namespace Constructor.Model.api
 
         public List<string> ListElements { get; set; } = new List<string>() { "Field", "Bush", "Well", "Borehole", "Dataset" };
         public ObservableCollection<string> ListNameAttribute { get; set; } = new ObservableCollection<string>();
+        public Classificator Classificator { get; set; } = new Classificator();
 
         private string selectElement;
         private string selectNameAttribute;
@@ -18,7 +19,6 @@ namespace Constructor.Model.api
         {
             List.Add(new Field("FirstField", "FirstCountry", "FirstArea"));
             List.Add(new Field("SecondField", "SecondCountry", "SecondArea"));
-            //-------------------------------------------------------------//
         }
 
         public string SelectElement

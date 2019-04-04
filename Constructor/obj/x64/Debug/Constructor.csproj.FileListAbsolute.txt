@@ -26,3 +26,4 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCDataGr
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCDataGrid.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableApi.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableApi.baml
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csprojAssemblyReference.cache

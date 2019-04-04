@@ -1,7 +1,9 @@
-﻿using Constructor.Model.api;
+﻿using Constructor.Model;
+using Constructor.Model.api;
 using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace Constructor.Windows
         public TableWindow()
         {
             InitializeComponent();
-            DataContext = new API();
+            DataContext = new WindowsApiVM();
         }
 
         private void ClickButton_Cancel(object sender, ExecutedRoutedEventArgs e)
@@ -31,38 +33,85 @@ namespace Constructor.Windows
 
         private void ClickButton_Send(object sender, ExecutedRoutedEventArgs e)
         {
-            ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), int.Parse(CountColumn.Text), int.Parse(CountRow.Text));
+            if (((WindowsApiVM)DataContext).TableIsUsedApi == false)
+            {
+                ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), ((WindowsApiVM)DataContext).Columns, ((WindowsApiVM)DataContext).Rows);
+            }
+            else
+            {
+                ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), ((WindowsApiVM)DataContext).Columns, ((WindowsApiVM)DataContext).Rows, ((WindowsApiVM)DataContext).Table);
+            }
             Close();
         }
 
-        private void CountColumn_TextChanged(object sender, TextChangedEventArgs e)
+        private void Qwe_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            //try
-            //{
-            //    if (int.Parse(CountColumn.Text) > 30)
-            //    {
-            //        CountColumn.Text = "30";
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ввод только для чисел");
-            //}
+            stackPanelScroll.ScrollToHorizontalOffset(e.HorizontalOffset);
         }
 
-        private void CountRow_TextChanged(object sender, TextChangedEventArgs e)
+        private void ItemsSourceIsChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (int.Parse(CountRow.Text) > 30)
-            //    {
-            //        CountRow.Text = "30";
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ввод только для чисел");
-            //}
+            propertyPanel.Children.Clear();
+
+            var List = ((WindowsApiVM)DataContext).HeadersTable;
+
+            for (int i = 0; i < DataGrid.Columns.Count; ++i)
+            {
+                var innerPanel = new StackPanel()
+                {
+                    Orientation = Orientation.Vertical
+                };
+
+                var button = new Button()
+                {
+                    Width = DataGrid.ColumnWidth.Value,
+                    DataContext = List[i],
+                    Content = (List[i].Name == null) ? "Пусто" : List[i].Name
+                };
+                button.Click += ClickButton_SelectSettingApi;
+
+                innerPanel.Children.Add(button);
+
+                propertyPanel.Children.Add(innerPanel);
+            }
+        }
+
+        private void GridOfData_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dpd = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, typeof(DataGrid));
+            if (dpd != null)
+            {
+                propertyPanel.Children.Clear();
+                var List = ((WindowsApiVM)DataContext).HeadersTable;
+                for (int i = 0; i < 1; ++i)
+                {
+                    var innerPanel = new StackPanel()
+                    {
+                        Orientation = Orientation.Vertical
+                    };
+                    var button = new Button()
+                    {
+                        Width = DataGrid.ColumnWidth.Value,
+                        DataContext = List[i],
+                        Content = "Пусто"
+                    };
+                    button.Click += ClickButton_SelectSettingApi;
+                    innerPanel.Children.Add(button);
+                    propertyPanel.Children.Add(innerPanel);
+                }
+                dpd.AddValueChanged(DataGrid, ItemsSourceIsChanged);
+            }
+        }
+
+        private void ClickButton_SelectSettingApi(object sender, RoutedEventArgs e)
+        {
+            var tableApi = new TableApi()
+            {
+                Focusable = true,
+                Owner = this,
+                DataContext = ((Control)sender).DataContext
+            };
+            tableApi.Show();
         }
     }
 }

@@ -45,5 +45,29 @@ namespace Constructor.Model.api
             }
             return ListNameAttribute;
         }
+
+        public double[] SearchCurse(string name)
+        {
+            foreach (var well in Wells)
+            {
+                if (well.SearchCurse(name) != null)
+                {
+                    return well.SearchCurse(name);
+                }
+            }
+            return null;
+        }
+
+        public double[] SearchCurse(string family, string type)
+        {
+            foreach (var well in Wells)
+            {
+                if (well.SearchCurse(family, type) != null)
+                {
+                    return well.SearchCurse(family, type);
+                }
+            }
+            return null;
+        }
     }
 }

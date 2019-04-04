@@ -88,8 +88,9 @@
     <Compile Include="Model\api\Well.cs" />
     <Compile Include="Model\api\Bush.cs" />
     <Compile Include="Model\api\API.cs" />
-    <Compile Include="Model\api\RequestAPI.cs" />
+    <Compile Include="Model\api\Classificator.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
+    <Compile Include="Model\Command.cs" />
     <Compile Include="UC\UCDataGrid.xaml.cs">
       <DependentUpon>UCDataGrid.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="ViewModel\Table\TableWithArrayVM.cs" />
     <Compile Include="ViewModel\Table\Array\TableControlVM.cs" />
     <Compile Include="View\DataRowViewConverter.cs" />
+    <Compile Include="Windows\Header.cs" />
     <Compile Include="Windows\SimpleApi.xaml.cs">
       <DependentUpon>SimpleApi.xaml</DependentUpon>
     </Compile>
@@ -122,6 +124,7 @@
     <Compile Include="ViewModel\Table\TableWithTextOrImageVM.cs" />
     <Compile Include="ViewModel\TemplateVM.cs" />
     <Compile Include="ViewModel\Table\TextOrImage\TextCellVM.cs" />
+    <Compile Include="Windows\WindowsApiVM.cs" />
     <Page Include="UC\UCDataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

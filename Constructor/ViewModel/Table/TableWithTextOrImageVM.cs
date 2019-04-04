@@ -118,6 +118,8 @@ namespace Constructor.ViewModel.Table
             get { return width; }
             set
             {
+                if (value == 0 || value < 0)
+                { return; }
                 width = value;
                 OnPropertyChanged("Width");
             }
@@ -128,6 +130,8 @@ namespace Constructor.ViewModel.Table
             get { return height; }
             set
             {
+                if (value == 0 || value < 0)
+                { return; }
                 height = value;
                 OnPropertyChanged("Height");
             }
@@ -138,10 +142,8 @@ namespace Constructor.ViewModel.Table
             get { return columns; }
             set
             {
-                if (value == 0)
-                {
-                    return;
-                }
+                if (value == 0 || value < 0)
+                { return; }
                 oldColumns = columns;
                 columns = value;
                 if (columns != 1)
@@ -164,10 +166,8 @@ namespace Constructor.ViewModel.Table
             get { return rows; }
             set
             {
-                if (value == 0)
-                {
-                    return;
-                }
+                if (value == 0 || value < 0)
+                { return; }
                 oldRows = rows;
                 rows = value;
                 if (rows != 1)
@@ -190,6 +190,8 @@ namespace Constructor.ViewModel.Table
             get { return xPoint; }
             set
             {
+                if (value < 0)
+                { return; }
                 xPoint = value;
                 margin.Left = value;
                 OnPropertyChanged("XPoint");
@@ -201,6 +203,8 @@ namespace Constructor.ViewModel.Table
             get { return yPoint; }
             set
             {
+                if (value < 0)
+                { return; }
                 yPoint = value;
                 margin.Top = value;
                 OnPropertyChanged("YPoint");
@@ -462,6 +466,6 @@ namespace Constructor.ViewModel.Table
             return image;
         }
         #endregion
- 
+
     }
 }

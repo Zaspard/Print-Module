@@ -1,5 +1,6 @@
 ﻿using Constructor.ViewModel;
 using Constructor.Windows;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +83,19 @@ namespace Constructor
         private void DeleteSelectedTable(object sender, ExecutedRoutedEventArgs e)
         {
             ViewModel.DeleteSelectedTable();
+        }
+
+        private void CreateOpenDialog(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                        "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                ViewModel.AddImageInSelectCell(op.FileName);
+            }
         }
     }
 }

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constructor.Model.api 
+namespace Constructor.Model.api
 {
     public class Well  //Скважина
     {
         string Name { get; set; }
         string Attribute { get; set; }
         List<Borehole> Boreholes { get; set; } = new List<Borehole>();
-        Dictionary<string,string> CollectionAttribures { get; set; } = new Dictionary<string, string>();
+        Dictionary<string, string> CollectionAttribures { get; set; } = new Dictionary<string, string>();
 
         public Well()
         {
@@ -46,6 +46,30 @@ namespace Constructor.Model.api
                 ListNameAttribute.Add(element.Key);
             }
             return ListNameAttribute;
+        }
+
+        public double[] SearchCurse(string name)
+        {
+            foreach (var borehole in Boreholes)
+            {
+                if (borehole.SearchCurse(name) != null)
+                {
+                    return borehole.SearchCurse(name);
+                }
+            }
+            return null;
+        }
+
+        public double[] SearchCurse(string family, string type)
+        {
+            foreach (var borehole in Boreholes)
+            {
+                if (borehole.SearchCurse(family, type) != null)
+                {
+                    return borehole.SearchCurse(family, type);
+                }
+            }
+            return null;
         }
     }
 }

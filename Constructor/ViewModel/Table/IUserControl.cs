@@ -14,5 +14,6 @@ namespace Constructor.ViewModel.Table
         event PropertyChangedEventHandler PropertyChanged;
         bool SelectInvokeOnProperyChanged { get; set; }
         bool CellHaveApi { get; set; }
+        string Url { get; set; } //Только для ячейки с изображением
     }
 }

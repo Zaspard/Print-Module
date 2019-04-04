@@ -115,6 +115,8 @@ namespace Constructor.ViewModel.Table
             get { return width; }
             set
             {
+                if (value < 0)
+                { return; }
                 width = value;
                 OnPropertyChanged("Width");
             }
@@ -125,6 +127,8 @@ namespace Constructor.ViewModel.Table
             get { return height; }
             set
             {
+                if (value < 0)
+                { return; }
                 height = value;
                 OnPropertyChanged("Height");
             }
@@ -135,10 +139,8 @@ namespace Constructor.ViewModel.Table
             get { return columns; }
             set
             {
-                if (value == 0)
-                {
-                    return;
-                }
+                if (value == 0 || value < 0)
+                { return; }
                 oldColumns = columns;
                 columns = value;
                 if (columns != 1)
@@ -161,10 +163,8 @@ namespace Constructor.ViewModel.Table
             get { return rows; }
             set
             {
-                if (value == 0)
-                {
-                    return;
-                }
+                if (value == 0 || value < 0)
+                { return; }
                 oldRows = rows;
                 rows = value;
                 if (rows != 1)
@@ -187,6 +187,8 @@ namespace Constructor.ViewModel.Table
             get { return xPoint; }
             set
             {
+                if (value < 0)
+                { return; }
                 xPoint = value;
                 margin.Left = value;
                 OnPropertyChanged("XPoint");
@@ -198,6 +200,8 @@ namespace Constructor.ViewModel.Table
             get { return yPoint; }
             set
             {
+                if (value < 0)
+                { return; }
                 yPoint = value;
                 margin.Top = value;
                 OnPropertyChanged("YPoint");
@@ -472,19 +476,28 @@ namespace Constructor.ViewModel.Table
                 DataGridTable.Columns.Add();
             }
             var content = new object[columns];
-            for (int i = 1; i < rows + 1; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 1; j < columns + 1; j++)
+                for (int j = 0; j < columns; j++)
                 {
-                    content[j - 1] = Cells[(j * i) - 1].Content;
+                    //content[j - 1] = Cells[(j * i) - 1].Content;
+                    content[j] = Cells[(columns * i) + j].Content;
                 }
-                DataGridTable.Rows.Add(content);
-                
+                DataGridTable.Rows.Add(content);           
             }
             DataGridTable.EndLoadData();
             DefaultTableView = DataGridTable.DefaultView;
             Debug.WriteLine("Changed");
         }
         #endregion
+
+        public void UsingTableApi(IEnumerable<double> list)
+        {
+            for (var i=0;i<Cells.Count; i++)
+            {
+                Cells[i].Content = ((ObservableCollection<double>)list)[i];
+            }
+            EditTable(Columns, Rows);
+        }
     }
 }

@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Constructor.Windows"
         mc:Ignorable="d"
-        Title="TableApi" Height="450" Width="600">
+        Title="" Height="300" Width="500" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Заполнить столбец по названию" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <CheckBox Grid.Column="1" IsChecked="{Binding TypeText}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="2" IsEnabled="{Binding TypeText}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Наименование столбца" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Заполнить столбец по cемейству и типу" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <CheckBox Grid.Column="1" IsChecked="{Binding TypeFamily}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="4" IsEnabled="{Binding TypeFamily}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование семейства" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center"
+                      IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Families}" DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectFamily}"/>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Наименование типа" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                      IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding DataTypes}" DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectDataType}"/>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Заполнить столбец референциальной кривой" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <CheckBox Grid.Column="1" IsChecked="{Binding TypeDepth}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="6">
+        </Grid>
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Click="Close"/>
+            <Button Grid.Column="1" Click="SendSelectedApi"/>
+        </Grid>
     </Grid>
 </Window>

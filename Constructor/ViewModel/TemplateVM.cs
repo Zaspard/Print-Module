@@ -66,6 +66,8 @@ namespace Constructor.ViewModel
             get{ return width; }
             set
             {
+                if (value == 0 || value <0)
+                { return; }
                 width = value;
                 OnPropertyChanged("Width");
             }
@@ -76,6 +78,8 @@ namespace Constructor.ViewModel
             get { return height; }
             set
             {
+                if (value == 0 || value < 0)
+                { return; }
                 height = value;
                 OnPropertyChanged("Height");
             }

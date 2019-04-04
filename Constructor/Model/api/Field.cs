@@ -45,5 +45,30 @@ namespace Constructor.Model.api
             }
             return ListNameAttribute;
         }
+
+        public double[] SearchCurse(string name)
+        {
+            foreach (var bush in Bushes)
+            {
+                if (bush.SearchCurse(name) != null)
+                {
+                    return bush.SearchCurse(name);
+                }
+            }
+            return null;
+        }
+
+        public double[] SearchCurse(string family, string type)
+        {
+            foreach (var bush in Bushes)
+            {
+                //return (bush.SearchCurse(family, type)!=null) ? (bush.SearchCurse(family, type)) : continue
+                if (bush.SearchCurse(family, type) != null)
+                {
+                    return bush.SearchCurse(family, type);
+                }
+            }
+            return null;
+        }
     }
 }
