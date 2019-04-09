@@ -23,6 +23,8 @@
         <RoutedUICommand x:Key="Commands.DeleteSelectedTable" />
         <RoutedUICommand x:Key="Commands.SimpleRequestByAPI" />
         <RoutedUICommand x:Key="Commands.OpenDialog" />
+        <RoutedUICommand x:Key="Commands.Serialize" />
+        <RoutedUICommand x:Key="Commands.Deserialize" />
 
         <Style TargetType="{x:Type view:ItemTable}">
             <Setter
@@ -437,6 +439,14 @@
             Command="{StaticResource Commands.OpenDialog}" 
             Executed="CreateOpenDialog" 
             />
+        <CommandBinding 
+            Command="{StaticResource Commands.Serialize}" 
+            Executed="Serialize" 
+            />
+        <CommandBinding 
+            Command="{StaticResource Commands.Deserialize}" 
+            Executed="Deserialize" 
+            />
     </Window.CommandBindings>
 
     <Window.DataContext>
@@ -474,7 +484,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Название шаблона" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                            <TextBox Grid.Column="1" FontSize="10" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="{Binding Template.NameTemplate}" FontSize="10" VerticalAlignment="Center"/>
                         </Grid>
                         <!--Кнопки-->
                         <Grid Grid.Column="1">
@@ -490,6 +500,12 @@
                     </Grid>
                 </Grid>
             </Border>
+            <Grid Grid.Row="1" Grid.Column="1">
+                
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                
+            </Grid>
             <!--Место под коструктор-->
             <Grid Grid.Column="1" Grid.Row="2" Background="LightGray">
                 <view:TableView x:Name="constructor" TablesSource="{Binding Template.Table}"
@@ -650,8 +666,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Margin="10,5,10,5"/>
-                        <Button Grid.Column="1" Margin="10,5,10,5"/>
+                        <Button Grid.Column="0" Margin="10,5,10,5" Content="Serialize" Command="{StaticResource Commands.Serialize}"/>
+                        <Button Grid.Column="1" Margin="10,5,10,5" Content="Deserialize" Command="{StaticResource Commands.Deserialize}"/>
                     </Grid>
                 </Border>
             </Grid>

@@ -1,7 +1,9 @@
 ﻿using Constructor.ViewModel.Table;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,7 +30,7 @@ namespace Constructor.ViewModel
             set
             {
                 template = value;
-                OnPropertyChanged("TemplateVM");
+                OnPropertyChanged("Template");
             }
         }
 
@@ -152,5 +154,35 @@ namespace Constructor.ViewModel
         {
             Template.SelectTable.SelectCell.Url = url;
         }
+
+
+        #region Serialize/Deserialize
+
+        DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TemplateVM));
+        public void Seriliz()
+        {
+            if (File.Exists(Template.NameTemplate + ".json"))
+            {
+                File.Delete(Template.NameTemplate + ".json");
+            }
+            using (FileStream fs = new FileStream(Template.NameTemplate + ".json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, Template);
+            }
+            name = Template.NameTemplate + ".json";
+            Template = null;
+        }
+
+        private string name;
+        public void Deseriliz()
+        {
+            Template = null;
+            name = "zcx.json";
+            using (FileStream fs = new FileStream(name, FileMode.OpenOrCreate))
+            {
+                Template = (TemplateVM)jsonFormatter.ReadObject(fs);
+            }
+        }
+        #endregion
     }
 }

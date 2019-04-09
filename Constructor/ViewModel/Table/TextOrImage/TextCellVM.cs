@@ -1,51 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
+using System.Runtime.Serialization;
 
 namespace Constructor.ViewModel.Table.TextOrImage
 {
+    [DataContract]
     public class TextCellVM : BaseVM, ICellVM
     {
+        [DataMember]
         private string nameColor;
+        [DataMember]
         private string content;
+        [DataMember]
         private int cellRow,  cellColumn;
+        [DataMember]
         private Brush borderBrush;
+        [DataMember]
         private Thickness borderThickness;
+        [DataMember]
         private HorizontalAlignment horizontalAlignment;
+        [DataMember]
         private VerticalAlignment verticalAlignment;
+        [DataMember]
         private double width, height;
-        private SolidColorBrush background;
+        [field: NonSerialized]
+        private SolidColorBrush background; ///!!!!!!!!!!!!!!!!!!!
+        [DataMember]
         private int angle;
-        private Point renderTransformOrigin;
+        [DataMember]
         private bool isBorderLeft = true;
+        [DataMember]
         private bool isBorderTop = true;
+        [DataMember]
         private bool isBorderRight = true;
+        [DataMember]
         private bool isBorderBottom = true;
+        [DataMember]
         private bool cellHaveApi = false;
-        
+        [DataMember]
         public double OldWidth { get; set; }
+        [DataMember]
         public double OldHeight { get; set; }
-        public List<string> Colors { get; } = new List<string>();
-        public List<HorizontalAlignment> HorizontalAlignments { get; } = new List<HorizontalAlignment>();
-        public List<VerticalAlignment> VerticalAlignments { get; } = new List<VerticalAlignment>();
+        [field:NonSerialized]
+        public List<string> Colors { get; set; } = new List<string>();
+        [field: NonSerialized]
+        public List<HorizontalAlignment> HorizontalAlignments { get; set; } = new List<HorizontalAlignment>();
+        [field: NonSerialized]
+        public List<VerticalAlignment> VerticalAlignments { get; set; } = new List<VerticalAlignment>();
+        [DataMember]
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
-
+        [DataMember]
         private int left = 1, top = 1, right = 1, bottom = 1;
 
         //Private TextCell
+        [field: NonSerialized]
         private FontFamily fontFamily;
+        [DataMember]
         private float fontSize;
+        [field: NonSerialized]
         private FontStyle fontStyle;
+        [field: NonSerialized]
         private FontWeight fontWeight;
+        [field: NonSerialized]
         private FontStretch fontStretch;
-        public List<FontFamily> FontFamils { get; } = new List<FontFamily>();
-        public ObservableCollection<FontStyle> FontStyles { get; } = new ObservableCollection<FontStyle>();
-        public ObservableCollection<FontWeight> FontWeights { get; } = new ObservableCollection<FontWeight>();
-        public ObservableCollection<FontStretch> FontStretches { get; } = new ObservableCollection<FontStretch>();
+        [field: NonSerialized]
+        public List<FontFamily> FontFamils { get; set; } = new List<FontFamily>();
+        [field: NonSerialized]
+        public ObservableCollection<FontStyle> FontStyles { get; set; } = new ObservableCollection<FontStyle>();
+        [field: NonSerialized]
+        public ObservableCollection<FontWeight> FontWeights { get; set; } = new ObservableCollection<FontWeight>();
+        [field: NonSerialized]
+        public ObservableCollection<FontStretch> FontStretches { get; set; } = new ObservableCollection<FontStretch>();
 
         public TextCellVM()
         {
@@ -175,16 +204,6 @@ namespace Constructor.ViewModel.Table.TextOrImage
             {
                 angle = value;
                 OnPropertyChanged("Angle");
-            }
-        }
-
-        public Point RenderTransformOrigin
-        {
-            get { return renderTransformOrigin; }
-            set
-            {
-                renderTransformOrigin = value;
-                OnPropertyChanged("RenderTransformOrigin");
             }
         }
 
@@ -396,5 +415,78 @@ namespace Constructor.ViewModel.Table.TextOrImage
         }
 
         public string Url { get; set; } //not using
+
+        #region Serialize
+        [DataMember]
+        private string nameColorSerialize;
+        [DataMember]
+        private string fontFamilySerialize;
+        [DataMember]
+        private string fontStyleSerialize;
+        [DataMember]
+        private string fontStretchSerialize;
+        [DataMember]
+        private string fontWeightSerialize;
+
+
+        [OnSerializing]
+        void StreamTextCell(StreamingContext sc)
+        {
+            nameColorSerialize = background.ToString();
+            fontFamilySerialize = FontFamils.ToString();
+            fontStyleSerialize = FontStyle.ToString();
+            fontStretchSerialize = FontStretch.ToString();
+            fontWeightSerialize = FontWeight.ToString();       
+        }
+
+        [OnDeserialized]
+        void LoadTextCell(StreamingContext sc)
+        {
+            //Filling collections
+            Colors = new List<string>();
+            HorizontalAlignments = new List<HorizontalAlignment>();
+            VerticalAlignments = new List<VerticalAlignment>();
+            FontFamils = new List<FontFamily>();
+            FontStyles = new ObservableCollection<FontStyle>();
+            FontWeights = new ObservableCollection<FontWeight>();
+            FontStretches = new ObservableCollection<FontStretch>();
+
+            Type typeBackground = typeof(System.Drawing.Color);
+            PropertyInfo[] colorInfo = typeBackground.GetProperties(BindingFlags.Public |
+                BindingFlags.Static);
+            foreach (PropertyInfo info in colorInfo)
+            {
+                Colors.Add(info.Name);
+            }
+            //HorizontalAlignment
+            foreach (var item in Enum.GetValues(typeof(HorizontalAlignment)))
+            {
+                HorizontalAlignments.Add((HorizontalAlignment)item);
+            }
+            //VerticalAlignment
+            foreach (var item in Enum.GetValues(typeof(VerticalAlignment)))
+            {
+                VerticalAlignments.Add((VerticalAlignment)item);
+            }
+            //FontFamily
+            foreach (var fontFamily in Fonts.SystemFontFamilies)
+            {
+                FontFamils.Add(fontFamily);
+            }
+            //Filling property
+            BrushConverter brushConverter = new BrushConverter();
+            FontFamilyConverter familyConverter = new FontFamilyConverter();
+            FontStyleConverter styleConverter = new FontStyleConverter();
+            FontStretchConverter stretchConverter = new FontStretchConverter();
+            FontWeightConverter weightConverter = new FontWeightConverter();
+
+            Background = nameColorSerialize!= null ? (SolidColorBrush)brushConverter.ConvertFromString(nameColorSerialize) : new SolidColorBrush(System.Windows.Media.Colors.White);
+            FontFamily = fontFamilySerialize != null ? (FontFamily)familyConverter.ConvertFromString(fontFamilySerialize) : new FontFamily("Times New Roman");
+            FontStyle = fontStyleSerialize != null ? (FontStyle)styleConverter.ConvertFromString(fontStyleSerialize) : FontStyles[0];
+            FontStretch = fontStretchSerialize != null ? (FontStretch)stretchConverter.ConvertFromString(fontStretchSerialize) : FontStretches[0];
+            FontWeight = fontWeightSerialize != null ? (FontWeight)weightConverter.ConvertFromString(fontWeightSerialize) : FontWeights[0];          
+        }
+        #endregion
+
     }
 }

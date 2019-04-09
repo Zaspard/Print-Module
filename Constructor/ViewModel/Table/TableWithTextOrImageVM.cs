@@ -1,36 +1,47 @@
-﻿using Constructor.Model;
-using Constructor.ViewModel.Table.Array;
-using Constructor.ViewModel.Table.TextOrImage;
+﻿using Constructor.ViewModel.Table.TextOrImage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Runtime.Serialization;
 
 namespace Constructor.ViewModel.Table
 {
+    [DataContract]
+    [KnownType(typeof(ImageCellVM))]
+    [KnownType(typeof(TextCellVM))]
     public class TableWithTextOrImageVM : BaseVM, ITable
     {
+        [DataMember]
         private double width, height;
+        [DataMember]
         private int columns, rows;
+        [DataMember]
         private int oldColumns = 1, oldRows = 1;
+        [DataMember]
         private double xPoint, yPoint, zPoint;
+        [DataMember]
         private Thickness margin;
+        [DataMember]
         private bool isBorder = true;
+        [DataMember]
         private Thickness borderThickness;
+        [field: NonSerialized]
         private IUserControl selectCell;
+        [DataMember]
         private string nameTable;
+        [DataMember]
         private bool isUsedAPi = false;
+        [DataMember]
         private int angle;
+        [DataMember]
         private Point renderTransformOrigin;
-
-        public ObservableCollection<IUserControl> Cells { get; } = new ObservableCollection<IUserControl>();
+        [DataMember]
+        public ObservableCollection<IUserControl> Cells { get; set; } = new ObservableCollection<IUserControl>();
+        [DataMember]
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
 
         public IUserControl SelectCell
@@ -47,7 +58,14 @@ namespace Constructor.ViewModel.Table
         #region Выбор ячейки
         public void SelectingCell(object sender)
         {
-            var cell = ((Control)sender).DataContext;
+            var cell = ((TextBox)sender).DataContext;
+            var index = Cells.IndexOf((IUserControl)cell);
+            SelectCell = Cells[index];
+        }
+
+        public void SelectingImageCell(object sender)
+        {
+            var cell = ((Image)sender).DataContext;
             var index = Cells.IndexOf((IUserControl)cell);
             SelectCell = Cells[index];
         }

@@ -1,35 +1,46 @@
 ﻿using Constructor.ViewModel.Table.Array;
-using Constructor.ViewModel.Table.TextOrImage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Constructor.ViewModel.Table
 {
+    [DataContract]
+    [KnownType(typeof(UserTableVM))]
     public class TableWithArrayVM : BaseVM, ITable
     {
+        [DataMember]
         private double width, height;
+        [DataMember]
         private int columns, rows;
+        [DataMember]
         private int oldColumns = 1, oldRows = 1;
+        [DataMember]
         private double xPoint, yPoint, zPoint;
+        [DataMember]
         private Thickness margin;
+        [DataMember]
         private bool isBorder = true;
+        [DataMember]
         private Thickness borderThickness;
+        [field: NonSerialized]
         private IUserControl selectCell;
+        [DataMember]
         private string nameTable;
+        [DataMember]
         private bool isUsedAPi = false;
+        [DataMember]
         private int angle;
+        [DataMember]
         private Point renderTransformOrigin;
-
-        public ObservableCollection<IUserControl> Cells { get; } = new ObservableCollection<IUserControl>();
+        [DataMember]
+        public ObservableCollection<IUserControl> Cells { get; set; } = new ObservableCollection<IUserControl>();
+        [DataMember]
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
 
         public IUserControl SelectCell
@@ -480,7 +491,6 @@ namespace Constructor.ViewModel.Table
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    //content[j - 1] = Cells[(j * i) - 1].Content;
                     content[j] = Cells[(columns * i) + j].Content;
                 }
                 DataGridTable.Rows.Add(content);           
@@ -498,6 +508,12 @@ namespace Constructor.ViewModel.Table
                 Cells[i].Content = ((ObservableCollection<double>)list)[i];
             }
             EditTable(Columns, Rows);
+        }
+
+        [OnDeserialized]
+        void LoadArrayTable(StreamingContext sc)
+        {
+            EditTable(columns, rows);
         }
     }
 }

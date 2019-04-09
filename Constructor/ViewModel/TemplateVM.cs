@@ -1,41 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Constructor.ViewModel.Table;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Controls;
-using Constructor.Model;
-using Constructor.ViewModel.Table;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Constructor.ViewModel
 {
+    [DataContract]
+    [KnownType(typeof(TableWithArrayVM))]
+    [KnownType(typeof(TableWithTextOrImageVM))]
     public class TemplateVM : BaseVM
     {
+        [DataMember]
+        private string nameTeplate;
+        [DataMember]
         private double width;
+        [DataMember]
         private double height;
+        [field:NonSerialized]
         private State state = State.normally;
+        [field: NonSerialized]
         private ITable selectTable;
-        private ObservableCollection<ITable> table;
+        [DataMember]
+        public ObservableCollection<ITable> Table { get; set; } = new ObservableCollection<ITable>();
 
         public TemplateVM()
         {
             Width = 800;
             Height = 1200;
         }
-
-        public ObservableCollection<ITable> Table
+        
+        public string NameTemplate
         {
-            get
+            get { return nameTeplate; }
+            set
             {
-                if (table == null)
-                {
-                    table = new ObservableCollection<ITable>();
-                }
-                return table;
+                nameTeplate = value;
+                OnPropertyChanged("NameTemplate");
             }
         }
 

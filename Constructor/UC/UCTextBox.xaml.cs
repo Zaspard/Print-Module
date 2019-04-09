@@ -28,5 +28,10 @@ namespace Constructor.UC
         {
             ((TableWithTextOrImageVM)DataContext).SelectingCell(sender);
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ((TableWithTextOrImageVM)DataContext).SelectingImageCell(sender);
+        }
     }
 }

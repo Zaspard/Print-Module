@@ -97,5 +97,15 @@ namespace Constructor
                 ViewModel.AddImageInSelectCell(op.FileName);
             }
         }
+
+        private void Serialize(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.Seriliz();
+        }
+
+        private void Deserialize(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.Deseriliz();
+        }
     }
 }

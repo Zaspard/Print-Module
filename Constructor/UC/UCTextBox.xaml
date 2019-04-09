@@ -37,8 +37,8 @@
                     BorderThickness="{Binding BorderThickness}" BorderBrush="Black"
                     Background="{Binding Background}">
                 <Image VerticalAlignment="{Binding VerticalAlignment}" HorizontalAlignment="{Binding HorizontalAlignment}"
-                       Source="{Binding Content}" Stretch="Fill"                   
-                       GotFocus="TextBox_GotFocus" Opacity="{Binding Opacity}">
+                       Source="{Binding Content}" Stretch="Fill"            
+                       MouseLeftButtonDown="Image_MouseLeftButtonDown" Opacity="1">
                     <Image.RenderTransformOrigin>
                         <Point X="0.5" Y="0.5"/>
                     </Image.RenderTransformOrigin>
