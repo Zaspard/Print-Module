@@ -14,4 +14,8 @@ C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingTe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csproj.CopyComplete
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.exe
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\Constructor.exe
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\Constructor.pdb
+C:\Users\zaspard\source\repos\PrintingText\PrintingText\bin\x64\Debug\Constructor.exe.config
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\obj\x64\Debug\PrintingText.csprojAssemblyReference.cache

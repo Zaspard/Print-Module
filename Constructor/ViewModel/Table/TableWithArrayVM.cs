@@ -308,7 +308,7 @@ namespace Constructor.ViewModel.Table
                     Cells.Add(tableCell);
                     oldRows++;
                 }
-                Height += addHeight;
+                Height += addHeight - (rows - 1);
                 EditTable(Columns, Rows);
                 return;
             }
@@ -330,7 +330,7 @@ namespace Constructor.ViewModel.Table
                     }
                 }
             }
-            Height += addHeight;
+            Height += addHeight - (rows-1);
             EditTable(Columns, Rows);
             return;
         }

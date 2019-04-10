@@ -167,6 +167,10 @@ namespace Constructor.Windows
             }
             else if (TypeSelectingApi == TypeSelectingApi.TypeFamily)
             {
+                if (SelectFamily == null)
+                {
+                    return null;
+                }
                 Name = (selectDataType != null) ? selectDataType.Name : selectFamily.Name;
                 return Tuple.Create(column, 2, Name, (selectDataType != null) ? selectFamily.Name : null);
             }

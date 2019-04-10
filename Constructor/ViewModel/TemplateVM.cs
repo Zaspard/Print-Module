@@ -47,10 +47,10 @@ namespace Constructor.ViewModel
             {
                 selectTable = value;
                 OnPropertyChanged("SelectTable");
-                if (SelectTable != null)
+                /*if (SelectTable != null)
                 {
                     SelectTable.PropertyChanged += SelectTable_PropertyChanged;
-                }
+                }*/
             }
         }
 

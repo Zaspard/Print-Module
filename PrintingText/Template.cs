@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace PrintingText
 {
-    class Template
+    class OldTemplate
     {
         public Grid Place(Page page)
         {

@@ -1,4 +1,5 @@
-﻿using PrintingText.Model;
+﻿using Constructor.ViewModel;
+using PrintingText.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -13,7 +14,7 @@ using System.Windows.Xps.Packaging;
 
 namespace PrintingText.ViewModel
 {
-    class PrintersSetting : INotifyPropertyChanged
+    class PrintersSetting : BaseVM, ITab
     {
         private PrintServer printServer = new PrintServer();
         private Printer selectPrinter;
@@ -21,7 +22,7 @@ namespace PrintingText.ViewModel
         public ObservableCollection<Printer> Printers { get; set; }
         public ObservableCollection<string> NamePrinters { get; set; }
         public Page Page { get; set; }
-        public Template template = new Template();
+        //public Template template = new Template();
         private readonly string path = "filename.xps"; //!!!
 
         public PrintersSetting()
@@ -92,7 +93,7 @@ namespace PrintingText.ViewModel
             }
         }
 
-        public ICommand Print
+        /*public ICommand Print
         {
             get
             {
@@ -135,7 +136,7 @@ namespace PrintingText.ViewModel
                     File.Delete(path);
                 });
             }
-        }
+        }*/
 
         public ICommand PrintDialog
         {
@@ -160,12 +161,5 @@ namespace PrintingText.ViewModel
                 });
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
     }
 }

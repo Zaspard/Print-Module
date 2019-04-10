@@ -63,6 +63,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -86,9 +87,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\FindTemplate.cs" />
+    <Compile Include="Model\SearchFile.cs" />
     <Compile Include="Template.cs" />
-    <Compile Include="ViewModel\DelegateCommand.cs" />
-    <Compile Include="ViewModel\PagePaginator.cs" />
+    <Compile Include="Model\DelegateCommand.cs" />
+    <Compile Include="Model\PagePaginator.cs" />
+    <Compile Include="ViewModel\ConstructorTab.cs" />
+    <Compile Include="ViewModel\ITab.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\PrintersSetting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +142,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Constructor\Constructor.csproj">
+      <Project>{6ef8791c-d21c-428e-a256-cd753e35a61f}</Project>
+      <Name>Constructor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

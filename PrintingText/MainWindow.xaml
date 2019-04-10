@@ -5,38 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintingText"
         xmlns:viewmodel="clr-namespace:PrintingText.ViewModel"
+        xmlns:view="clr-namespace:Constructor.View;assembly=Constructor"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:control="clr-namespace:Constructor.UC;assembly=Constructor"
+        xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table;assembly=Constructor"
         mc:Ignorable="d"
         Title="MainWindow" Height="674.5" Width="1139.5">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Width" Value="80" />
-            <Setter Property="Margin" Value="25 5 25 5" />
+        <RoutedUICommand x:Key="Commands.CreateNewTemplate" />
+
+        <Style TargetType="{x:Type view:ItemTable}">
+            <Setter
+                Property="X"
+                Value="{Binding XPoint}"
+                />
+            <Setter
+                Property="Y"
+                Value="{Binding YPoint}"
+                />
         </Style>
-    </Window.Resources>
-    <Grid Background="#FFD6D4D4">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="335*"/>
-            <ColumnDefinition Width="899*"/>
-        </Grid.ColumnDefinitions>
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="622*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <!--Вкладки-->
-                <TabControl>
-                    <TabItem Header="Вкладка 1">Шаблоны</TabItem>
-                    <TabItem Header="Вкладка 2">Настройка бумаги и печати</TabItem>
-                </TabControl>
+
+        <DataTemplate
+            DataType="{x:Type tablevm:TableWithTextOrImageVM}">
+            <control:UCTextBox/>
+        </DataTemplate>
+
+        <DataTemplate
+            DataType="{x:Type tablevm:TableWithArrayVM}">
+            <control:UCDataGrid/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ConstructorTab}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <ItemsControl Grid.Row="0">
+                    <ListView ItemsSource="{Binding CollectionFiles}" SelectedItem="{Binding SelectedFiles}">
+                    </ListView>
+                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                </ItemsControl>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Удалить"/>
+                    <Button Grid.Column="1" Content="Редактировать"/>
+                </Grid>
             </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:PrintersSetting}">
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="167*"/>
                     <RowDefinition Height="180*"/>
                     <RowDefinition Height="208*"/>
-                    <RowDefinition Height="67*"/>
+                    <RowDefinition Height="40*"/>
                 </Grid.RowDefinitions>
                 <Grid  Margin="0,0,0,144" Grid.RowSpan="2">
                     <Grid DataContext="{Binding Page}" HorizontalAlignment="Left" Height="135" Margin="53,28,0,0" VerticalAlignment="Top" Width="231">
@@ -68,6 +95,47 @@
                     <Button Command="{Binding PrintDialog}" Content="Button" HorizontalAlignment="Stretch" Grid.Column="1"/>
                 </Grid>
             </Grid>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{StaticResource Commands.CreateNewTemplate}" 
+            Executed="ClickButton_CreateNewTemplate"/>
+    </Window.CommandBindings>
+
+
+    <Grid Background="#FFD6D4D4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="335*"/>
+            <ColumnDefinition Width="899*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Background="White" BorderThickness="0,0,1,0" BorderBrush="Black">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21*"/>
+                    <RowDefinition Height="622*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <!--Вкладки-->
+                    <TabControl>
+                        <TabItem Header="Шаблоны" MouseLeftButtonUp="TabItem_MouseDown"/>
+                        <TabItem Header="Настройка бумаги и печати" MouseLeftButtonUp="TabItem_MouseDown"/>
+                    </TabControl>
+                </Grid>
+                <ContentPresenter Grid.Row="1" Content="{Binding SelectTab}"/>
+            </Grid>
+        </Border>
+        
+        <Grid Grid.Column="1" Background="LightGray">
+            <view:TableView x:Name="constructor" TablesSource="{Binding Template.Table}"
+                                  Width="{Binding Template.Width}"
+                                Height="{Binding Template.Height}"  Background="White"
+                                VirtualizingPanel.VirtualizationMode="Recycling">
+            </view:TableView>
         </Grid>
     </Grid>
 </Window>

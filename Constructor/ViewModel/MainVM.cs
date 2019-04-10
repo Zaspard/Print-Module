@@ -15,10 +15,28 @@ namespace Constructor.ViewModel
     public class MainVM : BaseVM
     {
         public TemplateVM template = null;
+        public string nameTemplate = "Шаблон";
 
         public MainVM()
         {
             Template = new TemplateVM();
+        }
+
+        public string NameTemplate
+        {
+            get
+            {
+                return nameTemplate;
+            }
+            set
+            {
+                nameTemplate = value;
+                if (Template != null)
+                {
+                    Template.NameTemplate = value;
+                }
+                OnPropertyChanged("NameTemplate");
+            }
         }
 
         public TemplateVM Template
@@ -161,26 +179,42 @@ namespace Constructor.ViewModel
         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TemplateVM));
         public void Seriliz()
         {
-            if (File.Exists(Template.NameTemplate + ".json"))
+            if (File.Exists(NameTemplate + ".json"))
             {
-                File.Delete(Template.NameTemplate + ".json");
+                if (MessageBox.Show("Файл с таким название уже существует. Заменить?", "Ошибка",
+                                            MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    File.Delete(NameTemplate + ".json");
+                    using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                    {
+                        jsonFormatter.WriteObject(fs, Template);
+                    }
+                    Template = null;
+                }
             }
-            using (FileStream fs = new FileStream(Template.NameTemplate + ".json", FileMode.OpenOrCreate))
+            else
             {
-                jsonFormatter.WriteObject(fs, Template);
+                using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                {
+                    jsonFormatter.WriteObject(fs, Template);
+                }
+                Template = null;
             }
-            name = Template.NameTemplate + ".json";
-            Template = null;
         }
 
-        private string name;
         public void Deseriliz()
         {
             Template = null;
-            name = "zcx.json";
-            using (FileStream fs = new FileStream(name, FileMode.OpenOrCreate))
+            if (File.Exists(NameTemplate + ".json"))
             {
-                Template = (TemplateVM)jsonFormatter.ReadObject(fs);
+                using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                {
+                    Template = (TemplateVM)jsonFormatter.ReadObject(fs);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Файл с таким не найдено", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         #endregion

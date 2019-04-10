@@ -36,8 +36,17 @@ namespace Constructor.Windows
 
         private void SendSelectedApi(object sender, RoutedEventArgs e)
         {
-            ((WindowsApiVM)Owner.DataContext).SendSettings(((Header)DataContext).Setting());
-            Close();
+            var setting = ((Header)DataContext).Setting();
+            if (setting != null)
+            {
+                ((WindowsApiVM)Owner.DataContext).SendSettings(setting);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Необходимо выбрать семейство", "Ошибка",
+                                            MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

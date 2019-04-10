@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using PrintingText.ViewModel;
+using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Printing;
 using System.Windows;
+using System.Windows.Controls;
+using Constructor;
 
 namespace PrintingText
 {
@@ -10,8 +14,28 @@ namespace PrintingText
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.PrintersSetting();
-        }  
+            DataContext = new MainVM();
+        }
+
+        private void TabItem_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (((TabItem)sender).Header.ToString() == "Шаблоны")
+            {
+                ((MainVM)DataContext).ChangeTab(true);
+            }
+            else
+            {
+                ((MainVM)DataContext).ChangeTab(false);
+            }
+        }
+
+        private void ClickButton_CreateNewTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            /*WindowConstructor simpleApi = new WindowConstructor();
+            simpleApi.Focusable = true;
+            simpleApi.Owner = this;
+            simpleApi.Show();*/
+        }
     }
 }
 

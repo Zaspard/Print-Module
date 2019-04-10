@@ -372,7 +372,7 @@ namespace Constructor.Windows
                 {
                     if (rows + (StartRow - 1) > array.Length)
                     {
-                        if (MessageBox.Show("Вбраны недопустимые значения массива данных. Изменить таблицу под доступные значения массива данных?", "Ошибка",
+                        if (MessageBox.Show("Невозможно добавить данные в таблицу. Изменить таблицу под доступные значения массива данных?", "Ошибка",
                                             MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
                         {
                             if (array.Length - startRow + 1 <= 0)

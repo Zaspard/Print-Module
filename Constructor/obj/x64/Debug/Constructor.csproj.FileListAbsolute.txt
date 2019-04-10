@@ -5,7 +5,6 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\System.Wind
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\SimpleApi.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableWindow.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCTextBox.g.cs
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\MainWindow.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\App.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor_MarkupCompile.cache
@@ -14,7 +13,6 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\Sim
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableWindow.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Themes\Generic.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCTextBox.baml
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\MainWindow.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.g.resources
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.Properties.Resources.resources
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.GenerateResource.cache
@@ -27,3 +25,5 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\UC\UCDataGr
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableApi.g.cs
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Windows\TableApi.baml
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csprojAssemblyReference.cache
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\MainWindow.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\MainWindow.baml
