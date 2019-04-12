@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PrintingText.ViewModel
 {
-    interface ITab
+    public interface ITab
     {
         event PropertyChangedEventHandler PropertyChanged;
     }

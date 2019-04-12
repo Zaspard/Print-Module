@@ -47,20 +47,16 @@ namespace Constructor.ViewModel
             {
                 selectTable = value;
                 OnPropertyChanged("SelectTable");
-                /*if (SelectTable != null)
-                {
-                    SelectTable.PropertyChanged += SelectTable_PropertyChanged;
-                }*/
             }
         }
 
-        private void SelectTable_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectCell")
-            {
-                SelectTable = (ITable)sender;
-            }
-        }
+        //private void SelectTable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == "SelectCell")
+        //    {
+        //        SelectTable = (ITable)sender;
+        //    }
+        //}
 
         public double Width
         {
@@ -95,6 +91,21 @@ namespace Constructor.ViewModel
                 OnPropertyChanged("State");
             }
         }
+
+        #region Для предпросмотра
+        [field: NonSerialized]
+        private bool isEnabled = false;
+
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set
+            {
+                isEnabled = value;
+                OnPropertyChanged("IsEnabled");
+            }
+        }
+        #endregion
     }
 }
 

@@ -10,9 +10,13 @@
         xmlns:control="clr-namespace:Constructor.UC;assembly=Constructor"
         xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table;assembly=Constructor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="674.5" Width="1139.5">
+        Title="Печать" Height="670" Width="1100">
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.CreateNewTemplate" />
+        <RoutedUICommand x:Key="Commands.DeleteSelectTemplate"/>
+        <RoutedUICommand x:Key="Commands.EditSelectTemplate"/>
+        <RoutedUICommand x:Key="Commands.Refresh"/>
+        <RoutedUICommand x:Key="Commands.Print"/>
 
         <Style TargetType="{x:Type view:ItemTable}">
             <Setter
@@ -38,60 +42,190 @@
         <DataTemplate DataType="{x:Type viewmodel:ConstructorTab}">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
                     <RowDefinition/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <ItemsControl Grid.Row="0">
-                    <ListView ItemsSource="{Binding CollectionFiles}" SelectedItem="{Binding SelectedFiles}">
-                    </ListView>
-                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                <Grid Grid.Row="0">
+                    <Button HorizontalAlignment="Right" Width="70"  Content="Обновить" Command="{StaticResource Commands.Refresh}"/>
+                </Grid>
+                <ItemsControl Grid.Row="1">
+                    <ListView ItemsSource="{Binding CollectionFiles}" SelectedItem="{Binding SelectedFiles}"
+                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
                 </ItemsControl>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Удалить"/>
-                    <Button Grid.Column="1" Content="Редактировать"/>
+                    <Button Grid.Column="0" Content="Удалить" Command="{StaticResource Commands.DeleteSelectTemplate}"/>
+                    <Button Grid.Column="1" Content="Редактировать" Command="{StaticResource Commands.EditSelectTemplate}"/>
                 </Grid>
             </Grid>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewmodel:PrintersSetting}">
-            <Grid Grid.Row="1">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="167*"/>
-                    <RowDefinition Height="180*"/>
-                    <RowDefinition Height="208*"/>
-                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Grid  Margin="0,0,0,144" Grid.RowSpan="2">
-                    <Grid DataContext="{Binding Page}" HorizontalAlignment="Left" Height="135" Margin="53,28,0,0" VerticalAlignment="Top" Width="231">
-                        <TextBox Text="{Binding Left}" HorizontalAlignment="Left" Height="22" Margin="84,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Background="White"/>
-                        <Label Content="Left" HorizontalAlignment="Left" Margin="11,5,0,0" VerticalAlignment="Top"/>
-                        <TextBox Text="{Binding Top}" HorizontalAlignment="Left" Height="22" Margin="85,39,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
-                        <Label Content="Top" HorizontalAlignment="Left" Margin="11,37,0,0" VerticalAlignment="Top"/>
-                        <TextBox Text="{Binding Right}" HorizontalAlignment="Left" Height="22" Margin="84,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
-                        <Label Content="Right" HorizontalAlignment="Left" Margin="11,67,0,0" VerticalAlignment="Top"/>
-                        <TextBox Text="{Binding Bottom}" HorizontalAlignment="Left" Height="22" Margin="84,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" Background="White"/>
-                        <Label Content="Bottom" HorizontalAlignment="Left" Margin="11,101,0,0" VerticalAlignment="Top"/>
+                <Border Grid.Row="0"  BorderThickness="0,0,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Настройка отступов" VerticalAlignment="Center"/>
+                </Border>
+                <Grid Grid.Row="1" Grid.RowSpan="1">
+                    <Grid DataContext="{Binding Page}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Left"/>
+                            <TextBox Grid.Column="1" Text="{Binding Left}"/>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Top"/>
+                            <TextBox Grid.Column="1" Text="{Binding Top}"/>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Right"/>
+                            <TextBox Grid.Column="1" Text="{Binding Right}"/>
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Bottom"/>
+                            <TextBox Grid.Column="1" Text="{Binding Bottom}"/>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <ComboBox ItemsSource="{Binding NamePrinters}" SelectedItem="{Binding NameSelectPrinter}" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" Width="220" Grid.Row="2" Height="22"/>
-                <Grid DataContext="{Binding SelectPrinter}" HorizontalAlignment="Left" Height="174" Margin="21,14,0,0" VerticalAlignment="Top" Width="268" Grid.Row="2">
-                    <ComboBox ItemsSource="{Binding PageMediaSizes}" SelectedItem="{Binding PageMediaSize}" HorizontalAlignment="Left" Margin="21,29,0,0" VerticalAlignment="Top" Width="220" />
-                    <ComboBox ItemsSource="{Binding PageOrientations}" SelectedItem="{Binding PageOrientation}" HorizontalAlignment="Left" Margin="21,56,0,0" VerticalAlignment="Top" Width="220"/>
-                    <ComboBox ItemsSource="{Binding OutputColors}" SelectedItem="{Binding OutputColor}" HorizontalAlignment="Left" Margin="21,84,0,0" VerticalAlignment="Top" Width="220"/>
-                    <ComboBox ItemsSource="{Binding InputBins}" SelectedItem="{Binding InputBin}" HorizontalAlignment="Left" Margin="21,111,0,0" VerticalAlignment="Top" Width="220"/>
-                    <TextBox Text="{Binding CopyCount, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="22" Margin="93,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Background="White"/>
-                    <Label Content="Count copy" HorizontalAlignment="Left" Margin="19,139,0,0" VerticalAlignment="Top"/>
-                </Grid>
+                <Border Grid.Row="2"  BorderThickness="0,1,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Выбор задачи" VerticalAlignment="Center"/>
+                </Border>
                 <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Content="Отправить на печать"/>
+                    <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsPrint}"/>
+                    <Label Grid.Row="1" Content="Сохранить в файл"/>
+                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}"/>
+                    <Grid Margin="50,0,0,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsEnabled="{Binding IsSaveToFile}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Content="Сохранить в pdf"/>
+                        <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsSaveToPDF}"/>
+                        <Label Grid.Row="1" Content="Сохранить в png"/>
+                        <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToPNG}"/>
+                    </Grid>
+                </Grid>
+                <Border Grid.Row="4"  BorderThickness="0,1,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Настройка бумаги" VerticalAlignment="Center"/>
+                </Border>
+                <Grid  Grid.Row="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Content="Выбор принтера"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding NamePrinters}" SelectedItem="{Binding NameSelectPrinter}"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" SelectionChanged="ComboBox_SelectionChanged"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"/>
+                        </Grid>
+                        <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Цветовая схема"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.OutputColors}" SelectedItem="{Binding SelectPrinter.OutputColor}"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="Использовать лоток"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.InputBins}" SelectedItem="{Binding SelectPrinter.InputBin}"/>
+                            <Label Grid.Row="5" Grid.Column="0" Content="Количество копий"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectPrinter.CopyCount, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="167*"/>
                         <ColumnDefinition Width="168*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Command="{Binding Print}" Content="Print" HorizontalAlignment="Stretch" Grid.Column="0"/>
+                    <Button Command="{StaticResource Commands.Print}" Content="Print" HorizontalAlignment="Stretch" Grid.Column="0"/>
                     <Button Command="{Binding PrintDialog}" Content="Button" HorizontalAlignment="Stretch" Grid.Column="1"/>
                 </Grid>
             </Grid>
@@ -103,39 +237,56 @@
         <CommandBinding 
             Command="{StaticResource Commands.CreateNewTemplate}" 
             Executed="ClickButton_CreateNewTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.DeleteSelectTemplate}" 
+            Executed="ClickButton_DeleteSelectTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.EditSelectTemplate}" 
+            Executed="ClickButton_EditSelectTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Print}" 
+            Executed="ClickButton_Print"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Refresh}" 
+            Executed="ClickButton_Refresh"/>
     </Window.CommandBindings>
 
 
-    <Grid Background="#FFD6D4D4">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="335*"/>
-            <ColumnDefinition Width="899*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
         <Border Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Background="White" BorderThickness="0,0,1,0" BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="21*"/>
-                    <RowDefinition Height="622*"/>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="0,0,0,1">
                     <!--Вкладки-->
                     <TabControl>
                         <TabItem Header="Шаблоны" MouseLeftButtonUp="TabItem_MouseDown"/>
                         <TabItem Header="Настройка бумаги и печати" MouseLeftButtonUp="TabItem_MouseDown"/>
                     </TabControl>
-                </Grid>
+                </Border>
                 <ContentPresenter Grid.Row="1" Content="{Binding SelectTab}"/>
             </Grid>
         </Border>
-        
+        <!--Предпросмотр-->
         <Grid Grid.Column="1" Background="LightGray">
-            <view:TableView x:Name="constructor" TablesSource="{Binding Template.Table}"
-                                  Width="{Binding Template.Width}"
-                                Height="{Binding Template.Height}"  Background="White"
-                                VirtualizingPanel.VirtualizationMode="Recycling">
-            </view:TableView>
+            <Grid x:Name="PreviewArea" Background="White" Height="{Binding PrintersSetting.Height}" Width="{Binding PrintersSetting.Width}"/>
+        </Grid>
+        <!--Поздгрузка для создания bitmap-->
+        <Grid Grid.Column="2" Background="LightGray" Visibility="Hidden">
+            <Grid x:Name="Place" Width="{Binding Template.Width}" Height="{Binding Template.Height}">
+                <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
+                                VirtualizingPanel.VirtualizationMode="Recycling"
+                                IsEnabledChanged="TemplateArea_IsEnabledChanged" IsEnabled="{Binding Template.IsEnabled}" >
+                </view:TableView>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

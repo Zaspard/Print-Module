@@ -87,9 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\FindTemplate.cs" />
+    <Compile Include="Model\FindedTemplate.cs" />
     <Compile Include="Model\SearchFile.cs" />
-    <Compile Include="Template.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\PagePaginator.cs" />
     <Compile Include="ViewModel\ConstructorTab.cs" />
@@ -129,7 +129,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

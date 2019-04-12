@@ -2,15 +2,9 @@
 using PrintingText.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
-using System.IO.Packaging;
 using System.Printing;
-using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Xps.Packaging;
 
 namespace PrintingText.ViewModel
 {
@@ -22,8 +16,13 @@ namespace PrintingText.ViewModel
         public ObservableCollection<Printer> Printers { get; set; }
         public ObservableCollection<string> NamePrinters { get; set; }
         public Page Page { get; set; }
-        //public Template template = new Template();
-        private readonly string path = "filename.xps"; //!!!
+        private bool isPrint = false;
+        private bool isSaveToFile = false;
+        private bool isSaveToPDF = false;
+        private bool isSaveToPNG = false;
+        private double width;
+        private double height;
+        public readonly string path = "filename.xps";
 
         public PrintersSetting()
         {
@@ -35,6 +34,8 @@ namespace PrintingText.ViewModel
                 Printers.Add(new Printer{ PrintQueue = item });
                 NamePrinters.Add(item.Name);
             }
+            width = 0;
+            height = 0;
         }
 
         public Printer SelectPrinter
@@ -51,15 +52,6 @@ namespace PrintingText.ViewModel
                 selectPrinter.PropertyChanged += SelectPrinter_PropertyChanged;
             }
         }
-
-        private void ReFillPage()
-        {
-            if (selectPrinter.PageOrientation == PageOrientation.Portrait)
-            { Page.IsPortrait = true; }
-            else { Page.IsPortrait = false; }
-            Page.Height = selectPrinter.PageMediaSize.Height.Value;
-            Page.Width = selectPrinter.PageMediaSize.Width.Value;
-        }
        
         private void SelectPrinter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -72,6 +64,8 @@ namespace PrintingText.ViewModel
                 var size = ((Printer)sender).PageMediaSize;
                 Page.Height = size.Height.Value;
                 Page.Width = size.Width.Value;
+                Width= size.Width.Value;
+                Height = size.Height.Value;
             }
         }
 
@@ -93,50 +87,81 @@ namespace PrintingText.ViewModel
             }
         }
 
-        /*public ICommand Print
+        public bool IsPrint
         {
-            get
+            get { return isPrint; }
+            set
             {
-                return new DelegateCommand((obj) =>
+                isPrint = value;
+                if (isPrint)
                 {
-                    var fixedPage = new FixedPage();
-                    if (Page.IsPortrait)
-                    {
-                        fixedPage.Width = Page.Width;
-                        fixedPage.Height = Page.Height;
-                    }
-                    else
-                    {
-                        fixedPage.Width = Page.Height;
-                        fixedPage.Height = Page.Width;
-                    }
-
-                    fixedPage.Children.Add(template.Place(Page));
-                    var pageContent = new PageContent();
-                    ((IAddChild)pageContent).AddChild(fixedPage);
-
-                    var package = Package.Open(path, FileMode.Create);
-                    var doc = new XpsDocument(package);
-                    var writers = XpsDocument.CreateXpsDocumentWriter(doc);
-                    var fixedDocument = new FixedDocument();
-                    fixedDocument.Pages.Add(pageContent);
-                    writers.Write(fixedDocument, selectPrinter.PrintTicket);
-                    doc.Close();
-                    package.Close();
-
-                    using (var fileStream = new StreamReader(path))
-                    {
-                        using (var printStream = new PrintQueueStream
-                        (selectPrinter.PrintQueue, "Print Template", false, selectPrinter.PrintTicket))
-                        {
-                            fileStream.BaseStream.CopyTo(printStream);
-                        }
-
-                    }
-                    File.Delete(path);
-                });
+                    IsSaveToFile = false;
+                }
+                OnPropertyChanged("IsPrint");
             }
-        }*/
+        }
+
+        public bool IsSaveToFile
+        {
+            get { return isSaveToFile; }
+            set
+            {
+                isSaveToFile = value;
+                if (isSaveToFile)
+                {
+                    IsPrint = false;
+                }
+                OnPropertyChanged("IsSaveToFile");
+            }
+        }
+
+        public bool IsSaveToPDF
+        {
+            get { return isSaveToPDF; }
+            set
+            {
+                isSaveToPDF = value;
+                if (isSaveToPDF)
+                {
+                    isSaveToPNG = false;
+                }
+                OnPropertyChanged("isSaveToPDF");
+            }
+        }
+
+        public bool IsSaveToPNG
+        {
+            get { return isSaveToPNG; }
+            set
+            {
+                isSaveToPNG = value;
+                if (isSaveToPNG)
+                {
+                    isSaveToPDF = false;
+                }
+                OnPropertyChanged("isSaveToPNG");
+            }
+        }
+
+        public double Width
+        {
+            get { return width; }
+            set
+            {
+                width = value;
+                OnPropertyChanged("Width");
+            }
+        }
+
+        public double Height
+        {
+            get { return height; }
+            set
+            {
+                height = value;
+                OnPropertyChanged("Height");
+            }
+        }
 
         public ICommand PrintDialog
         {
@@ -150,16 +175,25 @@ namespace PrintingText.ViewModel
                     var print = pDialog.ShowDialog();
                     if (print == true)
                     {
-                        /*foreach (var printer in Printers)
+                        foreach (var printer in Printers)
                         {
                             if (pDialog.PrintQueue == printer.PrintQueue)
                             {
                                 printer.PrintTicket = pDialog.PrintTicket;
                             }
-                        }*/
+                        }
                     }
                 });
             }
+        }
+
+        private void ReFillPage()
+        {
+            if (selectPrinter.PageOrientation == PageOrientation.Portrait)
+            { Page.IsPortrait = true; }
+            else { Page.IsPortrait = false; }
+            Page.Height = selectPrinter.PageMediaSize.Height.Value;
+            Page.Width = selectPrinter.PageMediaSize.Width.Value;
         }
     }
 }

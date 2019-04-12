@@ -1,14 +1,12 @@
 ﻿using PrintingText.ViewModel;
-using Microsoft.Win32;
-using System.Collections.Generic;
-using System.Printing;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using Constructor;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PrintingText
 {
-
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -31,21 +29,56 @@ namespace PrintingText
 
         private void ClickButton_CreateNewTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            /*WindowConstructor simpleApi = new WindowConstructor();
-            simpleApi.Focusable = true;
-            simpleApi.Owner = this;
-            simpleApi.Show();*/
+            Constructor.MainWindow constructor = new Constructor.MainWindow();
+            constructor.Focusable = true;
+            constructor.Owner = this;
+            constructor.Show();
+        }
+
+        private void ClickButton_DeleteSelectTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            ((MainVM)DataContext).DeleteTemplate();
+        }
+
+        private void ClickButton_EditSelectTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            Constructor.MainWindow constructor = new Constructor.MainWindow();
+            constructor.Focusable = true;
+            constructor.Owner = this;
+            ((Constructor.ViewModel.MainVM)constructor.DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+            constructor.Show();
+        }
+
+        private void ClickButton_Print(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            ((MainVM)DataContext).Print(TemplateArea);
+        }
+
+        private void ClickButton_Refresh(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            /*RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)constructor.ActualWidth, (int)constructor.ActualHeight , 96, 96, PixelFormats.Pbgra32);
+            renderTargetBitmap.Render(constructor);
+            PngBitmapEncoder pngImage = new PngBitmapEncoder();
+            pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            using (Stream fileStream = File.Create("Template\\"+ "image.png"))
+            {
+                pngImage.Save(fileStream);
+            }*/
+            ((MainVM)DataContext).ConstructorTab.ReloadingCollectionFiles();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PreviewArea.Children.Clear();
+            PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));
+        }
+
+        private void TemplateArea_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
-
-
-
-//@"D:\print.xps"
-//@"D:\sample1.xps"
-//@"D:\pdfurl-guide.pdf"
-//@"D:\topic1.docx"
-
 
 
 /*printTicket.PageResolution = new PageResolution(1, 1); //DPI

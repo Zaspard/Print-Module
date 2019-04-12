@@ -177,37 +177,42 @@ namespace Constructor.ViewModel
         #region Serialize/Deserialize
 
         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TemplateVM));
-        public void Seriliz()
+
+
+        public bool Seriliz()
         {
-            if (File.Exists(NameTemplate + ".json"))
+            if (File.Exists("Template\\" + NameTemplate + ".json"))
             {
                 if (MessageBox.Show("Файл с таким название уже существует. Заменить?", "Ошибка",
                                             MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
                 {
-                    File.Delete(NameTemplate + ".json");
-                    using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                    File.Delete("Template\\" + NameTemplate + ".json");
+                    using (FileStream fs = new FileStream("Template\\" + NameTemplate + ".json", FileMode.OpenOrCreate))
                     {
                         jsonFormatter.WriteObject(fs, Template);
                     }
                     Template = null;
+                    return true;
                 }
             }
             else
             {
-                using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream("Template\\" + NameTemplate + ".json", FileMode.OpenOrCreate))
                 {
                     jsonFormatter.WriteObject(fs, Template);
                 }
                 Template = null;
+                return true;
             }
+            return false;
         }
 
-        public void Deseriliz()
+        public void Deseriliz(string path)
         {
             Template = null;
-            if (File.Exists(NameTemplate + ".json"))
+            if (File.Exists(path))
             {
-                using (FileStream fs = new FileStream(NameTemplate + ".json", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
                 {
                     Template = (TemplateVM)jsonFormatter.ReadObject(fs);
                 }

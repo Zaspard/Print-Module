@@ -79,6 +79,11 @@ namespace PrintingText.Model
         public PrintTicket PrintTicket
         {
             get { return printTicket; }
+            set
+            {
+                printTicket = value;
+                OnPropertyChanged("PrintTicket");
+            }
         }
 
         public bool IsOffline

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Constructor.Windows"
         mc:Ignorable="d"
-        Title="" Height="300" Width="450" Loaded="Window_Loaded">
+        Title="Настройка заполнения столбца" Height="300" Width="450" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>

@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Constructor"
         xmlns:control="clr-namespace:Constructor.UC"
         xmlns:viewmodel="clr-namespace:Constructor.ViewModel"
         xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table" 
@@ -12,7 +11,7 @@
         xmlns:cellArray="clr-namespace:Constructor.ViewModel.Table.Array"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="810" Width="1200">
+        Title="Конструктор" Height="810" Width="1200">
 
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.ClickOnButtonCreateTextBox" />
@@ -24,7 +23,7 @@
         <RoutedUICommand x:Key="Commands.SimpleRequestByAPI" />
         <RoutedUICommand x:Key="Commands.OpenDialog" />
         <RoutedUICommand x:Key="Commands.Serialize" />
-        <RoutedUICommand x:Key="Commands.Deserialize" />
+        <RoutedUICommand x:Key="Commands.Close" />
 
         <Style TargetType="{x:Type view:ItemTable}">
             <Setter
@@ -444,8 +443,8 @@
             Executed="Serialize" 
             />
         <CommandBinding 
-            Command="{StaticResource Commands.Deserialize}" 
-            Executed="Deserialize" 
+            Command="{StaticResource Commands.Close}" 
+            Executed="Close" 
             />
     </Window.CommandBindings>
 
@@ -660,7 +659,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Margin="10,5,10,5" Content="Отмена" Command="{StaticResource Commands.Deserialize}"/>
+                        <Button Grid.Column="0" Margin="10,5,10,5" Content="Отмена" Command="{StaticResource Commands.Close}"/>
                         <Button Grid.Column="1" Margin="10,5,10,5" Content="Сохранить"  Command="{StaticResource Commands.Serialize}"/>
                     </Grid>
                 </Border>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Constructor.Windows"
         xmlns:model="clr-namespace:Constructor.Model.api"
         mc:Ignorable="d"
-        Title="SimpleApi" Height="400" Width="450">
+        Title="Добавление данных в ячейку" Height="400" Width="450">
 
     <Window.Resources>
         <RoutedUICommand x:Key="Commands.Cancel" />

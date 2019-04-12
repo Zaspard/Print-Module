@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace PrintingText
 {
-    class Page : INotifyPropertyChanged
+    public class Page : INotifyPropertyChanged
     {
         private bool isPortrait = true;
         private double left;
