@@ -404,7 +404,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
             }
         }
 
-        public bool CellHaveApi
+        public bool IsUsedApi
         {
             get { return cellHaveApi; }
             set

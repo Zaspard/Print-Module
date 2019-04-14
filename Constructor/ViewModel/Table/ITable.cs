@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -28,5 +29,7 @@ namespace Constructor.ViewModel.Table
         event PropertyChangedEventHandler PropertyChanged;
         int Angle { get; set; }
         Point RenderTransformOrigin { get; set; }
+        void FillCellInTheData(Field SelectField);
+
     }
 }

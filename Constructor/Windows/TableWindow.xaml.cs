@@ -1,5 +1,4 @@
 ﻿using Constructor.Model;
-using Constructor.Model.api;
 using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -39,7 +38,8 @@ namespace Constructor.Windows
             }
             else
             {
-                ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), ((WindowsApiVM)DataContext).Columns, ((WindowsApiVM)DataContext).Rows, ((WindowsApiVM)DataContext).Table);
+                ((MainVM)Owner.DataContext).CreateTable(new Point(0, 0), ((WindowsApiVM)DataContext).Columns, ((WindowsApiVM)DataContext).Rows, ((WindowsApiVM)DataContext).Table
+                    , ((WindowsApiVM)DataContext).Tuples);
             }
             Close();
         }

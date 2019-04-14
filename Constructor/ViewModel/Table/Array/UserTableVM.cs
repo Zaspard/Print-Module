@@ -21,7 +21,7 @@ namespace Constructor.ViewModel.Table.Array
         [DataMember]
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
         [DataMember]
-        private bool cellHaveApi = false;
+        private bool isUsedApi = false;
 
         public object Content
         {
@@ -97,12 +97,12 @@ namespace Constructor.ViewModel.Table.Array
             }
         }
 
-        public bool CellHaveApi
+        public bool IsUsedApi
         {
-            get { return cellHaveApi; }
+            get { return isUsedApi; }
             set
             {
-                cellHaveApi = value;
+                isUsedApi = value;
                 OnPropertyChanged("CellHaveApi");
             }
         }

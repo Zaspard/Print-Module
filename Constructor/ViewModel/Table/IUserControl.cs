@@ -13,7 +13,7 @@ namespace Constructor.ViewModel.Table
         double OldHeight { get; set; }
         event PropertyChangedEventHandler PropertyChanged;
         bool SelectInvokeOnProperyChanged { get; set; }
-        bool CellHaveApi { get; set; }
+        bool IsUsedApi { get; set; }
         string Url { get; set; } //Только для ячейки с изображением
     }
 }

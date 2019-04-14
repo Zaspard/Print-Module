@@ -1,5 +1,4 @@
-﻿using Constructor.Model;
-using Constructor.Model.api;
+﻿using API;
 using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -154,7 +153,7 @@ namespace Constructor.Windows
             }
         }
 
-        public Tuple<int,int,string,string> Setting()
+        public Tuple<int,int,string,string, int, int> Setting()
         {
             if (!typeText && !typeFamily && !typeDepth)
             {
@@ -163,7 +162,7 @@ namespace Constructor.Windows
             if (TypeSelectingApi == TypeSelectingApi.TypeText)
             {
                 Name = name;
-                return Tuple.Create(column, 1, name, "");
+                return Tuple.Create(column, 1, name, "", 0, 0);
             }
             else if (TypeSelectingApi == TypeSelectingApi.TypeFamily)
             {
@@ -172,17 +171,17 @@ namespace Constructor.Windows
                     return null;
                 }
                 Name = (selectDataType != null) ? selectDataType.Name : selectFamily.Name;
-                return Tuple.Create(column, 2, Name, (selectDataType != null) ? selectFamily.Name : null);
+                return Tuple.Create(column, 2, Name, (selectDataType != null) ? selectFamily.Name : null, 0, 0);
             }
             else if (TypeSelectingApi == TypeSelectingApi.TypeDepth)
             {
                 Name = "Depth";
-                return Tuple.Create(column, 1, "Depth", "");
+                return Tuple.Create(column, 1, "Depth", "", 0, 0);
             }
             else
             {
                 Name = null;
-                return Tuple.Create(column, 3, "", "");
+                return Tuple.Create(column, 3, "", "", 0, 0);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using Constructor.Model.api;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +16,6 @@ namespace Constructor.Windows
 {
     public partial class TableApi : Window
     {
-
         public TableApi()
         {
             InitializeComponent();
@@ -39,7 +37,7 @@ namespace Constructor.Windows
             var setting = ((Header)DataContext).Setting();
             if (setting != null)
             {
-                ((WindowsApiVM)Owner.DataContext).SendSettings(setting);
+                ((WindowsApiVM)Owner.DataContext).SetSettings(setting);
                 Close();
             }
             else

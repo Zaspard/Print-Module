@@ -7,10 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintingText", "PrintingTex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructor", "Constructor\Constructor.csproj", "{6EF8791C-D21C-428E-A256-CD753E35A61F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -34,11 +33,22 @@ Global
 		{6EF8791C-D21C-428E-A256-CD753E35A61F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EF8791C-D21C-428E-A256-CD753E35A61F}.Release|x64.ActiveCfg = Release|x64
 		{6EF8791C-D21C-428E-A256-CD753E35A61F}.Release|x64.Build.0 = Release|x64
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Debug|x64.Build.0 = Debug|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Release|x64.ActiveCfg = Release|Any CPU
+		{416AAA06-3779-4AEB-A766-C2E97B5F3A3B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6775B50A-7AC8-455C-9D5E-0B09FE9708ED}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

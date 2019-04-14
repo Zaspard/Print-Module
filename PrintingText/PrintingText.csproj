@@ -92,6 +92,7 @@
     <Compile Include="Document.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\PagePaginator.cs" />
+    <Compile Include="ViewModel\ApiTab.cs" />
     <Compile Include="ViewModel\ConstructorTab.cs" />
     <Compile Include="ViewModel\ITab.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
@@ -142,6 +143,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API\API.csproj">
+      <Project>{416aaa06-3779-4aeb-a766-c2e97b5f3a3b}</Project>
+      <Name>API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Constructor\Constructor.csproj">
       <Project>{6ef8791c-d21c-428e-a256-cd753e35a61f}</Project>
       <Name>Constructor</Name>

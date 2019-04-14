@@ -139,7 +139,7 @@ namespace Constructor.ViewModel
             Template.SelectTable = table;
         }
 
-        public void CreateTable(Point newLocation, int countColumn, int countRow, IEnumerable<double> list)
+        public void CreateTable(Point newLocation, int countColumn, int countRow, IEnumerable<double> list, List<Tuple<int, int, string, string, int, int>> tuples)
         {
             var table = new TableWithArrayVM()
             {
@@ -155,7 +155,7 @@ namespace Constructor.ViewModel
             table.CreateUserTable();
             table.Rows = countRow;
             table.Columns = countColumn;
-            table.UsingTableApi(list);
+            table.UsingTableApi(list, tuples);
             Template.Table.Add(table);
             Template.State = State.normally;
             Template.SelectTable = table;
@@ -165,7 +165,7 @@ namespace Constructor.ViewModel
         {
             Template.SelectTable.SelectCell.Content += "%|"+nameAttribute+"|%";
             Template.SelectTable.IsUsedApi = true;
-            Template.SelectTable.SelectCell.CellHaveApi = true;
+            Template.SelectTable.SelectCell.IsUsedApi = true;
         }
 
         public void AddImageInSelectCell(string url)

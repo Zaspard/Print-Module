@@ -1,4 +1,6 @@
-﻿using PrintingText.ViewModel;
+﻿using Constructor.View;
+using PrintingText.Model;
+using PrintingText.ViewModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,11 +21,15 @@ namespace PrintingText
         {
             if (((TabItem)sender).Header.ToString() == "Шаблоны")
             {
-                ((MainVM)DataContext).ChangeTab(true);
+                ((MainVM)DataContext).ChangeTab(1);
             }
-            else
+            else if (((TabItem)sender).Header.ToString() == "Настройка бумаги и печати")
             {
-                ((MainVM)DataContext).ChangeTab(false);
+                ((MainVM)DataContext).ChangeTab(2);
+            }
+            else 
+            {
+                ((MainVM)DataContext).ChangeTab(3);
             }
         }
 
@@ -56,14 +62,6 @@ namespace PrintingText
 
         private void ClickButton_Refresh(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            /*RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)constructor.ActualWidth, (int)constructor.ActualHeight , 96, 96, PixelFormats.Pbgra32);
-            renderTargetBitmap.Render(constructor);
-            PngBitmapEncoder pngImage = new PngBitmapEncoder();
-            pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream fileStream = File.Create("Template\\"+ "image.png"))
-            {
-                pngImage.Save(fileStream);
-            }*/
             ((MainVM)DataContext).ConstructorTab.ReloadingCollectionFiles();
         }
 
@@ -73,9 +71,9 @@ namespace PrintingText
             PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));
         }
 
-        private void TemplateArea_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void ClickButton_SaveFile(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-
+            ((MainVM)DataContext).SaveFile(TemplateArea);
         }
     }
 }

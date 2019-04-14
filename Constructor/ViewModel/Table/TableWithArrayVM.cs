@@ -1,4 +1,5 @@
-﻿using Constructor.ViewModel.Table.Array;
+﻿using API;
+using Constructor.ViewModel.Table.Array;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,6 +43,8 @@ namespace Constructor.ViewModel.Table
         public ObservableCollection<IUserControl> Cells { get; set; } = new ObservableCollection<IUserControl>();
         [DataMember]
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
+        [DataMember]
+        public List<Tuple<int, int, string, string, int, int >> Tuples = new List<Tuple<int, int, string, string, int, int>>();
 
         public IUserControl SelectCell
         {
@@ -501,19 +504,90 @@ namespace Constructor.ViewModel.Table
         }
         #endregion
 
-        public void UsingTableApi(IEnumerable<double> list)
+        public void UsingTableApi(IEnumerable<double> list, List<Tuple<int, int, string, string, int, int>> tuples)
         {
-            for (var i=0;i<Cells.Count; i++)
+            IsUsedApi = true;
+            Tuples = tuples;
+            /*!for (var i=0;i<Cells.Count; i++)
             {
                 Cells[i].Content = ((ObservableCollection<double>)list)[i];
-            }
+            }*/
             EditTable(Columns, Rows);
         }
 
+        #region Десериализация
         [OnDeserialized]
         void LoadArrayTable(StreamingContext sc)
         {
             EditTable(columns, rows);
         }
+        #endregion
+
+        #region Заполенение данными
+        public void FillCellInTheData(Field SelectField)
+        {
+            sth(SelectField);
+            /*!foreach (var cell in Cells)
+            {
+                for (var i=0;i<Cells.Count; i++)
+                {
+                    //!Cells[i].Content = ((ObservableCollection<double>)list)[i];
+                }
+            }*/
+            EditTable(Columns, Rows);
+        }
+
+        public void sth(Field SelectField)
+        {
+            foreach (var tuple in Tuples)
+            {
+                var column = tuple.Item1;
+                if (tuple.Item2 == 1)
+                {
+                    var array = SelectField.SearchCurse(tuple.Item3);
+                    if (array != null)
+                    {
+                        for (var i = 0; i < rows; i++)
+                        {
+                            if (i < tuple.Item6 && i < array.Length)
+                            {
+                                Cells[(columns * i) + column].Content = array[i + (tuple.Item5 - 1)];
+                            }
+                            else
+                            {
+                                Cells[(columns * i) + column].Content = "Значение не найдено";
+                            }   
+                        }
+                    }
+                }
+                else if (tuple.Item2 == 2)
+                {
+                    double[] array;
+                    if (tuple.Item4 != null)
+                    {
+                        array = SelectField.SearchCurse(tuple.Item4, tuple.Item3);
+                    }
+                    else
+                    {
+                        array = SelectField.SearchCurse(tuple.Item3, null);
+                    }
+                    if (array != null)
+                    {
+                        for (var i = 0; i < rows; i++)
+                        {
+                            if (i < tuple.Item6 && i < array.Length)
+                            {
+                                Cells[(columns * i) + column].Content = array[i + (tuple.Item5 - 1)];
+                            }
+                            else
+                            {
+                                Cells[(columns * i) + column].Content = "Значение не найдено";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Runtime.Serialization;
+using API;
 
 namespace Constructor.ViewModel.Table
 {
@@ -482,6 +483,30 @@ namespace Constructor.ViewModel.Table
             Cells.Add(image);
             SelectCell = image;
             return image;
+        }
+        #endregion
+
+        #region Заполенение данными
+        public void FillCellInTheData(Field SelectField)
+        {
+            foreach (var cell in Cells)
+            {
+                if (cell.IsUsedApi)
+                {
+                    var content = (string)cell.Content;
+
+                    var firstIndex = content.IndexOf("%|") + 2;
+                    var lastIndex = content.LastIndexOf("|%");
+
+                    var nameAttribute = content.Substring(firstIndex, lastIndex - firstIndex);
+                    var beginningOfString = content.Substring(0, firstIndex-2);
+                    var endOfString = content.Substring(lastIndex + 2, content.Length - lastIndex - 2);
+
+                    var response  = SelectField.GetAttribute(nameAttribute);
+                    //Если название атрибута было изменено или удалено в последующих версиях, то тогда не найдет.
+                    cell.Content = response  != null ? beginningOfString + response + endOfString : "!!!NOT FOUND!!!";
+                }
+            }
         }
         #endregion
 

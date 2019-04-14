@@ -123,7 +123,8 @@ namespace PrintingText.ViewModel
                 isSaveToPDF = value;
                 if (isSaveToPDF)
                 {
-                    isSaveToPNG = false;
+                    IsSaveToPNG = false;
+                    NameSelectPrinter = "Microsoft Print to PDF";
                 }
                 OnPropertyChanged("isSaveToPDF");
             }
@@ -137,7 +138,8 @@ namespace PrintingText.ViewModel
                 isSaveToPNG = value;
                 if (isSaveToPNG)
                 {
-                    isSaveToPDF = false;
+                    IsSaveToPDF = false;
+                    NameSelectPrinter = "Microsoft Print to PDF";
                 }
                 OnPropertyChanged("isSaveToPNG");
             }

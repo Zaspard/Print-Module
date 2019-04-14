@@ -1,4 +1,5 @@
 ﻿using Constructor.View;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,9 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace PrintingText
 {
-    public static class Document
+    public class Document
     {
-        public static Grid Place(Page page,TableView TemplateArea)
+        public Grid Place(Page page,TableView TemplateArea)
         {          
             Grid place = new Grid
             {
@@ -17,20 +18,21 @@ namespace PrintingText
                 Width = page.Width,
                 Height = page.Height
             };
-            Image image = new Image() { Height = TemplateArea.ActualHeight, Width = TemplateArea.ActualWidth, Source = CreatePngFromTemplate(TemplateArea),
+            var bitmap = CreatePngFromTemplate(TemplateArea);
+            Image image = new Image() { Height = TemplateArea.ActualHeight, Width = TemplateArea.ActualWidth, Source = bitmap,
                                         HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top };
             place.Children.Add(image);
             return place;
         }
 
-        private static BitmapImage CreatePngFromTemplate(TableView TemplateArea)
+        private BitmapImage CreatePngFromTemplate(TableView TemplateArea)
         {
             RenderTargetBitmap rtb = new RenderTargetBitmap((int)TemplateArea.ActualWidth, (int)TemplateArea.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(TemplateArea);
             PngBitmapEncoder png = new PngBitmapEncoder();
-            BitmapImage image = new BitmapImage();
             png.Frames.Add(BitmapFrame.Create(rtb));
             MemoryStream stream = new MemoryStream();
+            BitmapImage image = new BitmapImage();
             png.Save(stream);
             image.BeginInit();
             image.StreamSource = stream;

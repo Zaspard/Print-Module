@@ -15,6 +15,7 @@
         <RoutedUICommand x:Key="Commands.CreateNewTemplate" />
         <RoutedUICommand x:Key="Commands.DeleteSelectTemplate"/>
         <RoutedUICommand x:Key="Commands.EditSelectTemplate"/>
+        <RoutedUICommand x:Key="Commands.SaveFile"/>
         <RoutedUICommand x:Key="Commands.Refresh"/>
         <RoutedUICommand x:Key="Commands.Print"/>
 
@@ -74,6 +75,7 @@
                     <RowDefinition Height="110"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0"  BorderThickness="0,0,0,1" BorderBrush="Black">
@@ -195,7 +197,7 @@
                             <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
                             <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" SelectionChanged="ComboBox_SelectionChanged"/>
                             <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}" SelectionChanged="ComboBox_SelectionChanged"/>
                         </Grid>
                         <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
                             <Grid.RowDefinitions>
@@ -221,13 +223,26 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="6">
+                    <Button Command="{Binding PrintDialog}" Content="Открыть диалоговое окно печати" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="167*"/>
                         <ColumnDefinition Width="168*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Command="{StaticResource Commands.Print}" Content="Print" HorizontalAlignment="Stretch" Grid.Column="0"/>
-                    <Button Command="{Binding PrintDialog}" Content="Button" HorizontalAlignment="Stretch" Grid.Column="1"/>
+                    <Button Command="{StaticResource Commands.Print}" Content="Печать" HorizontalAlignment="Stretch" Grid.Column="0"/>
+                    <Button Command="{StaticResource Commands.SaveFile}" Content="Сохранить" HorizontalAlignment="Stretch" Grid.Column="1"/>
                 </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ApiTab}">
+            <Grid>
+                <ItemsControl>
+                    <ListView ItemsSource="{Binding Dossier.List}" SelectedItem="{Binding Dossier.SelectField}"
+                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
+                </ItemsControl>
             </Grid>
         </DataTemplate>
 
@@ -249,6 +264,9 @@
         <CommandBinding 
             Command="{StaticResource Commands.Refresh}" 
             Executed="ClickButton_Refresh"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.SaveFile}" 
+            Executed="ClickButton_SaveFile"/>
     </Window.CommandBindings>
 
 
@@ -270,6 +288,7 @@
                     <TabControl>
                         <TabItem Header="Шаблоны" MouseLeftButtonUp="TabItem_MouseDown"/>
                         <TabItem Header="Настройка бумаги и печати" MouseLeftButtonUp="TabItem_MouseDown"/>
+                        <TabItem Header="Api" MouseLeftButtonUp="TabItem_MouseDown"/>
                     </TabControl>
                 </Border>
                 <ContentPresenter Grid.Row="1" Content="{Binding SelectTab}"/>
@@ -283,8 +302,7 @@
         <Grid Grid.Column="2" Background="LightGray" Visibility="Hidden">
             <Grid x:Name="Place" Width="{Binding Template.Width}" Height="{Binding Template.Height}">
                 <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
-                                VirtualizingPanel.VirtualizationMode="Recycling"
-                                IsEnabledChanged="TemplateArea_IsEnabledChanged" IsEnabled="{Binding Template.IsEnabled}" >
+                                VirtualizingPanel.VirtualizationMode="Recycling">
                 </view:TableView>
             </Grid>
         </Grid>

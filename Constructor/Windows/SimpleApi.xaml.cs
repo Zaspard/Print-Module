@@ -1,5 +1,5 @@
-﻿using Constructor.Model;
-using Constructor.Model.api;
+﻿using API;
+using Constructor.Model;
 using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Constructor.Windows
         public SimpleApi()
         {
             InitializeComponent();
-            DataContext = new API();
+            DataContext = new Dossier();
         }
 
         private void ClickButton_Cancel(object sender, ExecutedRoutedEventArgs e)
@@ -32,9 +32,9 @@ namespace Constructor.Windows
 
         private void ClickButton_Send(object sender, ExecutedRoutedEventArgs e)
         {
-            if (((API)DataContext).SelectNameAttribute != null)
+            if (((Dossier)DataContext).SelectNameAttribute != null)
             {
-                ((MainVM)Owner.DataContext).AddSimpleAPI(((API)DataContext).SelectNameAttribute);
+                ((MainVM)Owner.DataContext).AddSimpleAPI(((Dossier)DataContext).SelectNameAttribute);
                 Close();
             }
             else MessageBox.Show("Выберите имя атрибута");

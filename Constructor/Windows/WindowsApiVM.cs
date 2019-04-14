@@ -1,4 +1,4 @@
-﻿using Constructor.Model.api;
+﻿using API;
 using Constructor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,10 +21,10 @@ namespace Constructor.Windows
         private int oldStartRow;
         private bool tableIsUsedApi = false;
         private Header selectHeader;
-        private API api = new API();
+        private Dossier api = new Dossier();
         public ObservableCollection<double> Table { get; } = new ObservableCollection<double>();
         public ObservableCollection<Header> HeadersTable { get; } = new ObservableCollection<Header>();
-        private List<Tuple<int, int, string, string>> Tuples = new List<Tuple<int, int, string, string>>();
+        public List<Tuple<int, int, string, string, int, int>> Tuples = new List<Tuple<int, int, string, string, int, int>>();
         private List<int> DeleteTuple = new List<int>();
 
         public WindowsApiVM()
@@ -36,7 +36,7 @@ namespace Constructor.Windows
             StartRow = 1;       
         }
 
-        public API Api
+        public Dossier Api
         {
             get { return api; }
         }
@@ -101,7 +101,7 @@ namespace Constructor.Windows
                 while (oldColumns < columns)
                 {
                     HeadersTable.Add(new Header() { Column = oldColumns });
-                    Tuples.Add(Tuple.Create(columns - 1, 0, "", ""));
+                    Tuples.Add(Tuple.Create(columns - 1, 0, "", "", StartRow, FinishRow));
                     oldColumns++;
                 }
                 if (oldColumn < columns)
@@ -304,7 +304,7 @@ namespace Constructor.Windows
                 HeadersTable.Remove(header);
             }
             //Delete Tuple
-            var DeletedTuplesCollection = new List<Tuple<int, int, string, string>>();
+            var DeletedTuplesCollection = new List<Tuple<int, int, string, string, int, int>>();
             foreach (var tuple in Tuples)
             {
                 if (tuple.Item1 > Columns - 1)
@@ -323,37 +323,41 @@ namespace Constructor.Windows
 
         private void RefreshTable()
         {
-            foreach(var tuple in Tuples)
+            /*!foreach(var tuple in Tuples)
             {
                 if (!ColumnFill(tuple))
                 {
                     break;
                 }
-            }
+            }*/
             foreach (var item in DeleteTuple)
             {
-                Tuples[item] = Tuple.Create(columns - 1, 0, "", "");
+                Tuples[item] = Tuple.Create(columns - 1, 0, "", "", StartRow, FinishRow);
             }
             DeleteTuple.Clear();
             EditTable(columns, rows);
         }
 
 
-        public void SendSettings(Tuple<int, int, string, string> tuple)
+        public void SetSettings(Tuple<int, int, string, string, int, int> tuple)
         {
-            if (ColumnFill(tuple))
-            {
+            //!if (ColumnFill(tuple))
+            //!{
                 Tuples[tuple.Item1] = tuple;
+            for (var i= 0;i< Tuples.Count;i++)
+            {
+                Tuples[i] = Tuple.Create(Tuples[i].Item1, Tuples[i].Item2, Tuples[i].Item3, Tuples[i].Item4, StartRow, FinishRow);
             }
-            foreach (var item in DeleteTuple)
+            //!}
+            /*!foreach (var item in DeleteTuple)
             {
                 Tuples[item] = Tuple.Create(columns - 1, 0, "", "");
             }
-            DeleteTuple.Clear();
+            DeleteTuple.Clear();*/
             EditTable(columns, rows);
         }
 
-        private bool ColumnFill(Tuple<int, int, string, string> tuple)
+        /*!private bool ColumnFill(Tuple<int, int, string, string> tuple)
         {
             var column = tuple.Item1;
             if (tuple.Item2 == 3)
@@ -436,7 +440,7 @@ namespace Constructor.Windows
                 }
             }
             return true;
-        }
+        }*/
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Constructor.ViewModel.Table;
+﻿using API;
+using Constructor.ViewModel.Table;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -50,14 +51,6 @@ namespace Constructor.ViewModel
             }
         }
 
-        //private void SelectTable_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "SelectCell")
-        //    {
-        //        SelectTable = (ITable)sender;
-        //    }
-        //}
-
         public double Width
         {
             get{ return width; }
@@ -103,6 +96,19 @@ namespace Constructor.ViewModel
             {
                 isEnabled = value;
                 OnPropertyChanged("IsEnabled");
+            }
+        }
+        #endregion
+
+        #region Заполенение данными
+        public void FillInTheData(Field SelectField)
+        {
+            foreach (var table in Table)
+            {
+                if (table.IsUsedApi)
+                {
+                    table.FillCellInTheData(SelectField);
+                }
             }
         }
         #endregion

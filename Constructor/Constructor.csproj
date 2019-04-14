@@ -87,14 +87,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\api\Borehole.cs" />
-    <Compile Include="Model\api\Curse.cs" />
-    <Compile Include="Model\api\Dataset.cs" />
-    <Compile Include="Model\api\Field.cs" />
-    <Compile Include="Model\api\Well.cs" />
-    <Compile Include="Model\api\Bush.cs" />
-    <Compile Include="Model\api\API.cs" />
-    <Compile Include="Model\api\Classificator.cs" />
     <Compile Include="Model\CollectionItemsChangedEventArgs.cs" />
     <Compile Include="Model\Command.cs" />
     <Compile Include="UC\UCDataGrid.xaml.cs">
@@ -196,7 +188,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SimpleAdorner\" />
+    <ProjectReference Include="..\API\API.csproj">
+      <Project>{416aaa06-3779-4aeb-a766-c2e97b5f3a3b}</Project>
+      <Name>API</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Безымянный.png" />
