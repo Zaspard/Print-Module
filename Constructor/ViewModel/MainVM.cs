@@ -110,7 +110,8 @@ namespace Constructor.ViewModel
                 Height = 50,
                 Width = 80,
                 IsBorder = true,
-                ZPoint = 1
+                ZPoint = 1,
+                IsImage = true
             };
             table.CreateImage();
             Template.Table.Add(table);
@@ -221,6 +222,7 @@ namespace Constructor.ViewModel
             {
                 MessageBox.Show("Файл с таким не найдено", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            NameTemplate = Template.NameTemplate;
         }
         #endregion
     }

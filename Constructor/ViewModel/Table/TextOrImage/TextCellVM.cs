@@ -28,7 +28,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
         [DataMember]
         private double width, height;
         [field: NonSerialized]
-        private SolidColorBrush background; ///!!!!!!!!!!!!!!!!!!!
+        private SolidColorBrush background;
         [DataMember]
         private int angle;
         [DataMember]
@@ -249,7 +249,14 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 isBorderLeft = value;
                 left = isBorderLeft ? 1:0;
                 ChangeBorger();
-                OnPropertyChanged("IsBorderLeft");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("IsBorderLeft");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }
             }
         }
 
@@ -261,7 +268,14 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 isBorderTop = value;
                 top = isBorderTop ? 1 : 0;
                 ChangeBorger();
-                OnPropertyChanged("IsBorderTop");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("IsBorderTop");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }
             }
         }
 
@@ -273,7 +287,14 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 isBorderRight = value;
                 right = isBorderRight ? 1 : 0;
                 ChangeBorger();
-                OnPropertyChanged("IsBorderRight");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("IsBorderRight");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }             
             }
         }
 
@@ -285,7 +306,15 @@ namespace Constructor.ViewModel.Table.TextOrImage
                 isBorderBottom = value;
                 bottom = isBorderBottom ? 1 : 0;
                 ChangeBorger();
-                OnPropertyChanged("IsBorderBottom");
+                if (!SelectInvokeOnProperyChanged)
+                {
+                    OnPropertyChanged("IsBorderBottom");
+                }
+                else
+                {
+                    OnPropertyChanged("");
+                }
+                
             }
         }
 

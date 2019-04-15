@@ -241,7 +241,7 @@ namespace PrintingText.ViewModel
         #region Удаление шаблона
         public void DeleteTemplate()
         {
-            if (constructorTab.SelectedFiles.Url != null )
+            if (constructorTab.SelectedFiles != null )
             {
                 File.Delete(constructorTab.SelectedFiles.Url);
                 constructorTab.ReloadingCollectionFiles();

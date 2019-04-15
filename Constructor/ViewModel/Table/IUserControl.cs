@@ -15,5 +15,9 @@ namespace Constructor.ViewModel.Table
         bool SelectInvokeOnProperyChanged { get; set; }
         bool IsUsedApi { get; set; }
         string Url { get; set; } //Только для ячейки с изображением
+        bool IsBorderLeft { get; set; }
+        bool IsBorderTop { get; set; }
+        bool IsBorderRight { get; set; }
+        bool IsBorderBottom { get; set; }
     }
 }

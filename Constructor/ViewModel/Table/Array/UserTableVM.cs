@@ -107,6 +107,12 @@ namespace Constructor.ViewModel.Table.Array
             }
         }
 
-        public string Url { get; set; } //not using
+        #region not using
+        public string Url { get; set; } 
+        public bool IsBorderLeft { get; set; }
+        public bool IsBorderTop { get; set; }
+        public bool IsBorderRight { get; set; }
+        public bool IsBorderBottom { get; set; }
+        #endregion
     }
 }

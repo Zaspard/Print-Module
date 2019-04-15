@@ -44,6 +44,8 @@ namespace Constructor.ViewModel.Table
         public ObservableCollection<IUserControl> Cells { get; set; } = new ObservableCollection<IUserControl>();
         [DataMember]
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
+        [DataMember]
+        public bool IsImage = false;
 
         public IUserControl SelectCell
         {
@@ -73,7 +75,7 @@ namespace Constructor.ViewModel.Table
 
         private void SelectCell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "WidthCell")
+            if (e.PropertyName == "WidthCell") //Изменение ширины всего стоблца
             {
                 var changeWidth = false;
                 foreach (var cell in Cells)
@@ -91,7 +93,7 @@ namespace Constructor.ViewModel.Table
                     }
                 }
             }
-            if (e.PropertyName == "HeightCell")
+            else if (e.PropertyName == "HeightCell")//Изменение высоты всей строки
             {
                 var changeHeight = false;
                 foreach (var cell in Cells)
@@ -107,6 +109,66 @@ namespace Constructor.ViewModel.Table
                         cell.Height = ((IUserControl)sender).Height;
                         cell.SelectInvokeOnProperyChanged = false;
                     }
+                }
+            }
+            else if (e.PropertyName == "IsBorderLeft") //Изменение соседних границ у ячейки
+            {
+                if (((IUserControl)sender).CellColumn != 0 && ((IUserControl)sender).IsBorderLeft == false)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[(columns * ((IUserControl)sender).CellRow) + (((IUserControl)sender).CellColumn - 1)].IsBorderRight = false;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+                else if (((IUserControl)sender).CellColumn != 0 && ((IUserControl)sender).IsBorderLeft == true)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[(columns * ((IUserControl)sender).CellRow) + (((IUserControl)sender).CellColumn - 1)].IsBorderRight = true;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+            }
+            else if (e.PropertyName == "IsBorderRight")
+            {
+                if (((IUserControl)sender).CellColumn != columns - 1 && ((IUserControl)sender).IsBorderRight == false)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[(columns * ((IUserControl)sender).CellRow) + (((IUserControl)sender).CellColumn + 1)].IsBorderLeft = false;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+                else if (((IUserControl)sender).CellColumn != columns - 1 && ((IUserControl)sender).IsBorderRight == true)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[(columns * ((IUserControl)sender).CellRow) + (((IUserControl)sender).CellColumn + 1)].IsBorderLeft = true;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+            }
+            else if (e.PropertyName == "IsBorderTop")
+            {
+                if (((IUserControl)sender).CellRow != 0 && ((IUserControl)sender).IsBorderTop == false)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[columns * (((IUserControl)sender).CellRow - 1) + ((IUserControl)sender).CellColumn].IsBorderBottom = false;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+                else if (((IUserControl)sender).CellRow != 0 && ((IUserControl)sender).IsBorderTop == true)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[columns * (((IUserControl)sender).CellRow - 1) + ((IUserControl)sender).CellColumn].IsBorderBottom = true;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+            }
+            else if (e.PropertyName == "IsBorderBottom") 
+            {
+                if (((IUserControl)sender).CellRow != rows - 1 && ((IUserControl)sender).IsBorderBottom == false)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[columns * (((IUserControl)sender).CellRow + 1) + ((IUserControl)sender).CellColumn].IsBorderTop = false;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
+                }
+                else if (((IUserControl)sender).CellRow != rows - 1 && ((IUserControl)sender).IsBorderBottom == true)
+                {
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = true;
+                    Cells[columns * (((IUserControl)sender).CellRow + 1) + ((IUserControl)sender).CellColumn].IsBorderTop = true;
+                    ((IUserControl)sender).SelectInvokeOnProperyChanged = false;
                 }
             }
         }
@@ -161,7 +223,7 @@ namespace Constructor.ViewModel.Table
             get { return columns; }
             set
             {
-                if (value == 0 || value < 0)
+                if (value == 0 || value < 0 || IsImage)
                 { return; }
                 oldColumns = columns;
                 columns = value;
@@ -185,7 +247,7 @@ namespace Constructor.ViewModel.Table
             get { return rows; }
             set
             {
-                if (value == 0 || value < 0)
+                if (value == 0 || value < 0 || IsImage) 
                 { return; }
                 oldRows = rows;
                 rows = value;
@@ -503,7 +565,7 @@ namespace Constructor.ViewModel.Table
                     var endOfString = content.Substring(lastIndex + 2, content.Length - lastIndex - 2);
 
                     var response  = SelectField.GetAttribute(nameAttribute);
-                    //Если название атрибута было изменено или удалено в последующих версиях, то тогда не найдет.
+                    //Если название атрибута было изменено или удалено в последующих версиях, или пользователь сам случайно изменил подпись, тогда не найдет.
                     cell.Content = response  != null ? beginningOfString + response + endOfString : "!!!NOT FOUND!!!";
                 }
             }

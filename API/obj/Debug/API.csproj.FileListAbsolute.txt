@@ -3,4 +3,3 @@ C:\Users\zaspard\source\repos\PrintingText\API\bin\Debug\API.pdb
 C:\Users\zaspard\source\repos\PrintingText\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\API\obj\Debug\API.dll
 C:\Users\zaspard\source\repos\PrintingText\API\obj\Debug\API.pdb
-C:\Users\zaspard\source\repos\PrintingText\API\obj\Debug\API.csprojAssemblyReference.cache

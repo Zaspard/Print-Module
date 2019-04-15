@@ -241,7 +241,6 @@
                 <ItemsControl>
                     <ListView ItemsSource="{Binding Dossier.List}" SelectedItem="{Binding Dossier.SelectField}"
                               DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
-                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
                 </ItemsControl>
             </Grid>
         </DataTemplate>
