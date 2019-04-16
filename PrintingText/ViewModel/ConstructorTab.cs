@@ -9,6 +9,7 @@ namespace PrintingText.ViewModel
     {
         private FindedTemplate selectedFiles;
         public ObservableCollection<FindedTemplate> CollectionFiles { get; set; } = new ObservableCollection<FindedTemplate>();
+        private bool isAwait = true;
 
         public ConstructorTab()
         {
@@ -33,6 +34,16 @@ namespace PrintingText.ViewModel
                 {
                     OnPropertyChanged("SelectedFiles");
                 }
+            }
+        }
+
+        public bool IsAwait
+        {
+            get { return isAwait; }
+            set
+            {
+                isAwait = value;
+                OnPropertyChanged("IsAwait");
             }
         }
 

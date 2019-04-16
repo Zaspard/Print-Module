@@ -87,17 +87,17 @@ namespace PrintingText.ViewModel
             {
                 selectTab = value;
                 OnPropertyChanged("SelectTab");
-                SelectTab.PropertyChanged += SelectTab_PropertyChanged;
+                //SelectTab.PropertyChanged += SelectTab_PropertyChanged;
             }
         }
 
-        private void SelectTab_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        /*private void SelectTab_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Contains("SelectedFiles"))
             {
                 Deseriliz(constructorTab.SelectedFiles.Url);
             }
-        }
+        }*/
 
         public void ChangeTab(int constructor)
         {

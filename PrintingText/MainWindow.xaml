@@ -51,7 +51,8 @@
                     <Button HorizontalAlignment="Right" Width="70"  Content="Обновить" Command="{StaticResource Commands.Refresh}"/>
                 </Grid>
                 <ItemsControl Grid.Row="1">
-                    <ListView ItemsSource="{Binding CollectionFiles}" SelectedItem="{Binding SelectedFiles}"
+                    <!--SelectedItem="{Binding SelectedFiles}"-->
+                    <ListView ItemsSource="{Binding CollectionFiles}" IsEnabled="{Binding IsAwait}"
                               DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
                     <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
                 </ItemsControl>
@@ -195,9 +196,9 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" SelectionChanged="ComboBox_SelectionChanged"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" />
                             <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}" SelectionChanged="ComboBox_SelectionChanged"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"/>
                         </Grid>
                         <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
                             <Grid.RowDefinitions>

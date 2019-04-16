@@ -2,6 +2,8 @@
 using PrintingText.Model;
 using PrintingText.ViewModel;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -67,8 +69,24 @@ namespace PrintingText
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PreviewArea.Children.Clear();
-            PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));
+            if (((ListView)sender).SelectedItem != null && ((MainVM)DataContext).ConstructorTab.IsAwait == true)
+            {
+                ((MainVM)DataContext).ConstructorTab.IsAwait = false;
+                ((MainVM)DataContext).ConstructorTab.SelectedFiles = (FindedTemplate)((ListView)sender).SelectedItem;
+                ((MainVM)DataContext).Deseriliz(((FindedTemplate)((ListView)sender).SelectedItem).Url);
+                Task.Run(() =>
+                {
+                    Thread.Sleep(7000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PreviewArea.Children.Clear();
+                        PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));
+                        ((MainVM)DataContext).ConstructorTab.IsAwait = true;
+                    });
+                });
+                /*PreviewArea.Children.Clear();
+                PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));*/
+            }
         }
 
         private void ClickButton_SaveFile(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
