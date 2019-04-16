@@ -60,6 +60,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
         [DataMember]
         public bool SelectInvokeOnProperyChanged { get; set; } = false;
 
+
         //Private ImageCell
         [DataMember]
         private string url;

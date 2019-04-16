@@ -508,10 +508,6 @@ namespace Constructor.ViewModel.Table
         {
             IsUsedApi = true;
             Tuples = tuples;
-            /*!for (var i=0;i<Cells.Count; i++)
-            {
-                Cells[i].Content = ((ObservableCollection<double>)list)[i];
-            }*/
             EditTable(Columns, Rows);
         }
 
@@ -527,13 +523,6 @@ namespace Constructor.ViewModel.Table
         public void FillCellInTheData(Field SelectField)
         {
             sth(SelectField);
-            /*!foreach (var cell in Cells)
-            {
-                for (var i=0;i<Cells.Count; i++)
-                {
-                    //!Cells[i].Content = ((ObservableCollection<double>)list)[i];
-                }
-            }*/
             EditTable(Columns, Rows);
         }
 

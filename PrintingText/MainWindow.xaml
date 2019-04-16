@@ -275,8 +275,12 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
         
-        <Border Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <Border Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Background="White" BorderThickness="0,0,1,0" BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>
@@ -294,12 +298,25 @@
                 <ContentPresenter Grid.Row="1" Content="{Binding SelectTab}"/>
             </Grid>
         </Border>
-        <!--Предпросмотр-->
-        <Grid Grid.Column="1" Background="LightGray">
-            <Grid x:Name="PreviewArea" Background="White" Height="{Binding PrintersSetting.Height}" Width="{Binding PrintersSetting.Width}"/>
+        
+        <!--Предпросмотр + Zoom -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Background="LightGray">
+                <Grid x:Name="PreviewArea" Background="White" Height="{Binding PrintersSetting.Height}" Width="{Binding PrintersSetting.Width}"/>
+                <Grid.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding Path=Value, ElementName=_zoom}" ScaleY="{Binding Path=Value, ElementName=_zoom}" />
+                </Grid.LayoutTransform>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Column="1" Grid.Row="1" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Slider Grid.Column="1" Name="_zoom" Minimum="0.5" Maximum="2" />
         </Grid>
         <!--Поздгрузка для создания bitmap-->
-        <Grid Grid.Column="2" Background="LightGray" Visibility="Hidden">
+        <Grid Grid.Column="2" Grid.RowSpan="2" Background="LightGray" Visibility="Hidden">
             <Grid x:Name="Place" Width="{Binding Template.Width}" Height="{Binding Template.Height}">
                 <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
                                 VirtualizingPanel.VirtualizationMode="Recycling">

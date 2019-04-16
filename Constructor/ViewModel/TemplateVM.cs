@@ -48,6 +48,21 @@ namespace Constructor.ViewModel
             {
                 selectTable = value;
                 OnPropertyChanged("SelectTable");
+                if (selectTable != null)
+                {
+                    SelectTable.PropertyChanged += SelectTable_PropertyChanged;
+                }
+            }
+        }
+
+        private void SelectTable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ThisTableSelected")
+            {
+                if (selectTable!= (ITable)sender)
+                {
+                    SelectTable = (ITable)sender;
+                }
             }
         }
 

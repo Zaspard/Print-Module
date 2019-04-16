@@ -64,6 +64,7 @@ namespace Constructor.ViewModel.Table
             var cell = ((TextBox)sender).DataContext;
             var index = Cells.IndexOf((IUserControl)cell);
             SelectCell = Cells[index];
+            OnPropertyChanged("ThisTableSelected");
         }
 
         public void SelectingImageCell(object sender)
@@ -378,7 +379,7 @@ namespace Constructor.ViewModel.Table
                         CellColumn = Columns - 1,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        NameColor = System.Windows.Media.Colors.White.ToString()
                     };
                     addHeight += cell.Height;
                     Cells.Add(textCell);
@@ -402,7 +403,7 @@ namespace Constructor.ViewModel.Table
                             CellColumn = i,
                             HorizontalAlignment = HorizontalAlignment.Stretch,
                             VerticalAlignment = VerticalAlignment.Center,
-                            NameColor = System.Windows.Media.Colors.White.ToString(),
+                            NameColor = System.Windows.Media.Colors.White.ToString()
                         };
                         Cells.Add(textCell);
                     }
@@ -429,7 +430,7 @@ namespace Constructor.ViewModel.Table
                         CellColumn = oldColumns,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
                         VerticalAlignment = VerticalAlignment.Center,
-                        NameColor = System.Windows.Media.Colors.White.ToString(),
+                        NameColor = System.Windows.Media.Colors.White.ToString()
                     };
                     Cells.Insert(((oldColumns + 1) * i) - 1, textCell);
                 }
@@ -442,7 +443,7 @@ namespace Constructor.ViewModel.Table
                     CellColumn = oldColumns,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     VerticalAlignment = VerticalAlignment.Center,
-                    NameColor = System.Windows.Media.Colors.White.ToString(),
+                    NameColor = System.Windows.Media.Colors.White.ToString()
                 };
                 Cells.Add(textCellEnd);
                 oldColumns++;
@@ -522,7 +523,7 @@ namespace Constructor.ViewModel.Table
                 CellColumn = 0,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Center,
-                NameColor = System.Windows.Media.Colors.White.ToString(),
+                NameColor = System.Windows.Media.Colors.White.ToString()
             };
             Cells.Add(textCell);
             SelectCell = textCell;
@@ -540,7 +541,7 @@ namespace Constructor.ViewModel.Table
                 CellColumn = 0,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Center,
-                NameColor = System.Windows.Media.Colors.White.ToString(),
+                NameColor = System.Windows.Media.Colors.White.ToString()
             };
             Cells.Add(image);
             SelectCell = image;
