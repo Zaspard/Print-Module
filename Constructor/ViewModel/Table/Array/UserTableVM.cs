@@ -1,10 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Constructor.ViewModel.Table.Array
 {
     [DataContract]
-    class UserTableVM : BaseVM, IUserControl
+    public class UserTableVM : BaseVM, IUserControl
     {
         [DataMember]
         private string content;

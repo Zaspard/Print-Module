@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PrintingText"
-        xmlns:viewmodel="clr-namespace:PrintingText.ViewModel"
-        xmlns:view="clr-namespace:Constructor.View;assembly=Constructor"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:control="clr-namespace:Constructor.UC;assembly=Constructor"
+        xmlns:local="clr-namespace:PrintingText"
+        xmlns:view="clr-namespace:PrintingText.View"
+        xmlns:control="clr-namespace:PrintingText.UC"
+        xmlns:viewmodel="clr-namespace:PrintingText.ViewModel"
         xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table;assembly=Constructor"
         mc:Ignorable="d"
         Title="Печать" Height="670" Width="1100">
@@ -241,7 +241,7 @@
             <Grid>
                 <ItemsControl>
                     <ListView ItemsSource="{Binding Dossier.List}" SelectedItem="{Binding Dossier.SelectField}"
-                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                              DisplayMemberPath="Name"/>
                 </ItemsControl>
             </Grid>
         </DataTemplate>

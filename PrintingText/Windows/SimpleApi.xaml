@@ -1,0 +1,62 @@
+﻿<Window x:Class="PrintingText.Windows.SimpleApi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrintingText.Windows"
+        mc:Ignorable="d"
+        Title="Добавление данных в ячейку" Height="400" Width="450">
+    
+    <Window.Resources>
+        <RoutedUICommand x:Key="Commands.Cancel" />
+        <RoutedUICommand x:Key="Commands.Send" />
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{StaticResource Commands.Cancel}" 
+            Executed="ClickButton_Cancel"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Send}" 
+            Executed="ClickButton_Send"/>
+    </Window.CommandBindings>
+
+    <Grid Background="Beige">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" ItemsSource="{Binding ListElements}" SelectedItem="{Binding SelectElement}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Grid.Column="1" ItemsSource="{Binding ListNameAttribute}" SelectedItem="{Binding SelectNameAttribute}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Отмена" Margin="3,3,3,0" Command="{StaticResource Commands.Cancel}"/>
+            <Button Grid.Column="1" Content="Выбрать" Margin="3,3,3,0" Command="{StaticResource Commands.Send}"/>
+        </Grid>
+    </Grid>
+</Window>

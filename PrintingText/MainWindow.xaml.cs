@@ -1,4 +1,4 @@
-﻿using Constructor.View;
+﻿using PrintingText.View;
 using PrintingText.Model;
 using PrintingText.ViewModel;
 using System.IO;
@@ -37,7 +37,7 @@ namespace PrintingText
 
         private void ClickButton_CreateNewTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            Constructor.MainWindow constructor = new Constructor.MainWindow();
+            Windows.Constructor constructor = new Windows.Constructor();
             constructor.Focusable = true;
             constructor.Owner = this;
             constructor.Show();
@@ -50,10 +50,10 @@ namespace PrintingText
 
         private void ClickButton_EditSelectTemplate(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            Constructor.MainWindow constructor = new Constructor.MainWindow();
+            Windows.Constructor constructor = new Windows.Constructor();
             constructor.Focusable = true;
             constructor.Owner = this;
-            ((Constructor.ViewModel.MainVM)constructor.DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+            ((Constructor.ViewModel.ConstructorMainVM)constructor.DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
             constructor.Show();
         }
 
@@ -84,8 +84,6 @@ namespace PrintingText
                         ((MainVM)DataContext).ConstructorTab.IsAwait = true;
                     });
                 });
-                /*PreviewArea.Children.Clear();
-                PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(TemplateArea));*/
             }
         }
 

@@ -92,11 +92,37 @@
     <Compile Include="Document.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\PagePaginator.cs" />
+    <Compile Include="UC\UCDataGrid.xaml.cs">
+      <DependentUpon>UCDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UCTextBox.xaml.cs">
+      <DependentUpon>UCTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ApiTab.cs" />
     <Compile Include="ViewModel\ConstructorTab.cs" />
     <Compile Include="ViewModel\ITab.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\PrintersSetting.cs" />
+    <Compile Include="View\DataRowViewConverter.cs" />
+    <Compile Include="View\ElementControl.cs" />
+    <Compile Include="View\GridHelpers.cs" />
+    <Compile Include="View\ItemTable.cs" />
+    <Compile Include="View\TableDragEvents.cs" />
+    <Compile Include="View\TableView.cs" />
+    <Compile Include="Windows\Constructor.xaml.cs">
+      <DependentUpon>Constructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingTable.xaml.cs">
+      <DependentUpon>SettingTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SimpleApi.xaml.cs">
+      <DependentUpon>SimpleApi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TableApi.xaml.cs">
+      <DependentUpon>TableApi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WindowsVM\Header.cs" />
+    <Compile Include="Windows\WindowsVM\WindowsApiVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +135,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UC\UCDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UC\UCTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Constructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SimpleApi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TableApi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Printer.cs" />
@@ -152,5 +206,6 @@
       <Name>Constructor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
