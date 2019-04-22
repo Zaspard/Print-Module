@@ -54,7 +54,7 @@
                 </Grid>
                 <ItemsControl Grid.Row="1">
                     <ListView ItemsSource="{Binding CollectionFiles}"
-                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                              DisplayMemberPath="Name" SelectionChanged="ListView_SelectionChanged"/>
                     <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
                 </ItemsControl>
                 <Grid Grid.Row="2">
@@ -102,7 +102,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Left"/>
-                            <TextBox Grid.Column="1" Text="{Binding Left}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Left}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
@@ -110,7 +110,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Top"/>
-                            <TextBox Grid.Column="1" Text="{Binding Top}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Top}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="5">
                             <Grid.ColumnDefinitions>
@@ -118,7 +118,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Right"/>
-                            <TextBox Grid.Column="1" Text="{Binding Right}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Right}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="7">
                             <Grid.ColumnDefinitions>
@@ -126,7 +126,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Bottom"/>
-                            <TextBox Grid.Column="1" Text="{Binding Bottom}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Bottom}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -147,7 +147,7 @@
                     <Label Grid.Row="0" Content="Отправить на печать"/>
                     <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsPrint}"/>
                     <Label Grid.Row="1" Content="Сохранить в файл"/>
-                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}"/>
+                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}" Checked="CheckBox_Checked"/>
                     <Grid Margin="50,0,0,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsEnabled="{Binding IsSaveToFile}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -199,7 +199,7 @@
                             <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
                             <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" SelectionChanged="ComboBox_SelectionChanged_1"/>
                             <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}" />
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"  SelectionChanged="ComboBox_SelectionChanged_1"/>
                         </Grid>
                         <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
                             <Grid.RowDefinitions>
@@ -332,9 +332,9 @@
         <!--Поздгрузка для создания bitmap-->
         <Grid Grid.Column="2" Grid.RowSpan="2" Background="LightGray" Visibility="Hidden">
             <Grid Width="{Binding Template.Width}" Height="{Binding Template.Height}">
-                <Grid x:Name="Place">
+                <Grid x:Name="Place" Background="White">
                     <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
-                                VirtualizingPanel.VirtualizationMode="Recycling">
+                                VirtualizingPanel.VirtualizationMode="Recycling" Margin="{Binding PrintersSetting.MarginFullDocument}">
                     </view:TableView>
                 </Grid>
             </Grid>

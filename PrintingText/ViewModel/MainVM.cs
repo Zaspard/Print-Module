@@ -29,6 +29,7 @@ namespace PrintingText.ViewModel
         private int numderPage = 0;
         public int column;
         public int row;
+        public int OldTextinTextBox = 0;
 
         public MainVM()
         {
@@ -126,7 +127,7 @@ namespace PrintingText.ViewModel
             return null;
         }
 
-        public void CuttingPages(TableView TemplateArea)
+        public void CuttingPages(Grid TemplateArea)
         {
             numderPage = 0;
             var bitmapImage = Document.CreatePngFromTemplate(TemplateArea);
@@ -150,7 +151,8 @@ namespace PrintingText.ViewModel
             {
                 for (int j = 0; j < row; j++)
                 {
-                    g.DrawImage(bitmap, new Rectangle(20, 20, (int)printersSetting.Page.Width - 20, (int)printersSetting.Page.Height - 20),
+                    g.DrawImage(bitmap, new Rectangle((int)printersSetting.Page.Left, (int)printersSetting.Page.Top,
+                               (int)printersSetting.Page.Width - (int)printersSetting.Page.Left, (int)printersSetting.Page.Height - (int)printersSetting.Page.Top),
                                (int)printersSetting.Page.Width * i, (int)printersSetting.Page.Height * j, //координаты
                                (int)printersSetting.Page.Width, (int)printersSetting.Page.Height, //размеры
                                GraphicsUnit.Pixel);
@@ -169,11 +171,11 @@ namespace PrintingText.ViewModel
 
         public Grid RefreshPreviewArea()
         {
-            return Document.Place(printersSetting.Page, numderPage);
+           return Document.Place(printersSetting.Page, numderPage);
         }
 
         #region Печать
-        public void Print(TableView TemplateArea)
+        public void Print(Grid TemplateArea)
         {
             // Необходимое количество страниц для печати всего докупента
             var package = Package.Open(printersSetting.path, FileMode.Create);
@@ -183,17 +185,11 @@ namespace PrintingText.ViewModel
             //
             foreach (var item in Document.Pages)
             {
-                var fixedPage = new FixedPage();
-                if (printersSetting.Page.IsPortrait)
+                var fixedPage = new FixedPage()
                 {
-                    fixedPage.Width = printersSetting.Page.Width;
-                    fixedPage.Height = printersSetting.Page.Height;
-                }
-                else
-                {
-                    fixedPage.Width = printersSetting.Page.Height;
-                    fixedPage.Height = printersSetting.Page.Width;
-                }
+                    Width = printersSetting.Page.Width,
+                    Height = printersSetting.Page.Height
+                };
                 System.Windows.Controls.Image image = new System.Windows.Controls.Image()
                 {
                     Height = printersSetting.Page.Height,
@@ -229,7 +225,7 @@ namespace PrintingText.ViewModel
         #endregion
 
         #region Сохранение файла
-        public void SaveFile(TableView TemplateArea)
+        public void SaveFile(Grid TemplateArea)
         {
             if (PrintersSetting.IsSaveToFile && PrintersSetting.IsSaveToPNG)
             {
@@ -245,16 +241,8 @@ namespace PrintingText.ViewModel
             else if (PrintersSetting.IsSaveToFile && PrintersSetting.IsSaveToPDF)
             {
                 var fixedPage = new FixedPage();
-                if (printersSetting.Page.IsPortrait)
-                {
-                    fixedPage.Width = printersSetting.Page.Width;
-                    fixedPage.Height = printersSetting.Page.Height;
-                }
-                else
-                {
-                    fixedPage.Width = printersSetting.Page.Height;
-                    fixedPage.Height = printersSetting.Page.Width;
-                }
+                fixedPage.Width = TemplateArea.ActualWidth;
+                fixedPage.Height = TemplateArea.ActualHeight;
                 var place = Document.SaveInPdf(printersSetting.Page, TemplateArea);
                 fixedPage.Children.Add(place);
                 var pageContent = new PageContent();
@@ -264,7 +252,8 @@ namespace PrintingText.ViewModel
                 var writers = XpsDocument.CreateXpsDocumentWriter(doc);
                 var fixedDocument = new FixedDocument();
                 fixedDocument.Pages.Add(pageContent);
-                writers.Write(fixedDocument, printersSetting.SelectPrinter.PrintTicket);
+                PrintQueue print = new PrintQueue(new PrintServer(), "Microsoft Print to PDF");
+                writers.Write(fixedDocument, print.DefaultPrintTicket);
                 doc.Close();
                 package.Close();
                 using (var fileStream = new StreamReader(printersSetting.path))
@@ -272,7 +261,7 @@ namespace PrintingText.ViewModel
                     try
                     {
                         using (var printStream = new PrintQueueStream
-                        (printersSetting.SelectPrinter.PrintQueue, "Print Template", false, printersSetting.SelectPrinter.PrintTicket))
+                        (print, "Print Template", false, print.DefaultPrintTicket))
                         {
                             fileStream.BaseStream.CopyTo(printStream);
                         }

@@ -3,6 +3,7 @@ using PrintingText.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Printing;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -15,7 +16,7 @@ namespace PrintingText.ViewModel
         private string nameSelectPrinter;
         public ObservableCollection<Printer> Printers { get; set; }
         public ObservableCollection<string> NamePrinters { get; set; }
-        public Page Page { get; set; }
+        private Page page;
         private bool isPrint = false;
         private bool isSaveToFile = false;
         private bool isSaveToPDF = false;
@@ -24,6 +25,8 @@ namespace PrintingText.ViewModel
         private double height;
         public readonly string path = "filename.xps";
         private bool isAwait = true;
+        private Thickness marginFullDocument;
+        public bool IsSizeSelected = false;
 
         public PrintersSetting()
         {
@@ -57,9 +60,21 @@ namespace PrintingText.ViewModel
         private void SelectPrinter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsPortrait")
-            { Page.IsPortrait = true; }
+            {
+                Page.IsPortrait = true;
+                Page.Height = SelectPrinter.PageMediaSize.Height.Value;
+                Page.Width = SelectPrinter.PageMediaSize.Width.Value;
+                Width = SelectPrinter.PageMediaSize.Width.Value;
+                Height = SelectPrinter.PageMediaSize.Height.Value;
+            }
             else if (e.PropertyName == "IsLandscape")
-            { Page.IsPortrait = false; }
+            {
+                Page.IsPortrait = false;
+                Page.Height = SelectPrinter.PageMediaSize.Width.Value;
+                Page.Width = SelectPrinter.PageMediaSize.Height.Value;
+                Width = SelectPrinter.PageMediaSize.Height.Value;
+                Height = SelectPrinter.PageMediaSize.Width.Value;
+            }
             else if (e.PropertyName == "PageMediaSize")
             {
                 var size = ((Printer)sender).PageMediaSize;
@@ -67,6 +82,25 @@ namespace PrintingText.ViewModel
                 Page.Width = size.Width.Value;
                 Width= size.Width.Value;
                 Height = size.Height.Value;
+                IsSizeSelected = true;
+            }
+        }
+
+        public Page Page
+        {
+            get { return page; }
+            set
+            {
+                page = value;
+                page.PropertyChanged += Page_PropertyChanged;
+            }
+        }
+
+        private void Page_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Left" || e.PropertyName == "Top" || e.PropertyName == "Right" || e.PropertyName == "Bottom")
+            {
+                MarginFullDocument = new Thickness(Page.Left, Page.Top, Page.Right, Page.Bottom);
             }
         }
 
@@ -118,7 +152,6 @@ namespace PrintingText.ViewModel
             set
             {
                 isSaveToFile = value;
-                IsSaveToPDF = true;
                 if (isSaveToFile)
                 {
                     IsPrint = false;
@@ -137,7 +170,6 @@ namespace PrintingText.ViewModel
                 if (isSaveToPDF)
                 {
                     IsSaveToPNG = false;
-                    NameSelectPrinter = "Microsoft Print to PDF";
                 }
                 OnPropertyChanged("isSaveToPDF");
             }
@@ -152,7 +184,6 @@ namespace PrintingText.ViewModel
                 if (isSaveToPNG)
                 {
                     IsSaveToPDF = false;
-                    NameSelectPrinter = "Microsoft Print to PDF";
                 }
                 OnPropertyChanged("isSaveToPNG");
             }
@@ -175,6 +206,16 @@ namespace PrintingText.ViewModel
             {
                 height = value;
                 OnPropertyChanged("Height");
+            }
+        }
+
+        public Thickness MarginFullDocument
+        {
+            get { return marginFullDocument; }
+            set
+            {
+                marginFullDocument = value;
+                OnPropertyChanged("MarginFullDocument");
             }
         }
 
@@ -205,8 +246,13 @@ namespace PrintingText.ViewModel
         private void ReFillPage()
         {
             if (selectPrinter.PageOrientation == PageOrientation.Portrait)
-            { Page.IsPortrait = true; }
-            else { Page.IsPortrait = false; }
+            {
+                Page.IsPortrait = true;
+            }
+            else
+            {
+                Page.IsPortrait = false;
+            }
             Page.Height = selectPrinter.PageMediaSize.Height.Value;
             Page.Width = selectPrinter.PageMediaSize.Width.Value;
         }

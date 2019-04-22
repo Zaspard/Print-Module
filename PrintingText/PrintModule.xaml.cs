@@ -87,7 +87,7 @@ namespace PrintingText
 
         private void ClickButton_SaveFile(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            ((MainVM)DataContext).SaveFile(TemplateArea);
+            //((MainVM)DataContext).SaveFile(TemplateArea);
         }
     }
 }

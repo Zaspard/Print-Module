@@ -18,7 +18,6 @@ namespace PrintingText
         {          
             Grid place = new Grid
             {
-                //Margin = new Thickness(20, 20, 5, 20),
                 Width = page.Width,
                 Height = page.Height
             };
@@ -29,11 +28,30 @@ namespace PrintingText
             return place;
         }
 
-        public Grid SaveInPdf(Page page, TableView TemplateArea)
+        public Grid Place(Grid TemplateArea)
         {
             Grid place = new Grid
             {
-                //Margin = new Thickness(page.Left, page.Top, page.Right, page.Bottom),
+                Width = TemplateArea.Width,
+                Height = TemplateArea.Height
+            };
+            var bitmap = CreatePngFromTemplate(TemplateArea);
+            Image image = new Image()
+            {
+                Height = TemplateArea.Height,
+                Width = TemplateArea.Width,
+                Source = bitmap,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top
+            };
+            place.Children.Add(image);
+            return place;
+        }
+
+        public Grid SaveInPdf(Page page, Grid TemplateArea)
+        {
+            Grid place = new Grid
+            {
                 Width = TemplateArea.ActualWidth,
                 Height = TemplateArea.ActualHeight
             };
@@ -50,7 +68,7 @@ namespace PrintingText
             return place;
         }
 
-        public BitmapImage CreatePngFromTemplate(TableView TemplateArea)
+        public BitmapImage CreatePngFromTemplate(Grid TemplateArea)
         {
             RenderTargetBitmap rtb = new RenderTargetBitmap((int)TemplateArea.ActualHeight, (int)TemplateArea.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(TemplateArea);

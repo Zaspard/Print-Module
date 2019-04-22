@@ -59,7 +59,7 @@ namespace PrintingText
 
         private void ClickButton_Print(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            ((MainVM)DataContext).Print(TemplateArea);
+            ((MainVM)DataContext).Print(Place);
         }
 
         private void ClickButton_Refresh(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -67,13 +67,12 @@ namespace PrintingText
             ((MainVM)DataContext).ConstructorTab.ReloadingCollectionFiles();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (((ListView)sender).SelectedItem != null)
             {
                 ((MainVM)DataContext).ConstructorTab.SelectedFiles = (FindedTemplate)((ListView)sender).SelectedItem;
             }
-
             if (((ListView)sender).SelectedItem != null && ((MainVM)DataContext).ConstructorTab.IsAwait == true
                                                         && ((MainVM)DataContext).PrintersSetting.SelectPrinter != null)
             {
@@ -91,7 +90,7 @@ namespace PrintingText
                     Thread.Sleep(7000);
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        ((MainVM)DataContext).CuttingPages(TemplateArea);
+                        ((MainVM)DataContext).CuttingPages(Place);
                         PreviewArea.Children.Clear();
                         PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea());
                         ((MainVM)DataContext).ConstructorTab.IsAwait = true;
@@ -103,7 +102,7 @@ namespace PrintingText
 
         private void ClickButton_SaveFile(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
-            ((MainVM)DataContext).SaveFile(TemplateArea);
+            ((MainVM)DataContext).SaveFile(Place);
         }
 
         private void ClickButton_Left(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -130,7 +129,8 @@ namespace PrintingText
         {
             if (((ComboBox)sender).SelectedItem != null && ((MainVM)DataContext).ConstructorTab.IsAwait == true
                                                         && ((MainVM)DataContext).PrintersSetting.SelectPrinter != null 
-                                                        && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null)
+                                                        && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null
+                                                        && ((MainVM)DataContext).PrintersSetting.IsSizeSelected != false)
             {
                 ((MainVM)DataContext).Document.Pages.Clear();
                 ((MainVM)DataContext).ConstructorTab.IsAwait = false;
@@ -147,7 +147,7 @@ namespace PrintingText
                     Thread.Sleep(7000);
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        ((MainVM)DataContext).CuttingPages(TemplateArea);
+                        ((MainVM)DataContext).CuttingPages(Place);
                         PreviewArea.Children.Clear();
                         PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea());
                         ((MainVM)DataContext).ConstructorTab.IsAwait = true;
@@ -155,6 +155,66 @@ namespace PrintingText
                     });
                 });
             }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (((TextBox)sender).Text != "")
+            {
+                int.TryParse(((TextBox)sender).Text, out ((MainVM)DataContext).OldTextinTextBox);
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if ((((TextBox)sender).Text != "" && ((TextBox)sender).Text != ((MainVM)DataContext).OldTextinTextBox.ToString())
+                                              && ((MainVM)DataContext).ConstructorTab.IsAwait == true 
+                                              && ((MainVM)DataContext).PrintersSetting.SelectPrinter != null
+                                              && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null)
+            {
+
+                ((MainVM)DataContext).Document.Pages.Clear();
+                ((MainVM)DataContext).ConstructorTab.IsAwait = false;
+                ((MainVM)DataContext).PrintersSetting.IsAwait = false;
+                ((MainVM)DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+
+                ((MainVM)DataContext).column = (int)(((MainVM)DataContext).Template.Width / ((MainVM)DataContext).PrintersSetting.Page.Width) + 1;
+                ((MainVM)DataContext).row = (int)(((MainVM)DataContext).Template.Height / ((MainVM)DataContext).PrintersSetting.Page.Height) + 1;
+                ((MainVM)DataContext).Template.Width = ((MainVM)DataContext).PrintersSetting.Page.Width * ((MainVM)DataContext).column;
+                ((MainVM)DataContext).Template.Height = ((MainVM)DataContext).PrintersSetting.Page.Height * ((MainVM)DataContext).row;
+
+                Task.Run(() =>
+                {
+                    Thread.Sleep(7000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ((MainVM)DataContext).CuttingPages(Place);
+                        PreviewArea.Children.Clear();
+                        PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea());
+                        ((MainVM)DataContext).ConstructorTab.IsAwait = true;
+                        ((MainVM)DataContext).PrintersSetting.IsAwait = true;
+                    });
+                });
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ((MainVM)DataContext).Document.Pages.Clear();
+            ((MainVM)DataContext).ConstructorTab.IsAwait = false;
+            ((MainVM)DataContext).PrintersSetting.IsAwait = false;
+            ((MainVM)DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+            Task.Run(() =>
+            {
+                Thread.Sleep(7000);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    PreviewArea.Children.Clear();
+                    PreviewArea.Children.Add(((MainVM)DataContext).Document.Place(Place));
+                    ((MainVM)DataContext).ConstructorTab.IsAwait = true;
+                    ((MainVM)DataContext).PrintersSetting.IsAwait = true;
+                });
+            });
         }
     }
 }
