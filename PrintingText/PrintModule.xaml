@@ -1,0 +1,327 @@
+﻿<Window x:Class="PrintingText.PrintModule"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:PrintingText"
+        xmlns:view="clr-namespace:PrintingText.View"
+        xmlns:control="clr-namespace:PrintingText.UC"
+        xmlns:viewmodel="clr-namespace:PrintingText.ViewModel"
+        xmlns:tablevm="clr-namespace:Constructor.ViewModel.Table;assembly=Constructor"
+        mc:Ignorable="d"
+        Title="Печать" Height="670" Width="1100">
+    <Window.Resources>
+        <RoutedUICommand x:Key="Commands.CreateNewTemplate" />
+        <RoutedUICommand x:Key="Commands.DeleteSelectTemplate"/>
+        <RoutedUICommand x:Key="Commands.EditSelectTemplate"/>
+        <RoutedUICommand x:Key="Commands.SaveFile"/>
+        <RoutedUICommand x:Key="Commands.Refresh"/>
+        <RoutedUICommand x:Key="Commands.Print"/>
+
+        <Style TargetType="{x:Type view:ItemTable}">
+            <Setter
+                Property="X"
+                Value="{Binding XPoint}"
+                />
+            <Setter
+                Property="Y"
+                Value="{Binding YPoint}"
+                />
+        </Style>
+
+        <DataTemplate
+            DataType="{x:Type tablevm:TableWithTextOrImageVM}">
+            <control:UCTextBox/>
+        </DataTemplate>
+
+        <DataTemplate
+            DataType="{x:Type tablevm:TableWithArrayVM}">
+            <control:UCDataGrid/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ConstructorTab}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Button HorizontalAlignment="Right" Width="70"  Content="Обновить" Command="{StaticResource Commands.Refresh}"/>
+                </Grid>
+                <ItemsControl Grid.Row="1">
+                    <!--SelectedItem="{Binding SelectedFiles}"-->
+                    <ListView ItemsSource="{Binding CollectionFiles}" IsEnabled="{Binding IsAwait}"
+                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
+                </ItemsControl>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Удалить" Command="{StaticResource Commands.DeleteSelectTemplate}"/>
+                    <Button Grid.Column="1" Content="Редактировать" Command="{StaticResource Commands.EditSelectTemplate}"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:PrintersSetting}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"  BorderThickness="0,0,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Настройка отступов" VerticalAlignment="Center"/>
+                </Border>
+                <Grid Grid.Row="1" Grid.RowSpan="1">
+                    <Grid DataContext="{Binding Page}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Left"/>
+                            <TextBox Grid.Column="1" Text="{Binding Left}"/>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Top"/>
+                            <TextBox Grid.Column="1" Text="{Binding Top}"/>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Right"/>
+                            <TextBox Grid.Column="1" Text="{Binding Right}"/>
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Bottom"/>
+                            <TextBox Grid.Column="1" Text="{Binding Bottom}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Border Grid.Row="2"  BorderThickness="0,1,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Выбор задачи" VerticalAlignment="Center"/>
+                </Border>
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Content="Отправить на печать"/>
+                    <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsPrint}"/>
+                    <Label Grid.Row="1" Content="Сохранить в файл"/>
+                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}"/>
+                    <Grid Margin="50,0,0,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsEnabled="{Binding IsSaveToFile}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Content="Сохранить в pdf"/>
+                        <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsSaveToPDF}"/>
+                        <Label Grid.Row="1" Content="Сохранить в png"/>
+                        <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToPNG}"/>
+                    </Grid>
+                </Grid>
+                <Border Grid.Row="4"  BorderThickness="0,1,0,1" BorderBrush="Black">
+                    <TextBlock Text=" Настройка бумаги" VerticalAlignment="Center"/>
+                </Border>
+                <Grid  Grid.Row="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Content="Выбор принтера"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding NamePrinters}" SelectedItem="{Binding NameSelectPrinter}"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" />
+                            <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"/>
+                        </Grid>
+                        <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Цветовая схема"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.OutputColors}" SelectedItem="{Binding SelectPrinter.OutputColor}"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="Использовать лоток"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.InputBins}" SelectedItem="{Binding SelectPrinter.InputBin}"/>
+                            <Label Grid.Row="5" Grid.Column="0" Content="Количество копий"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectPrinter.CopyCount, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <Button Command="{Binding PrintDialog}" Content="Открыть диалоговое окно печати" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="167*"/>
+                        <ColumnDefinition Width="168*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{StaticResource Commands.Print}" Content="Печать" HorizontalAlignment="Stretch" Grid.Column="0"/>
+                    <Button Command="{StaticResource Commands.SaveFile}" Content="Сохранить" HorizontalAlignment="Stretch" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ApiTab}">
+            <Grid>
+                <ItemsControl>
+                    <ListView ItemsSource="{Binding Dossier.List}" SelectedItem="{Binding Dossier.SelectField}"
+                              DisplayMemberPath="Name"/>
+                </ItemsControl>
+            </Grid>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{StaticResource Commands.CreateNewTemplate}" 
+            Executed="ClickButton_CreateNewTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.DeleteSelectTemplate}" 
+            Executed="ClickButton_DeleteSelectTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.EditSelectTemplate}" 
+            Executed="ClickButton_EditSelectTemplate"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Print}" 
+            Executed="ClickButton_Print"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Refresh}" 
+            Executed="ClickButton_Refresh"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.SaveFile}" 
+            Executed="ClickButton_SaveFile"/>
+    </Window.CommandBindings>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Background="White" BorderThickness="0,0,1,0" BorderBrush="Black">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="0,0,0,1">
+                    <!--Вкладки-->
+                    <TabControl>
+                        <TabItem Header="Шаблоны" MouseLeftButtonUp="TabItem_MouseDown"/>
+                        <TabItem Header="Настройка бумаги и печати" MouseLeftButtonUp="TabItem_MouseDown"/>
+                        <TabItem Header="Api" MouseLeftButtonUp="TabItem_MouseDown"/>
+                    </TabControl>
+                </Border>
+                <ContentPresenter Grid.Row="1" Content="{Binding SelectTab}"/>
+            </Grid>
+        </Border>
+
+        <!--Предпросмотр + Zoom -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Background="LightGray">
+                <Grid x:Name="PreviewArea" Background="White" Height="{Binding PrintersSetting.Height}" Width="{Binding PrintersSetting.Width}"/>
+                <Grid.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding Path=Value, ElementName=_zoom}" ScaleY="{Binding Path=Value, ElementName=_zoom}" />
+                </Grid.LayoutTransform>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Column="1" Grid.Row="1" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Slider Grid.Column="1" Name="_zoom" Minimum="0.5" Maximum="2" />
+        </Grid>
+        <!--Поздгрузка для создания bitmap-->
+        <Grid Grid.Column="2" Grid.RowSpan="2" Background="LightGray" Visibility="Hidden">
+            <Grid x:Name="Place" Width="{Binding Template.Width}" Height="{Binding Template.Height}">
+                <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
+                                VirtualizingPanel.VirtualizationMode="Recycling">
+                </view:TableView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -23,6 +23,7 @@ namespace PrintingText.ViewModel
         private double width;
         private double height;
         public readonly string path = "filename.xps";
+        private bool isAwait = true;
 
         public PrintersSetting()
         {
@@ -69,6 +70,16 @@ namespace PrintingText.ViewModel
             }
         }
 
+        public bool IsAwait
+        {
+            get { return isAwait; }
+            set
+            {
+                isAwait = value;
+                OnPropertyChanged("IsAwait");
+            }
+        }
+
         public string NameSelectPrinter
         {
             get { return nameSelectPrinter; }
@@ -107,9 +118,11 @@ namespace PrintingText.ViewModel
             set
             {
                 isSaveToFile = value;
+                IsSaveToPDF = true;
                 if (isSaveToFile)
                 {
                     IsPrint = false;
+                    IsSaveToPDF = true;
                 }
                 OnPropertyChanged("IsSaveToFile");
             }

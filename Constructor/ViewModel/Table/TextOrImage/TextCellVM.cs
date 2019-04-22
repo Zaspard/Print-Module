@@ -141,7 +141,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
             get { return width; }
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 { return; }
                 OldWidth = width;
                 width = value;
@@ -161,7 +161,7 @@ namespace Constructor.ViewModel.Table.TextOrImage
             get { return height; }
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 { return; }
                 OldHeight = height;
                 height = value;

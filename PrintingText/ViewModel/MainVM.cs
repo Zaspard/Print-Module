@@ -1,11 +1,13 @@
-﻿using API;
+﻿using Constructor.ViewModel;
 using PrintingText.View;
-using Constructor.ViewModel;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Packaging;
 using System.Printing;
 using System.Runtime.Serialization.Json;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -24,6 +26,9 @@ namespace PrintingText.ViewModel
 
         private TemplateVM template;
         private Document document;
+        private int numderPage = 0;
+        public int column;
+        public int row;
 
         public MainVM()
         {
@@ -87,17 +92,8 @@ namespace PrintingText.ViewModel
             {
                 selectTab = value;
                 OnPropertyChanged("SelectTab");
-                //SelectTab.PropertyChanged += SelectTab_PropertyChanged;
             }
         }
-
-        /*private void SelectTab_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.Contains("SelectedFiles"))
-            {
-                Deseriliz(constructorTab.SelectedFiles.Url);
-            }
-        }*/
 
         public void ChangeTab(int constructor)
         {
@@ -115,37 +111,106 @@ namespace PrintingText.ViewModel
             }
         }
 
-        public Grid RefreshPreviewArea(TableView TemplateArea)
+        public Grid ChangePage(bool IsToRight)
         {
-            return Document.Place(printersSetting.Page, TemplateArea);
+            if (IsToRight && numderPage != (column * row) - 1)
+            {
+                numderPage++;
+                return RefreshPreviewArea();
+            }
+            else if (!IsToRight && numderPage != 0)
+            {
+                numderPage--;
+                return RefreshPreviewArea();
+            }
+            return null;
+        }
+
+        public void CuttingPages(TableView TemplateArea)
+        {
+            numderPage = 0;
+            var bitmapImage = Document.CreatePngFromTemplate(TemplateArea);
+
+            Bitmap bitmap;
+            using (MemoryStream outStream = new MemoryStream())
+            {   
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                Bitmap bitmaps = new Bitmap(outStream);
+                bitmap = new Bitmap(bitmaps);
+            }
+
+            Bitmap destination_bmp = new Bitmap((int)printersSetting.Page.Width, (int)printersSetting.Page.Height);
+            Graphics g = Graphics.FromImage(destination_bmp);
+            g.Clear(System.Drawing.Color.White);
+            g.DrawImageUnscaled(destination_bmp, 0, 0);
+            MemoryStream ms;
+            for (int i = 0; i < column; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    g.DrawImage(bitmap, new Rectangle(20, 20, (int)printersSetting.Page.Width - 20, (int)printersSetting.Page.Height - 20),
+                               (int)printersSetting.Page.Width * i, (int)printersSetting.Page.Height * j, //координаты
+                               (int)printersSetting.Page.Width, (int)printersSetting.Page.Height, //размеры
+                               GraphicsUnit.Pixel);
+                    ms = new MemoryStream();
+                    destination_bmp.Save(ms, ImageFormat.Bmp);
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    ms.Seek(0, SeekOrigin.Begin);
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    Document.Pages.Add(image);
+                    ms = null;
+                }
+            }
+        }
+
+        public Grid RefreshPreviewArea()
+        {
+            return Document.Place(printersSetting.Page, numderPage);
         }
 
         #region Печать
         public void Print(TableView TemplateArea)
         {
-            var fixedPage = new FixedPage();
-            if (printersSetting.Page.IsPortrait)
-            {
-                fixedPage.Width = printersSetting.Page.Width;
-                fixedPage.Height = printersSetting.Page.Height;
-            }
-            else
-            {
-                fixedPage.Width = printersSetting.Page.Height;
-                fixedPage.Height = printersSetting.Page.Width;
-            }
-            var place = Document.Place(printersSetting.Page, TemplateArea);
-            fixedPage.Children.Add(place);
-            var pageContent = new PageContent();
-            ((IAddChild)pageContent).AddChild(fixedPage);
+            // Необходимое количество страниц для печати всего докупента
             var package = Package.Open(printersSetting.path, FileMode.Create);
             var doc = new XpsDocument(package);
             var writers = XpsDocument.CreateXpsDocumentWriter(doc);
             var fixedDocument = new FixedDocument();
-            fixedDocument.Pages.Add(pageContent);
+            //
+            foreach (var item in Document.Pages)
+            {
+                var fixedPage = new FixedPage();
+                if (printersSetting.Page.IsPortrait)
+                {
+                    fixedPage.Width = printersSetting.Page.Width;
+                    fixedPage.Height = printersSetting.Page.Height;
+                }
+                else
+                {
+                    fixedPage.Width = printersSetting.Page.Height;
+                    fixedPage.Height = printersSetting.Page.Width;
+                }
+                System.Windows.Controls.Image image = new System.Windows.Controls.Image()
+                {
+                    Height = printersSetting.Page.Height,
+                    Width = printersSetting.Page.Width,
+                    Source = item,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top
+                };
+                fixedPage.Children.Add(image);
+                var pageContent = new PageContent();
+                ((IAddChild)pageContent).AddChild(fixedPage);
+                fixedDocument.Pages.Add(pageContent);
+            }
             writers.Write(fixedDocument, printersSetting.SelectPrinter.PrintTicket);
             doc.Close();
             package.Close();
+
             using (var fileStream = new StreamReader(printersSetting.path))
             {
                 try
@@ -157,11 +222,9 @@ namespace PrintingText.ViewModel
                     }
                 }
                 catch
-                {
-                    
-                }
+                {}
             }
-            File.Delete(printersSetting.path);    
+            File.Delete(printersSetting.path);
         }
         #endregion
 
@@ -170,7 +233,6 @@ namespace PrintingText.ViewModel
         {
             if (PrintersSetting.IsSaveToFile && PrintersSetting.IsSaveToPNG)
             {
-                //var place = Document.Place(printersSetting.Page, TemplateArea);
                 RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)TemplateArea.ActualWidth, (int)TemplateArea.ActualHeight, 96, 96, PixelFormats.Pbgra32);
                 renderTargetBitmap.Render(TemplateArea);
                 PngBitmapEncoder pngImage = new PngBitmapEncoder();
@@ -193,7 +255,7 @@ namespace PrintingText.ViewModel
                     fixedPage.Width = printersSetting.Page.Height;
                     fixedPage.Height = printersSetting.Page.Width;
                 }
-                var place = Document.Place(printersSetting.Page, TemplateArea);
+                var place = Document.SaveInPdf(printersSetting.Page, TemplateArea);
                 fixedPage.Children.Add(place);
                 var pageContent = new PageContent();
                 ((IAddChild)pageContent).AddChild(fixedPage);

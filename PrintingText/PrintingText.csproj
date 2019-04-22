@@ -92,6 +92,9 @@
     <Compile Include="Document.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\PagePaginator.cs" />
+    <Compile Include="PrintModule.xaml.cs">
+      <DependentUpon>PrintModule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC\UCDataGrid.xaml.cs">
       <DependentUpon>UCDataGrid.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PrintModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

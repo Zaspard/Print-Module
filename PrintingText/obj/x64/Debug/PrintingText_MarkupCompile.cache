@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\zaspard\source\repos\PrintingText\PrintingText\App.xaml
-81135873146
+91634916782
 
-312044216518
+32862085506
 23-1675478237
-MainWindow.xaml;Themes\Generic.xaml;UC\UCDataGrid.xaml;UC\UCTextBox.xaml;Windows\Constructor.xaml;Windows\SettingTable.xaml;Windows\SimpleApi.xaml;Windows\TableApi.xaml;
+MainWindow.xaml;PrintModule.xaml;Themes\Generic.xaml;UC\UCDataGrid.xaml;UC\UCTextBox.xaml;Windows\Constructor.xaml;Windows\SettingTable.xaml;Windows\SimpleApi.xaml;Windows\TableApi.xaml;
 
 False
 

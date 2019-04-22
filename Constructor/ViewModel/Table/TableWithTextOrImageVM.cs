@@ -46,6 +46,8 @@ namespace Constructor.ViewModel.Table
         public List<IUserControl> DeletedCellsCollection = new List<IUserControl>();
         [DataMember]
         public bool IsImage = false;
+        [field: NonSerialized]
+        private bool IsChangingTableSize = false;
 
         public IUserControl SelectCell
         {
@@ -86,7 +88,9 @@ namespace Constructor.ViewModel.Table
                         cell.SelectInvokeOnProperyChanged = true;
                         if (!changeWidth)
                         {
+                            IsChangingTableSize = true;
                             Width += ((IUserControl)sender).Width - ((IUserControl)sender).OldWidth;
+                            IsChangingTableSize = false;
                             changeWidth = true;
                         }
                         cell.Width = ((IUserControl)sender).Width;
@@ -104,7 +108,9 @@ namespace Constructor.ViewModel.Table
                         cell.SelectInvokeOnProperyChanged = true;
                         if (!changeHeight)
                         {
+                            IsChangingTableSize = true;
                             Height += ((IUserControl)sender).Height - ((IUserControl)sender).OldHeight;
+                            IsChangingTableSize = false;
                             changeHeight = true;
                         }
                         cell.Height = ((IUserControl)sender).Height;
@@ -202,8 +208,31 @@ namespace Constructor.ViewModel.Table
             {
                 if (value == 0 || value < 0)
                 { return; }
+                var changes = value - width;
                 width = value;
+                if (!IsChangingTableSize && changes!=0)
+                {
+                    if (changes > 0)
+                    {
+                        foreach (var cell in Cells)
+                        {
+                            cell.SelectInvokeOnProperyChanged = true;
+                            cell.Width += changes / columns;
+                            cell.SelectInvokeOnProperyChanged = false;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var cell in Cells)
+                        {
+                            cell.SelectInvokeOnProperyChanged = true;
+                            cell.Width -= (changes / columns) * -1;
+                            cell.SelectInvokeOnProperyChanged = false;
+                        }
+                    }
+                }
                 OnPropertyChanged("Width");
+
             }
         }
 
@@ -214,7 +243,29 @@ namespace Constructor.ViewModel.Table
             {
                 if (value == 0 || value < 0)
                 { return; }
+                var changes = value - height;
                 height = value;
+                if (!IsChangingTableSize && changes != 0)
+                {
+                    if (changes > 0)
+                    {
+                        foreach (var cell in Cells)
+                        {
+                            cell.SelectInvokeOnProperyChanged = true;
+                            cell.Height += changes / columns;
+                            cell.SelectInvokeOnProperyChanged = false;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var cell in Cells)
+                        {
+                            cell.SelectInvokeOnProperyChanged = true;
+                            cell.Height -= (changes / columns) * -1;
+                            cell.SelectInvokeOnProperyChanged = false;
+                        }
+                    }
+                }
                 OnPropertyChanged("Height");
             }
         }
@@ -385,7 +436,9 @@ namespace Constructor.ViewModel.Table
                     Cells.Add(textCell);
                     oldRows++;
                 }
+                IsChangingTableSize = true;
                 Height += addHeight;
+                IsChangingTableSize = false;
                 return;
             }
             for (; oldRows < Rows; oldRows++)
@@ -397,8 +450,8 @@ namespace Constructor.ViewModel.Table
                         var textCell = new TextCellVM()
                         {
                             Content = "",
-                            Height = cell.Height,
-                            Width = cell.Width,
+                            Height = Cells[(columns * (oldRows - 1)) + i].Height,
+                            Width = Cells[(columns * (oldRows - 1)) + i].Width,
                             CellRow = oldRows,
                             CellColumn = i,
                             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -409,7 +462,9 @@ namespace Constructor.ViewModel.Table
                     }
                 }
             }
+            IsChangingTableSize = true;
             Height += addHeight;
+            IsChangingTableSize = false;
             return;
         }
 
@@ -424,8 +479,8 @@ namespace Constructor.ViewModel.Table
                     var textCell = new TextCellVM()
                     {
                         Content = "",
-                        Height = cell.Height,
-                        Width = cell.Width,
+                        Height = Cells[((oldColumns + 1) * i) - 2].Height,
+                        Width = Cells[((oldColumns + 1) * i) - 2].Width,
                         CellRow = i - 1,
                         CellColumn = oldColumns,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -449,7 +504,9 @@ namespace Constructor.ViewModel.Table
                 oldColumns++;
                 addWidth += cell.Width;
             }
+            IsChangingTableSize = true;
             Width += addWidth;
+            IsChangingTableSize = false;
             Debug.WriteLine("Add");
             return;
         }
@@ -471,7 +528,9 @@ namespace Constructor.ViewModel.Table
                 {
                     if (deletedCell.CellRow==i)
                     {
+                        IsChangingTableSize = true;
                         Height -= ((ICellVM)deletedCell).Height;
+                        IsChangingTableSize = false;
                         break;
                     }
                 }
@@ -498,7 +557,9 @@ namespace Constructor.ViewModel.Table
                 {
                     if (deletedCell.CellColumn == i)
                     {
+                        IsChangingTableSize = true;
                         Width -= ((ICellVM)deletedCell).Width;
+                        IsChangingTableSize = false;
                         break;
                     }
                 }

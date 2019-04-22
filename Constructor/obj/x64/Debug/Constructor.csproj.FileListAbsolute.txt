@@ -1,3 +1,9 @@
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\App.g.cs
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor_MarkupCompile.cache
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.g.resources
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.Properties.Resources.resources
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.GenerateResource.cache
+C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\Constructor.exe.config
 C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\Constructor.exe
 C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\Constructor.pdb
@@ -5,12 +11,6 @@ C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\API.dll
 C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\System.Windows.Interactivity.dll
 C:\Users\zaspard\source\repos\PrintingText\Constructor\bin\x64\Debug\API.pdb
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csprojAssemblyReference.cache
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\App.g.cs
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor_MarkupCompile.cache
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.g.resources
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.Properties.Resources.resources
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.GenerateResource.cache
-C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.CoreCompileInputs.cache
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.csproj.CopyComplete
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.exe
 C:\Users\zaspard\source\repos\PrintingText\Constructor\obj\x64\Debug\Constructor.pdb
