@@ -1,4 +1,5 @@
 ﻿using Constructor.ViewModel;
+using Microsoft.Win32;
 using PrintingText.View;
 using System.Collections.Generic;
 using System.Drawing;
@@ -171,7 +172,12 @@ namespace PrintingText.ViewModel
 
         public Grid RefreshPreviewArea()
         {
-           return Document.Place(printersSetting.Page, numderPage);
+                return Document.Place(printersSetting.Page, numderPage);
+        }
+
+        public Grid RefreshPreviewArea(Grid TemplateArea)
+        {
+            return Document.Place(TemplateArea, PrintersSetting.Page);
         }
 
         #region Печать
@@ -229,13 +235,22 @@ namespace PrintingText.ViewModel
         {
             if (PrintersSetting.IsSaveToFile && PrintersSetting.IsSaveToPNG)
             {
-                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)TemplateArea.ActualWidth, (int)TemplateArea.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-                renderTargetBitmap.Render(TemplateArea);
-                PngBitmapEncoder pngImage = new PngBitmapEncoder();
-                pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-                using (Stream fileStream = File.Create("Template\\" + "image.png"))
+                using (System.Windows.Forms.SaveFileDialog saveimg = new System.Windows.Forms.SaveFileDialog())
                 {
-                    pngImage.Save(fileStream);
+                    saveimg.DefaultExt = ".bmp";
+                    saveimg.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp";
+
+                    if (System.Windows.Forms.DialogResult.OK == saveimg.ShowDialog())
+                    {
+                        RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)TemplateArea.ActualWidth, (int)TemplateArea.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                        renderTargetBitmap.Render(TemplateArea);
+                        PngBitmapEncoder pngImage = new PngBitmapEncoder();
+                        pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+                        using (Stream fileStream = File.Create(saveimg.FileName))
+                        {
+                            pngImage.Save(fileStream);
+                        }
+                    }
                 }
             }
             else if (PrintersSetting.IsSaveToFile && PrintersSetting.IsSaveToPDF)

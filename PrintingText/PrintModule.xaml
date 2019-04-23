@@ -18,6 +18,8 @@
         <RoutedUICommand x:Key="Commands.SaveFile"/>
         <RoutedUICommand x:Key="Commands.Refresh"/>
         <RoutedUICommand x:Key="Commands.Print"/>
+        <RoutedUICommand x:Key="Commands.Left"/>
+        <RoutedUICommand x:Key="Commands.Right"/>
 
         <Style TargetType="{x:Type view:ItemTable}">
             <Setter
@@ -41,7 +43,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewmodel:ConstructorTab}">
-            <Grid>
+            <Grid IsEnabled="{Binding IsAwait}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition/>
@@ -51,9 +53,8 @@
                     <Button HorizontalAlignment="Right" Width="70"  Content="Обновить" Command="{StaticResource Commands.Refresh}"/>
                 </Grid>
                 <ItemsControl Grid.Row="1">
-                    <!--SelectedItem="{Binding SelectedFiles}"-->
-                    <ListView ItemsSource="{Binding CollectionFiles}" IsEnabled="{Binding IsAwait}"
-                              DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <ListView ItemsSource="{Binding CollectionFiles}"
+                              DisplayMemberPath="Name" SelectionChanged="ListView_SelectionChanged"/>
                     <Button Content="Добавить новый шаблон" HorizontalAlignment="Stretch" VerticalAlignment="Top" Command="{StaticResource Commands.CreateNewTemplate}"/>
                 </ItemsControl>
                 <Grid Grid.Row="2">
@@ -68,7 +69,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewmodel:PrintersSetting}">
-            <Grid>
+            <Grid IsEnabled="{Binding IsAwait}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="120"/>
@@ -101,7 +102,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Left"/>
-                            <TextBox Grid.Column="1" Text="{Binding Left}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Left}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
@@ -109,7 +110,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Top"/>
-                            <TextBox Grid.Column="1" Text="{Binding Top}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Top}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="5">
                             <Grid.ColumnDefinitions>
@@ -117,7 +118,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Right"/>
-                            <TextBox Grid.Column="1" Text="{Binding Right}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Right}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                         <Grid Grid.Row="7">
                             <Grid.ColumnDefinitions>
@@ -125,7 +126,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Bottom"/>
-                            <TextBox Grid.Column="1" Text="{Binding Bottom}"/>
+                            <TextBox Grid.Column="1" Text="{Binding Bottom}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_TextChanged"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -146,7 +147,7 @@
                     <Label Grid.Row="0" Content="Отправить на печать"/>
                     <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsPrint}"/>
                     <Label Grid.Row="1" Content="Сохранить в файл"/>
-                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}"/>
+                    <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsSaveToFile}" Checked="CheckBox_Checked"/>
                     <Grid Margin="50,0,0,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsEnabled="{Binding IsSaveToFile}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -184,7 +185,7 @@
                             <RowDefinition Height="60"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                        <Grid Grid.Row="0" IsEnabled="{Binding IsPrint}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="5"/>
                                 <RowDefinition Height="25"/>
@@ -196,9 +197,9 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="1" Grid.Column="0" Content="Тип бумаги"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" />
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageMediaSizes}" SelectedItem="{Binding SelectPrinter.PageMediaSize}" SelectionChanged="ComboBox_SelectionChanged_1"/>
                             <Label Grid.Row="3" Grid.Column="0" Content="Ориентация"/>
-                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SelectPrinter.PageOrientations}" SelectedItem="{Binding SelectPrinter.PageOrientation}"  SelectionChanged="ComboBox_SelectionChanged_1"/>
                         </Grid>
                         <Grid Grid.Row="1" IsEnabled="{Binding IsPrint}">
                             <Grid.RowDefinitions>
@@ -267,6 +268,12 @@
         <CommandBinding 
             Command="{StaticResource Commands.SaveFile}" 
             Executed="ClickButton_SaveFile"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Left}" 
+            Executed="ClickButton_Left"/>
+        <CommandBinding 
+            Command="{StaticResource Commands.Right}" 
+            Executed="ClickButton_Right"/>
     </Window.CommandBindings>
 
 
@@ -308,19 +315,28 @@
                 </Grid.LayoutTransform>
             </Grid>
         </ScrollViewer>
-        <Grid Grid.Column="1" Grid.Row="1" Background="LightGray">
+        <Grid Grid.Column="1" Grid.Row="1" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Slider Grid.Column="1" Name="_zoom" Minimum="0.5" Maximum="2" />
+            <Button Grid.Column="2" Command="{StaticResource Commands.Left}"/>
+            <Button Grid.Column="4" Command="{StaticResource Commands.Right}"/>
+            <Slider Grid.Column="7" Name="_zoom" Minimum="0.35" Maximum="2" />
         </Grid>
         <!--Поздгрузка для создания bitmap-->
         <Grid Grid.Column="2" Grid.RowSpan="2" Background="LightGray" Visibility="Hidden">
-            <Grid x:Name="Place" Width="{Binding Template.Width}" Height="{Binding Template.Height}">
-                <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
-                                VirtualizingPanel.VirtualizationMode="Recycling">
-                </view:TableView>
+            <Grid Width="{Binding Template.Width}" Height="{Binding Template.Height}">
+                <Grid x:Name="Place" Background="White">
+                    <view:TableView x:Name="TemplateArea" TablesSource="{Binding Template.Table}"  Background="White"
+                                VirtualizingPanel.VirtualizationMode="Recycling" Margin="{Binding PrintersSetting.MarginFullDocument}">
+                    </view:TableView>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

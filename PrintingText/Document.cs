@@ -28,12 +28,14 @@ namespace PrintingText
             return place;
         }
 
-        public Grid Place(Grid TemplateArea)
+        public Grid Place(Grid TemplateArea, Page page)
         {
             Grid place = new Grid
             {
                 Width = TemplateArea.Width,
-                Height = TemplateArea.Height
+                Height = TemplateArea.Height,
+                Margin = new Thickness(page.Left,page.Top, page.Right, page.Bottom)
+                
             };
             var bitmap = CreatePngFromTemplate(TemplateArea);
             Image image = new Image()

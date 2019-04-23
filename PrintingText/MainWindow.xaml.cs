@@ -167,10 +167,11 @@ namespace PrintingText
 
         private void TextBox_TextChanged(object sender, RoutedEventArgs e)
         {
-            if ((((TextBox)sender).Text != "" && ((TextBox)sender).Text != ((MainVM)DataContext).OldTextinTextBox.ToString())
-                                              && ((MainVM)DataContext).ConstructorTab.IsAwait == true 
-                                              && ((MainVM)DataContext).PrintersSetting.SelectPrinter != null
-                                              && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null)
+            if (((MainVM)DataContext).PrintersSetting.IsPrint && ((TextBox)sender).Text != ""  
+                                                              && ((TextBox)sender).Text != ((MainVM)DataContext).OldTextinTextBox.ToString()
+                                                              && ((MainVM)DataContext).ConstructorTab.IsAwait == true 
+                                                              && ((MainVM)DataContext).PrintersSetting.SelectPrinter != null
+                                                              && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null)
             {
 
                 ((MainVM)DataContext).Document.Pages.Clear();
@@ -196,25 +197,52 @@ namespace PrintingText
                     });
                 });
             }
+            else if (((MainVM)DataContext).PrintersSetting.IsSaveToFile && ((MainVM)DataContext).ConstructorTab.SelectedFiles != null
+                                                                        && ((TextBox)sender).Text != ""
+                                                                        && ((TextBox)sender).Text != ((MainVM)DataContext).OldTextinTextBox.ToString())
+            {
+                ((MainVM)DataContext).Document.Pages.Clear();
+                ((MainVM)DataContext).ConstructorTab.IsAwait = false;
+                ((MainVM)DataContext).PrintersSetting.IsAwait = false;
+                //((MainVM)DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+                ((MainVM)DataContext).PrintersSetting.Height = ((MainVM)DataContext).Template.Height;
+                ((MainVM)DataContext).PrintersSetting.Width = ((MainVM)DataContext).Template.Width;
+                Task.Run(() =>
+                {
+                    Thread.Sleep(7000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PreviewArea.Children.Clear();
+                        PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(Place));
+                        ((MainVM)DataContext).ConstructorTab.IsAwait = true;
+                        ((MainVM)DataContext).PrintersSetting.IsAwait = true;
+                    });
+                });
+            }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ((MainVM)DataContext).Document.Pages.Clear();
-            ((MainVM)DataContext).ConstructorTab.IsAwait = false;
-            ((MainVM)DataContext).PrintersSetting.IsAwait = false;
-            ((MainVM)DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
-            Task.Run(() =>
+            if (((MainVM)DataContext).ConstructorTab.SelectedFiles != null)
             {
-                Thread.Sleep(7000);
-                Application.Current.Dispatcher.Invoke(() =>
+                ((MainVM)DataContext).Document.Pages.Clear();
+                ((MainVM)DataContext).ConstructorTab.IsAwait = false;
+                ((MainVM)DataContext).PrintersSetting.IsAwait = false;
+                ((MainVM)DataContext).Deseriliz(((MainVM)DataContext).ConstructorTab.SelectedFiles.Url);
+                ((MainVM)DataContext).PrintersSetting.Height = ((MainVM)DataContext).Template.Height;
+                ((MainVM)DataContext).PrintersSetting.Width = ((MainVM)DataContext).Template.Width;
+                Task.Run(() =>
                 {
-                    PreviewArea.Children.Clear();
-                    PreviewArea.Children.Add(((MainVM)DataContext).Document.Place(Place));
-                    ((MainVM)DataContext).ConstructorTab.IsAwait = true;
-                    ((MainVM)DataContext).PrintersSetting.IsAwait = true;
+                    Thread.Sleep(7000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PreviewArea.Children.Clear();
+                        PreviewArea.Children.Add(((MainVM)DataContext).RefreshPreviewArea(Place));
+                        ((MainVM)DataContext).ConstructorTab.IsAwait = true;
+                        ((MainVM)DataContext).PrintersSetting.IsAwait = true;
+                    });
                 });
-            });
+            }
         }
     }
 }
